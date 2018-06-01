@@ -566,6 +566,54 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#store-query" title="Store Query" class="md-nav__link">
+    Store Query
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select" title="Select" class="md-nav__link">
+    Select
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete_1" title="Delete" class="md-nav__link">
+    Delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update_1" title="Update" class="md-nav__link">
+    Update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-or-insert-into_1" title="Update or Insert Into" class="md-nav__link">
+    Update or Insert Into
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert-into" title="Insert Into" class="md-nav__link">
+    Insert Into
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#incremental-aggregation" title="Incremental Aggregation" class="md-nav__link">
     Incremental Aggregation
   </a>
@@ -736,6 +784,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/4.1.30/" title="4.1.30" class="md-nav__link">
+      4.1.30
+    </a>
+  </li>
+
         
           
           
@@ -1319,6 +1379,54 @@
           <li class="md-nav__item">
   <a href="#in" title="In" class="md-nav__link">
     In
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#store-query" title="Store Query" class="md-nav__link">
+    Store Query
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select" title="Select" class="md-nav__link">
+    Select
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete_1" title="Delete" class="md-nav__link">
+    Delete
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update_1" title="Update" class="md-nav__link">
+    Update
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-or-insert-into_1" title="Update or Insert Into" class="md-nav__link">
+    Update or Insert Into
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert-into" title="Insert Into" class="md-nav__link">
+    Insert Into
   </a>
   
 </li>
@@ -3189,6 +3297,163 @@ When constructing the <code>condition</code>, the table attribute must be always
 
 <span class="k">from</span> <span class="n">TempStream</span><span class="p">[</span><span class="n">ServerRoomTable</span><span class="p">.</span><span class="n">roomNo</span> <span class="o">==</span> <span class="n">roomNo</span> <span class="k">in</span> <span class="n">ServerRoomTable</span><span class="p">]</span>
 <span class="k">insert</span> <span class="k">into</span> <span class="n">ServerRoomTempStream</span><span class="p">;</span>
+</pre></div>
+
+
+<h2 id="store-query">Store Query<a class="headerlink" href="#store-query" title="Permanent link">&para;</a></h2>
+<p>Siddhi store queries are a set of on-demand queries that can be used to perform operations on Siddhi tables, windows, and aggregators.</p>
+<p><strong>Purpose</strong></p>
+<p>Store queries allow you to execute the following operations on Siddhi tables, windows, and aggregators without the intervention of streams.</p>
+<p>Queries supported for tables:</p>
+<ul>
+<li>SELECT</li>
+<li>INSERT</li>
+<li>DELETE</li>
+<li>UPDATE</li>
+<li>UPDATE OR INSERT</li>
+</ul>
+<p>Queries supported for windows and aggregators:</p>
+<ul>
+<li>SELECT</li>
+</ul>
+<p>This is be done by submitting the store query to the Siddhi application runtime using its <code>query()</code> method.</p>
+<p>In order to execute store queries, the Siddhi application of the Siddhi application runtime you are using, should have
+ a store defined, which contains the table that needs to be queried.</p>
+<p><strong>Example</strong></p>
+<p>If you need to query the table named <code>RoomTypeTable</code> the it should have been defined in the Siddhi application.</p>
+<p>In order to execute a store query on <code>RoomTypeTable</code>, you need to submit the store query using <code>query()</code> 
+method of <code>SiddhiAppRuntime</code> instance as below.</p>
+<div class="codehilite"><pre><span></span><span class="n">siddhiAppRuntime</span><span class="o">.</span><span class="na">query</span><span class="o">(&lt;</span><span class="n">store</span> <span class="n">query</span><span class="o">&gt;);</span>
+</pre></div>
+
+
+<h3 id="select">Select<a class="headerlink" href="#select" title="Permanent link">&para;</a></h3>
+<p>The <code>SELECT</code> store query retrieves one or more records that match a given condition from a specified table.</p>
+<p><strong>Syntax</strong></p>
+<div class="codehilite"><pre><span></span><span class="k">from</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">/</span><span class="n">window</span><span class="o">/</span><span class="n">aggregation</span><span class="o">&gt;</span>
+<span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
+<span class="n">group_by</span><span class="o">?</span> 
+<span class="k">having</span><span class="o">?</span> 
+<span class="n">order_by</span><span class="o">?</span> 
+<span class="k">limit</span><span class="o">?</span>
+</pre></div>
+
+
+<p><strong>Example</strong></p>
+<p>This query retrieves room numbers and types of the rooms starting from room no 10.</p>
+<div class="codehilite"><pre><span></span><span class="k">from</span> <span class="n">roomTypeTable</span>
+<span class="k">select</span> <span class="n">roomNo</span><span class="p">,</span> <span class="k">type</span>
+<span class="k">on</span> <span class="n">roomNo</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">;</span>
+</pre></div>
+
+
+<h3 id="delete_1">Delete<a class="headerlink" href="#delete_1" title="Permanent link">&para;</a></h3>
+<p>The <code>DELETE</code> store query deletes selected records from a specified table.</p>
+<p><strong>Syntax</strong></p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="k">select</span><span class="o">&gt;?</span>  
+<span class="k">delete</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">&gt;</span>  
+<span class="k">on</span> <span class="o">&lt;</span><span class="n">conditional</span> <span class="n">expresssion</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>The <code>condition</code> element specifies the basis on which records are selected to be deleted.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Table attributes must always be referred to with the table name as shown below: <br />
+ <code>&lt;table name&gt;.&lt;attibute name&gt;</code>.</p>
+</div>
+<p><strong>Example</strong></p>
+<p>In this example, query deletes a record in the table named <code>RoomTypeTable</code> if it has value for the <code>roomNo</code> 
+attribute that matches the value for the <code>roomNumber</code> attribute of the selection which has 10 as the actual value.</p>
+<div class="codehilite"><pre><span></span><span class="k">select</span> <span class="mi">10</span> <span class="k">as</span> <span class="n">roomNumber</span>
+<span class="k">delete</span> <span class="n">RoomTypeTable</span>
+<span class="k">on</span> <span class="n">RoomTypeTable</span><span class="p">.</span><span class="n">roomNo</span> <span class="o">==</span> <span class="n">roomNumber</span><span class="p">;</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="k">delete</span> <span class="n">RoomTypeTable</span>
+<span class="k">on</span> <span class="n">RoomTypeTable</span><span class="p">.</span><span class="n">roomNo</span> <span class="o">==</span> <span class="mi">10</span><span class="p">;</span>
+</pre></div>
+
+
+<h3 id="update_1">Update<a class="headerlink" href="#update_1" title="Permanent link">&para;</a></h3>
+<p>The <code>UPDATE</code> store query updates selected attributes stored in a specific table, based on a given condition.</p>
+<p><strong>Syntax</strong></p>
+<div class="codehilite"><pre><span></span><span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span><span class="o">?</span>
+<span class="k">update</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">&gt;</span>
+    <span class="k">set</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">&gt;</span><span class="p">.</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;|&lt;</span><span class="n">expression</span><span class="o">&gt;</span><span class="p">)</span><span class="o">?</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">&gt;</span><span class="p">.</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;|&lt;</span><span class="n">expression</span><span class="o">&gt;</span><span class="p">)</span><span class="o">?</span><span class="p">,</span> <span class="p">...</span>
+    <span class="k">on</span> <span class="o">&lt;</span><span class="n">condition</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>The <code>condition</code> element specifies the basis on which records are selected to be updated.
+When specifying the <code>condition</code>, table attributes must be referred to with the table name.</p>
+<p>You can use the <code>set</code> keyword to update selected attributes from the table. Here, for each assignment, the attribute specified in the left must be the table attribute, and the one specified in the right can be a stream/table attribute a mathematical operation, or other. When the <code>set</code> clause is not provided, all the attributes in the table are updated.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Table attributes must always be referred to with the table name as shown below: <br />
+ <code>&lt;table name&gt;.&lt;attibute name&gt;</code>.</p>
+</div>
+<p><strong>Example</strong></p>
+<p>The following query updates the room occupancy by increasing the value of <code>people</code> by 1, in the <code>RoomOccupancyTable</code> 
+table for each room number greater than 10.</p>
+<div class="codehilite"><pre><span></span><span class="k">select</span> <span class="mi">10</span> <span class="k">as</span> <span class="n">roomNumber</span><span class="p">,</span> <span class="mi">1</span> <span class="k">as</span> <span class="n">arrival</span>
+<span class="k">update</span> <span class="n">RoomTypeTable</span>
+    <span class="k">set</span> <span class="n">RoomTypeTable</span><span class="p">.</span><span class="n">people</span> <span class="o">=</span> <span class="n">RoomTypeTable</span><span class="p">.</span><span class="n">people</span> <span class="o">+</span> <span class="n">arrival</span>
+    <span class="k">on</span> <span class="n">RoomTypeTable</span><span class="p">.</span><span class="n">roomNo</span> <span class="o">==</span> <span class="n">roomNumber</span><span class="p">;</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="k">update</span> <span class="n">RoomTypeTable</span>
+    <span class="k">set</span> <span class="n">RoomTypeTable</span><span class="p">.</span><span class="n">people</span> <span class="o">=</span> <span class="n">RoomTypeTable</span><span class="p">.</span><span class="n">people</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">on</span> <span class="n">RoomTypeTable</span><span class="p">.</span><span class="n">roomNo</span> <span class="o">==</span> <span class="mi">10</span><span class="p">;</span>
+</pre></div>
+
+
+<h3 id="update-or-insert-into_1">Update or Insert Into<a class="headerlink" href="#update-or-insert-into_1" title="Permanent link">&para;</a></h3>
+<p>This allows you to update selected attributes if a record that meets the given conditions already exists in the specified  table. 
+If a matching record does not exist, the entry is inserted as a new record.</p>
+<p><strong>Syntax</strong></p>
+<div class="codehilite"><pre><span></span><span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
+<span class="k">update</span> <span class="k">or</span> <span class="k">insert</span> <span class="k">into</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">&gt;</span>
+    <span class="k">set</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">&gt;</span><span class="p">.</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">expression</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">&gt;</span><span class="p">.</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">expression</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
+    <span class="k">on</span> <span class="o">&lt;</span><span class="n">condition</span><span class="o">&gt;</span>
+</pre></div>
+
+
+<p>The <code>condition</code> element specifies the basis on which records are selected for update.
+When specifying the <code>condition</code>, table attributes should be referred to with the table name.
+If a record that matches the condition does not already exist in the table, the arriving event is inserted into the table.</p>
+<p>The <code>set</code> clause is only used when an update is performed during the insert/update operation.
+When <code>set</code> clause is used, the attribute to the left is always a table attribute, and the attribute to the right can be a stream/table attribute, mathematical
+operation or other. The attribute to the left (i.e., the attribute in the event table) is updated with the value of the attribute to the right if the given condition is met. When the <code>set</code> clause is not provided, all the attributes in the table are updated.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Table attributes must always be referred to with the table name as shown below: <br />
+ <code>&lt;table name&gt;.&lt;attibute name&gt;</code>.</p>
+</div>
+<p><strong>Example</strong></p>
+<p>The following query update the records in the <code>UpdateTable</code> table that have room numbers that match the same in the selection. If such records are found in the event table, they are updated. If such records are not found, it is inserted from the stream.</p>
+<div class="codehilite"><pre><span></span><span class="k">from</span> <span class="n">RoomAssigneeStream</span>
+<span class="k">select</span> <span class="mi">10</span> <span class="k">as</span> <span class="n">roomNo</span><span class="p">,</span> <span class="ss">&quot;single&quot;</span> <span class="k">as</span> <span class="k">type</span><span class="p">,</span> <span class="ss">&quot;abc&quot;</span> <span class="k">as</span> <span class="n">assignee</span>
+<span class="k">update</span> <span class="k">or</span> <span class="k">insert</span> <span class="k">into</span> <span class="n">RoomAssigneeTable</span>
+    <span class="k">set</span> <span class="n">RoomAssigneeTable</span><span class="p">.</span><span class="n">assignee</span> <span class="o">=</span> <span class="n">assignee</span>
+    <span class="k">on</span> <span class="n">RoomAssigneeTable</span><span class="p">.</span><span class="n">roomNo</span> <span class="o">==</span> <span class="n">roomNo</span><span class="p">;</span>
+</pre></div>
+
+
+<h3 id="insert-into">Insert Into<a class="headerlink" href="#insert-into" title="Permanent link">&para;</a></h3>
+<p>This allows you to insert a new record to the table with the attribute values you define in the <code>select</code> section.</p>
+<p><strong>Syntax</strong></p>
+<div class="codehilite"><pre><span></span><span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">&gt;</span><span class="p">;</span>
+</pre></div>
+
+
+<p><strong>Example</strong></p>
+<p>This store query inserts a new record to the table <code>RoomOccupancyTable</code>, with the specified attribute values.</p>
+<div class="codehilite"><pre><span></span><span class="k">select</span> <span class="mi">10</span> <span class="k">as</span> <span class="n">roomNo</span><span class="p">,</span> <span class="mi">2</span> <span class="k">as</span> <span class="n">people</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">RoomOccupancyTable</span> 
 </pre></div>
 
 
