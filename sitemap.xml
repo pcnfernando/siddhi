@@ -4,7 +4,7 @@
     
     <url>
      <loc>https://wso2.github.io/siddhi/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>https://wso2.github.io/siddhi/features/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +20,7 @@
     
     <url>
      <loc>https://wso2.github.io/siddhi/documentation/siddhi-quckstart-4.0/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -29,19 +29,19 @@
         
     <url>
      <loc>https://wso2.github.io/siddhi/documentation/user-guide/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/documentation/siddhi-4.0/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/documentation/siddhi-architecture/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -50,7 +50,7 @@
     
     <url>
      <loc>https://wso2.github.io/siddhi/extensions/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -58,152 +58,158 @@
     
         
     <url>
+     <loc>https://wso2.github.io/siddhi/api/4.1.31/</loc>
+     <lastmod>2018-06-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.30/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.29/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.28/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.27/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.26/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.25/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.24/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.23/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.22/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.21/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.20/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.19/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.18/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.17/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.16/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.15/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.14/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.13/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.7/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.6/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.5/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.1.0/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.0.9/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/4.0.0/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>https://wso2.github.io/siddhi/api/latest/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -212,7 +218,7 @@
     
     <url>
      <loc>https://wso2.github.io/siddhi/license/</loc>
-     <lastmod>2018-06-01</lastmod>
+     <lastmod>2018-06-02</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
