@@ -791,6 +791,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/4.1.33/" title="4.1.33" class="md-nav__link">
+      4.1.33
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/4.1.32/" title="4.1.32" class="md-nav__link">
       4.1.32
     </a>
@@ -1745,7 +1757,7 @@ The source syntax is as follows:</p>
         <span class="o">@</span><span class="n">attributes</span><span class="p">(</span> <span class="n">attributeN</span><span class="o">=</span><span class="s1">&#39;attribute_mapping_N&#39;</span><span class="p">,</span> <span class="n">attribute1</span><span class="o">=</span><span class="s1">&#39;attribute_mapping_1&#39;</span><span class="p">)</span>
     <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="n">stream_name</span> <span class="p">(</span><span class="n">attribute1</span> <span class="n">Type1</span><span class="p">,</span> <span class="n">attributeN</span> <span class="n">TypeN</span><span class="p">);</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">StreamName</span> <span class="p">(</span><span class="n">attribute1</span> <span class="n">Type1</span><span class="p">,</span> <span class="n">attributeN</span> <span class="n">TypeN</span><span class="p">);</span>
 </pre></div>
 
 
@@ -1824,7 +1836,7 @@ annotation with the required parameter values. The sink syntax is as follows:</p
         <span class="o">@</span><span class="n">payload</span><span class="p">(</span><span class="s1">&#39;payload_mapping&#39;</span><span class="p">)</span>
     <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="n">stream_name</span> <span class="p">(</span><span class="n">attribute1</span> <span class="n">Type1</span><span class="p">,</span> <span class="n">attributeN</span> <span class="n">TypeN</span><span class="p">);</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">StreamName</span> <span class="p">(</span><span class="n">attribute1</span> <span class="n">Type1</span><span class="p">,</span> <span class="n">attributeN</span> <span class="n">TypeN</span><span class="p">);</span>
 </pre></div>
 
 
@@ -3763,10 +3775,10 @@ method of <code>SiddhiAppRuntime</code> instance as below.</p>
 <p><strong>Syntax</strong></p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">/</span><span class="n">window</span><span class="o">/</span><span class="n">aggregation</span><span class="o">&gt;</span>
 <span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
-<span class="n">group_by</span><span class="o">?</span> 
-<span class="k">having</span><span class="o">?</span> 
-<span class="n">order_by</span><span class="o">?</span> 
-<span class="k">limit</span><span class="o">?</span>
+<span class="o">&lt;</span><span class="k">group</span> <span class="k">by</span><span class="o">&gt;?</span> 
+<span class="o">&lt;</span><span class="k">having</span><span class="o">&gt;?</span> 
+<span class="o">&lt;</span><span class="k">order</span> <span class="k">by</span><span class="o">&gt;?</span> 
+<span class="o">&lt;</span><span class="k">limit</span><span class="o">&gt;?</span>
 </pre></div>
 
 
