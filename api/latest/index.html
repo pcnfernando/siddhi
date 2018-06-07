@@ -333,6 +333,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../4.1.34/" title="4.1.34" class="md-nav__link">
+      4.1.34
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../4.1.33/" title="4.1.33" class="md-nav__link">
       4.1.33
     </a>
@@ -1476,7 +1488,7 @@
               
                 
                 
-                <h1 id="api-docs-v4133">API Docs - v4.1.33<a class="headerlink" href="#api-docs-v4133" title="Permanent link">&para;</a></h1>
+                <h1 id="api-docs-v4134">API Docs - v4.1.34<a class="headerlink" href="#api-docs-v4134" title="Permanent link">&para;</a></h1>
 <h2 id="core">Core<a class="headerlink" href="#core" title="Permanent link">&para;</a></h2>
 <h3 id="avg-aggregate-function">avg <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#aggregate-function">(Aggregate Function)</a></em><a class="headerlink" href="#avg-aggregate-function" title="Permanent link">&para;</a></h3>
 <p style="word-wrap: break-word">Calculates the average for all the events.</p>
@@ -2532,7 +2544,7 @@ insert into outputStream ;
 <p style="word-wrap: break-word">This will return cartesian coordinates (4.99953024681082, 0.06853693328228748, 3.4)for theta: 0.7854 and rho: 5 and z: 3.4.</p>
 
 <h3 id="log-stream-processor">log <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#stream-processor">(Stream Processor)</a></em><a class="headerlink" href="#log-stream-processor" title="Permanent link">&para;</a></h3>
-<p style="word-wrap: break-word">The logger stream processor logs the message with or without event for the given log priority.</p>
+<p style="word-wrap: break-word">The logger logs the message on the given priority with or without processed event.</p>
 
 <p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
 <div class="codehilite"><pre><span></span>log(&lt;STRING&gt; priority, &lt;STRING&gt; log.message, &lt;BOOL&gt; is.event.logged)
@@ -2551,15 +2563,15 @@ insert into outputStream ;
     </tr>
     <tr>
         <td style="vertical-align: top">priority</td>
-        <td style="vertical-align: top; word-wrap: break-word">The priority/type of this log message.</td>
-        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top; word-wrap: break-word">The priority/type of this log message (INFO, DEBUG, WARN, FATAL, ERROR, OFF, TRACE).</td>
+        <td style="vertical-align: top">INFO</td>
         <td style="vertical-align: top">STRING</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>
     </tr>
     <tr>
         <td style="vertical-align: top">log.message</td>
-        <td style="vertical-align: top; word-wrap: break-word">This submit the log message.</td>
+        <td style="vertical-align: top; word-wrap: break-word">This message will be logged.</td>
         <td style="vertical-align: top"></td>
         <td style="vertical-align: top">STRING</td>
         <td style="vertical-align: top">No</td>
@@ -2567,10 +2579,10 @@ insert into outputStream ;
     </tr>
     <tr>
         <td style="vertical-align: top">is.event.logged</td>
-        <td style="vertical-align: top; word-wrap: break-word">Use this command to enable the logging of one or more events.</td>
-        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top; word-wrap: break-word">To log the processed event.</td>
+        <td style="vertical-align: top">true</td>
         <td style="vertical-align: top">BOOL</td>
-        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">Yes</td>
         <td style="vertical-align: top">No</td>
     </tr>
 </table></p>
