@@ -798,6 +798,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/4.1.48/" title="4.1.48" class="md-nav__link">
+      4.1.48
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/4.1.47/" title="4.1.47" class="md-nav__link">
       4.1.47
     </a>
@@ -1758,7 +1770,7 @@ can configure mappers to extract data from the incoming message selectively, and
 <p>This query receives events via the <code>HTTP</code> source in the <code>JSON</code> data format, and directs them to the <code>InputStream</code> stream for processing. 
 Here the HTTP source is configured to receive events on all network interfaces on the <code>8080</code>port, on the <code>foo</code> context, and 
 it is secured via basic authentication.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">receiver</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:8080/foo&#39;</span><span class="p">,</span> <span class="k">is</span><span class="p">.</span><span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">enabled</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span> 
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">receiver</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:8080/foo&#39;</span><span class="p">,</span> <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">enabled</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span> 
   <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
 <span class="n">define</span> <span class="n">stream</span> <span class="n">InputStream</span> <span class="p">(</span><span class="n">name</span> <span class="n">string</span><span class="p">,</span> <span class="n">age</span> <span class="nb">int</span><span class="p">,</span> <span class="n">country</span> <span class="n">string</span><span class="p">);</span>
 </pre></div>
