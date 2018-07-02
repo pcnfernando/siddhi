@@ -717,15 +717,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#appstatistics" title="@app:statistics" class="md-nav__link">
-    @app:statistics
+  <a href="#threading-and-asynchronous" title="Threading and Asynchronous" class="md-nav__link">
+    Threading and Asynchronous
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#appplayback" title="@app:playback" class="md-nav__link">
-    @app:playback
+  <a href="#statistics" title="Statistics" class="md-nav__link">
+    Statistics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-playback" title="Event Playback" class="md-nav__link">
+    Event Playback
   </a>
   
 </li>
@@ -791,6 +798,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/4.1.49/" title="4.1.49" class="md-nav__link">
+      4.1.49
+    </a>
+  </li>
+
         
           
           
@@ -1523,15 +1542,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#appstatistics" title="@app:statistics" class="md-nav__link">
-    @app:statistics
+  <a href="#threading-and-asynchronous" title="Threading and Asynchronous" class="md-nav__link">
+    Threading and Asynchronous
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#appplayback" title="@app:playback" class="md-nav__link">
-    @app:playback
+  <a href="#statistics" title="Statistics" class="md-nav__link">
+    Statistics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-playback" title="Event Playback" class="md-nav__link">
+    Event Playback
   </a>
   
 </li>
@@ -1680,13 +1706,8 @@ All the events that are selected to be received into a specific stream have the 
 </tr>
 </tbody>
 </table>
-<p>To improve the throughput of a stream, you can add the <code>@Async</code> annotation as shown in the extract below.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">Async</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="k">size</span> <span class="o">=</span> <span class="s1">&#39;1024&#39;</span><span class="p">)</span> 
-<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span> <span class="p">);</span>
-</pre></div>
-
-
-<p>This annotation adds a disruptor to allow events in the stream to be processed in parallel via multiple threads. You can specify the number of events to be kept in the buffer before they are directed to the threads to be processed in parallel. This is done via the <code>buffer.size</code> parameter.</p>
+<p>To make the stream process events in asynchronous and multi-threading manner use the <code>@Async</code> annotation as shown in 
+<a href="https://wso2.github.io/siddhi/api/latest/#threading-and-asynchronous">Threading and Asynchronous</a> configuration section.</p>
 <p><strong>Example</strong></p>
 <div class="codehilite"><pre><span></span><span class="n">define</span> <span class="n">stream</span> <span class="n">TempStream</span> <span class="p">(</span><span class="n">deviceID</span> <span class="n">long</span><span class="p">,</span> <span class="n">roomNo</span> <span class="nb">int</span><span class="p">,</span> <span class="n">temp</span> <span class="n">double</span><span class="p">);</span>
 </pre></div>
@@ -4232,9 +4253,43 @@ extension will not work without @Extension annotation.</p>
 </li>
 </ol>
 <h2 id="configuring-and-monitoring-siddhi-applications">Configuring and Monitoring Siddhi Applications<a class="headerlink" href="#configuring-and-monitoring-siddhi-applications" title="Permanent link">&para;</a></h2>
-<p>This section explains how to use the <code>@app</code> annotation to generate statistics for Siddhi applications as well as improve the performance of Siddhi applications.</p>
-<h3 id="appstatistics">@app:statistics<a class="headerlink" href="#appstatistics" title="Permanent link">&para;</a></h3>
-<p>To evaluate the performance of an application, you can enable the statistics of a Siddhi application to be published. This is done via the <code>@app:statistics</code> annotation that can be added to a Siddhi application as shown in the following example.</p>
+<h3 id="threading-and-asynchronous">Threading and Asynchronous<a class="headerlink" href="#threading-and-asynchronous" title="Permanent link">&para;</a></h3>
+<p>When <code>@Async</code> annotation is added to the Streams it enable the Streams to introduce asynchronous and multi-threading 
+behaviour. </p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">Async</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="k">size</span><span class="o">=</span><span class="s1">&#39;256&#39;</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">batch</span><span class="p">.</span><span class="k">size</span><span class="p">.</span><span class="k">max</span><span class="o">=</span><span class="s1">&#39;5&#39;</span><span class="p">)</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span> <span class="p">);</span>
+</pre></div>
+
+
+<p>The following elements are configured with this annotation.</p>
+<table>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Description</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>buffer.size</code></td>
+<td>The size of the event buffer that will be used to handover the execution to other threads.</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>workers</code></td>
+<td>Number of worker threads that will be be used to process the buffered events.</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>batch.size.max</code></td>
+<td>The maximum number of events that will be processed together by a worker thread at a given time.</td>
+<td><code>buffer.size</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="statistics">Statistics<a class="headerlink" href="#statistics" title="Permanent link">&para;</a></h3>
+<p>Use <code>@app:statistics</code> app level annotation to evaluate the performance of an application, you can enable the statistics of a Siddhi application to be published. This is done via the <code>@app:statistics</code> annotation that can be added to a Siddhi application as shown in the following example.</p>
 <div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">app</span><span class="p">:</span><span class="k">statistics</span><span class="p">(</span><span class="n">reporter</span> <span class="o">=</span> <span class="s1">&#39;console&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -4319,7 +4374,6 @@ extension will not work without @Extension annotation.</p>
 <div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;TestMetrics&#39;</span><span class="p">)</span>
 <span class="o">@</span><span class="n">App</span><span class="p">:</span><span class="k">Statistics</span><span class="p">(</span><span class="n">reporter</span> <span class="o">=</span> <span class="s1">&#39;console&#39;</span><span class="p">)</span>
 
-<span class="o">@</span><span class="n">Async</span><span class="p">(</span><span class="n">buffer</span><span class="p">.</span><span class="k">size</span><span class="o">=</span><span class="s1">&#39;64&#39;</span><span class="p">)</span>
 <span class="n">define</span> <span class="n">stream</span> <span class="n">TestStream</span> <span class="p">(</span><span class="n">message</span> <span class="n">string</span><span class="p">);</span>
 
 <span class="o">@</span><span class="n">info</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;logQuery&#39;</span><span class="p">)</span>
@@ -4374,8 +4428,8 @@ extension will not work without @Extension annotation.</p>
                99% &lt;= 1.08 milliseconds
              99.9% &lt;= 1.08 milliseconds</p>
 <p></details></p>
-<h3 id="appplayback">@app:playback<a class="headerlink" href="#appplayback" title="Permanent link">&para;</a></h3>
-<p>When this annotation is included, the timestamp of the event (specified via an attribute) is treated as the current time. This results in events being processed faster.
+<h3 id="event-playback">Event Playback<a class="headerlink" href="#event-playback" title="Permanent link">&para;</a></h3>
+<p>When <code>@app:playback</code> annotation is added to the app, the timestamp of the event (specified via an attribute) is treated as the current time. This results in events being processed faster.
 The following elements are configured with this annotation.</p>
 <table>
 <thead>
