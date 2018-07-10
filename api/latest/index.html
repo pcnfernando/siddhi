@@ -106,7 +106,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#api-docs-v4153" tabindex="1" class="md-skip">
+      <a href="#api-docs-v4154" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -371,6 +371,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.1.54/" title="4.1.54" class="md-nav__link">
+      4.1.54
+    </a>
+  </li>
+
         
           
           
@@ -926,6 +938,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#batch-window" title="batch (Window)" class="md-nav__link">
+    batch (Window)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cron-window" title="cron (Window)" class="md-nav__link">
     cron (Window)
   </a>
@@ -1340,6 +1359,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#batch-window" title="batch (Window)" class="md-nav__link">
+    batch (Window)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#cron-window" title="cron (Window)" class="md-nav__link">
     cron (Window)
   </a>
@@ -1527,7 +1553,7 @@
                   <a href="https://github.com/wso2/siddhi/edit/master/docs/api/latest.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="api-docs-v4153">API Docs - v4.1.53<a class="headerlink" href="#api-docs-v4153" title="Permanent link">&para;</a></h1>
+                <h1 id="api-docs-v4154">API Docs - v4.1.54<a class="headerlink" href="#api-docs-v4154" title="Permanent link">&para;</a></h1>
 <h2 id="core">Core<a class="headerlink" href="#core" title="Permanent link">&para;</a></h2>
 <h3 id="avg-aggregate-function">avg <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#aggregate-function">(Aggregate Function)</a></em><a class="headerlink" href="#avg-aggregate-function" title="Permanent link">&para;</a></h3>
 <p style="word-wrap: break-word">Calculates the average for all the events.</p>
@@ -2670,6 +2696,27 @@ insert into barStream;
 
 
 <p style="word-wrap: break-word">This will log message and fooStream:events.</p>
+
+<h3 id="batch-window">batch <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#window">(Window)</a></em><a class="headerlink" href="#batch-window" title="Permanent link">&para;</a></h3>
+<p style="word-wrap: break-word">A window that holds an incoming events batch. When a new set of events arrives, the previously arrived old events will be expired. Batch window can be used to aggregate events that comes in batches.</p>
+
+<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<div class="codehilite"><pre><span></span>batch()
+</pre></div>
+
+
+<p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
+<span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
+<div class="codehilite"><pre><span></span>define stream consumerItemStream (itemId string, price float)
+
+from consumerItemStream#window.batch()
+select price, str:groupConcat(itemId) as itemIds
+group by price
+insert into outputStream;
+</pre></div>
+
+
+<p style="word-wrap: break-word">This will output comma separated items IDs that have the same price for each incoming batch of events.</p>
 
 <h3 id="cron-window">cron <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#window">(Window)</a></em><a class="headerlink" href="#cron-window" title="Permanent link">&para;</a></h3>
 <p style="word-wrap: break-word">This window returns events processed periodically as the output in time-repeating patterns, triggered based on time passing.</p>
