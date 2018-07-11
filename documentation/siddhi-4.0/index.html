@@ -852,6 +852,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/4.1.55/" title="4.1.55" class="md-nav__link">
+      4.1.55
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/4.1.54/" title="4.1.54" class="md-nav__link">
       4.1.54
     </a>
@@ -3873,6 +3885,7 @@ method of <code>SiddhiAppRuntime</code> instance as below.</p>
 <p>The <code>SELECT</code> store query retrieves records from the specified table or window, based on the given condition.</p>
 <p><strong>Syntax</strong></p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">/</span><span class="n">window</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="k">on</span> <span class="n">condition</span><span class="o">&gt;?</span>
 <span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
 <span class="o">&lt;</span><span class="k">group</span> <span class="k">by</span><span class="o">&gt;?</span> 
 <span class="o">&lt;</span><span class="k">having</span><span class="o">&gt;?</span> 
@@ -3884,8 +3897,8 @@ method of <code>SiddhiAppRuntime</code> instance as below.</p>
 <p><strong>Example</strong></p>
 <p>This query retrieves room numbers and types of the rooms starting from room no 10.</p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="n">roomTypeTable</span>
-<span class="k">select</span> <span class="n">roomNo</span><span class="p">,</span> <span class="k">type</span>
 <span class="k">on</span> <span class="n">roomNo</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="k">select</span> <span class="n">roomNo</span><span class="p">,</span> <span class="k">type</span>
 </pre></div>
 
 
@@ -3894,9 +3907,10 @@ method of <code>SiddhiAppRuntime</code> instance as below.</p>
 and granularity.</p>
 <p><strong>Syntax</strong></p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="o">&lt;</span><span class="n">aggregation</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="k">on</span> <span class="n">condition</span><span class="o">&gt;?</span>
+<span class="n">within</span> <span class="o">&lt;</span><span class="n">time</span> <span class="n">range</span><span class="o">&gt;</span>
+<span class="n">per</span> <span class="o">&lt;</span><span class="n">time</span> <span class="n">granularity</span><span class="o">&gt;</span>
 <span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
-<span class="o">&lt;</span><span class="n">within</span><span class="o">&gt;?</span>
-<span class="o">&lt;</span><span class="n">per</span><span class="o">&gt;?</span>
 <span class="o">&lt;</span><span class="k">group</span> <span class="k">by</span><span class="o">&gt;?</span> 
 <span class="o">&lt;</span><span class="k">having</span><span class="o">&gt;?</span> 
 <span class="o">&lt;</span><span class="k">order</span> <span class="k">by</span><span class="o">&gt;?</span> 
@@ -3920,8 +3934,7 @@ and granularity.</p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="n">TradeAggregation</span>
   <span class="n">within</span> <span class="ss">&quot;2014-02-15 00:00:00 +05:30&quot;</span><span class="p">,</span> <span class="ss">&quot;2014-03-16 00:00:00 +05:30&quot;</span> 
   <span class="n">per</span> <span class="ss">&quot;days&quot;</span> 
-<span class="k">select</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">avgPrice</span> 
-<span class="k">insert</span> <span class="k">into</span> <span class="n">AggregateStockStream</span><span class="p">;</span>
+<span class="k">select</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">avgPrice</span> <span class="p">;</span>
 </pre></div>
 
 
@@ -3930,8 +3943,7 @@ and granularity.</p>
   <span class="k">on</span> <span class="n">symbol</span> <span class="o">==</span> <span class="ss">&quot;FB&quot;</span> 
   <span class="n">within</span> <span class="ss">&quot;2014-02-15 **:**:** +05:30&quot;</span>
   <span class="n">per</span> <span class="ss">&quot;hours&quot;</span> 
-<span class="k">select</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">avgPrice</span> 
-<span class="k">insert</span> <span class="k">into</span> <span class="n">AggregateStockStream</span><span class="p">;</span>
+<span class="k">select</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">avgPrice</span><span class="p">;</span>
 </pre></div>
 
 
