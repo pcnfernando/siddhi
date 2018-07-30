@@ -106,7 +106,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#api-docs-v4158" tabindex="1" class="md-skip">
+      <a href="#api-docs-v4159" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -371,6 +371,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.1.59/" title="4.1.59" class="md-nav__link">
+      4.1.59
+    </a>
+  </li>
+
         
           
           
@@ -797,6 +809,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#and-aggregate-function" title="and (Aggregate Function)" class="md-nav__link">
+    and (Aggregate Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#avg-aggregate-function" title="avg (Aggregate Function)" class="md-nav__link">
     avg (Aggregate Function)
   </a>
@@ -841,6 +860,13 @@
           <li class="md-nav__item">
   <a href="#minforever-aggregate-function" title="minForever (Aggregate Function)" class="md-nav__link">
     minForever (Aggregate Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#or-aggregate-function" title="or (Aggregate Function)" class="md-nav__link">
+    or (Aggregate Function)
   </a>
   
 </li>
@@ -1239,6 +1265,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#and-aggregate-function" title="and (Aggregate Function)" class="md-nav__link">
+    and (Aggregate Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#avg-aggregate-function" title="avg (Aggregate Function)" class="md-nav__link">
     avg (Aggregate Function)
   </a>
@@ -1283,6 +1316,13 @@
           <li class="md-nav__item">
   <a href="#minforever-aggregate-function" title="minForever (Aggregate Function)" class="md-nav__link">
     minForever (Aggregate Function)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#or-aggregate-function" title="or (Aggregate Function)" class="md-nav__link">
+    or (Aggregate Function)
   </a>
   
 </li>
@@ -1643,8 +1683,45 @@
                   <a href="https://github.com/wso2/siddhi/edit/master/docs/api/latest.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="api-docs-v4158">API Docs - v4.1.58<a class="headerlink" href="#api-docs-v4158" title="Permanent link">&para;</a></h1>
+                <h1 id="api-docs-v4159">API Docs - v4.1.59<a class="headerlink" href="#api-docs-v4159" title="Permanent link">&para;</a></h1>
 <h2 id="core">Core<a class="headerlink" href="#core" title="Permanent link">&para;</a></h2>
+<h3 id="and-aggregate-function">and <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#aggregate-function">(Aggregate Function)</a></em><a class="headerlink" href="#and-aggregate-function" title="Permanent link">&para;</a></h3>
+<p style="word-wrap: break-word">Returns the results of AND operation for all the events.</p>
+
+<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<div class="codehilite"><pre><span></span>&lt;BOOL&gt; and(&lt;BOOL&gt; arg)
+</pre></div>
+
+
+<p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
+<table>
+    <tr>
+        <th>Name</th>
+        <th style="min-width: 20em">Description</th>
+        <th>Default Value</th>
+        <th>Possible Data Types</th>
+        <th>Optional</th>
+        <th>Dynamic</th>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">arg</td>
+        <td style="vertical-align: top; word-wrap: break-word">The value that needs to be AND operation.</td>
+        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top">BOOL</td>
+        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+</table></p>
+<p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
+<span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
+<div class="codehilite"><pre><span></span>from cscStream#window.lengthBatch(10)
+select and(isFraud) as isFraudTransaction
+insert into alertStream;
+</pre></div>
+
+
+<p style="word-wrap: break-word">This will returns the result for AND operation of isFraud values as a boolean value for event chunk expiry by window length batch.</p>
+
 <h3 id="avg-aggregate-function">avg <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#aggregate-function">(Aggregate Function)</a></em><a class="headerlink" href="#avg-aggregate-function" title="Permanent link">&para;</a></h3>
 <p style="word-wrap: break-word">Calculates the average for all the events.</p>
 
@@ -1884,6 +1961,43 @@ insert into outputStream;
 
 
 <p style="word-wrap: break-word">minForever(temp) returns the minimum temp value recorded for all the events throughoutthe lifetime of the query.</p>
+
+<h3 id="or-aggregate-function">or <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#aggregate-function">(Aggregate Function)</a></em><a class="headerlink" href="#or-aggregate-function" title="Permanent link">&para;</a></h3>
+<p style="word-wrap: break-word">Returns the results of OR operation for all the events.</p>
+
+<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<div class="codehilite"><pre><span></span>&lt;BOOL&gt; or(&lt;BOOL&gt; arg)
+</pre></div>
+
+
+<p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
+<table>
+    <tr>
+        <th>Name</th>
+        <th style="min-width: 20em">Description</th>
+        <th>Default Value</th>
+        <th>Possible Data Types</th>
+        <th>Optional</th>
+        <th>Dynamic</th>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">arg</td>
+        <td style="vertical-align: top; word-wrap: break-word">The value that needs to be OR operation.</td>
+        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top">BOOL</td>
+        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+</table></p>
+<p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
+<span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
+<div class="codehilite"><pre><span></span>from cscStream#window.lengthBatch(10)
+select or(isFraud) as isFraudTransaction
+insert into alertStream;
+</pre></div>
+
+
+<p style="word-wrap: break-word">This will returns the result for OR operation of isFraud values as a boolean value for event chunk expiry by window length batch.</p>
 
 <h3 id="stddev-aggregate-function">stdDev <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#aggregate-function">(Aggregate Function)</a></em><a class="headerlink" href="#stddev-aggregate-function" title="Permanent link">&para;</a></h3>
 <p style="word-wrap: break-word">Returns the calculated standard deviation for all the events.</p>
