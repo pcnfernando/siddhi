@@ -859,6 +859,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/4.2.0/" title="4.2.0" class="md-nav__link">
+      4.2.0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/4.1.64/" title="4.1.64" class="md-nav__link">
       4.1.64
     </a>
@@ -3045,7 +3057,7 @@ table abstraction.</p>
 </tr>
 <tr>
 <td><code>attribute name</code></td>
-<td>The schema of the table is defined by its attributes with uniquely identifiable attribute names (<code>camalCase</code> is used for attribute names as a convention.)</td>
+<td>The schema of the table is defined by its attributes with uniquely identifiable attribute names (<code>camelCase</code> is used for attribute names as a convention.)</td>
 </tr>
 <tr>
 <td><code>attribute type</code></td>
@@ -3284,9 +3296,7 @@ of stream attributes for durations such as <code>sec</code>, <code>min</code>, <
 <p>This is of considerable importance in many Analytics scenarios because aggregate values are often needed for several time periods. 
 Furthermore, this ensures that the aggregations are not lost due to unexpected system failures because aggregates can be stored in different persistence <code>stores</code>.</p>
 <p><strong>Syntax</strong></p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">BufferSize</span><span class="p">(</span><span class="ss">&quot;&lt;positive integer&gt;&quot;</span><span class="p">)</span>
-<span class="o">@</span><span class="n">IgnoreEventsOlderThanBuffer</span><span class="p">(</span><span class="ss">&quot;&lt;true or false&gt;&quot;</span><span class="p">)</span>
-<span class="o">@</span><span class="n">store</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="ss">&quot;&lt;store type&gt;&quot;</span><span class="p">,</span> <span class="p">...)</span>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">store</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="ss">&quot;&lt;store type&gt;&quot;</span><span class="p">,</span> <span class="p">...)</span>
 <span class="n">define</span> <span class="n">aggregation</span> <span class="o">&lt;</span><span class="n">aggregator</span> <span class="n">name</span><span class="o">&gt;</span>
 <span class="k">from</span> <span class="o">&lt;</span><span class="k">input</span> <span class="n">stream</span><span class="o">&gt;</span>
 <span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">aggregate</span> <span class="k">function</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">as</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
@@ -3306,11 +3316,11 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 <tbody>
 <tr>
 <td><code>@BufferSize</code></td>
-<td>This annotation is optional. The default value is buffer size 0. <br/>It is used to identify the number of 'expired' events to retain <br/>in a buffer, to handle out of order event processing. It's an optional parameter <br/>which is applicable, only if aggregation is based on external timestamp (since events <br/>aggregated based on event arrival time cannot be out of order). An event is identified <br/>as 'expired' with relation to the latest event's timestamp and the most granular duration <br/>for which aggregation is calculated. For example, if aggregation is for sec...year, the <br/>most granular duration is seconds. Hence, if buffer size is 3 and events for 51st second, <br/>52nd second, 53rd second and 54th second arrive, all of the older aggregations (for <br/>seconds 51, 52 and 53) would be kept in the buffer (since latest event is for 54th second)</td>
+<td><strong>DEPRECIATED FROM V4.2.0</strong>. This annotation is optional. The default value is buffer size 0. <br/>It is used to identify the number of 'expired' events to retain <br/>in a buffer, to handle out of order event processing. It's an optional parameter <br/>which is applicable, only if aggregation is based on external timestamp (since events <br/>aggregated based on event arrival time cannot be out of order). An event is identified <br/>as 'expired' with relation to the latest event's timestamp and the most granular duration <br/>for which aggregation is calculated. For example, if aggregation is for sec...year, the <br/>most granular duration is seconds. Hence, if buffer size is 3 and events for 51st second, <br/>52nd second, 53rd second and 54th second arrive, all of the older aggregations (for <br/>seconds 51, 52 and 53) would be kept in the buffer (since latest event is for 54th second)</td>
 </tr>
 <tr>
 <td><code>@IgnoreEventsOlderThanBuffer</code></td>
-<td>This annotation specifies whether or not to aggregate events older than the <br/>buffer. If this value is false (which is the default value as well), an event <br/>older than the buffer would be aggregated with the oldest event in buffer. If <br/>the value is true, an event older than the buffer would be dropped. This is an optional annotation. Default value is false.</td>
+<td><strong>DEPRECIATED FROM V4.2.0</strong>.This annotation specifies whether or not to aggregate events older than the <br/>buffer. If this value is false (which is the default value as well), an event <br/>older than the buffer would be aggregated with the oldest event in buffer. If <br/>the value is true, an event older than the buffer would be dropped. This is an optional annotation. Default value is false.</td>
 </tr>
 <tr>
 <td><code>@store</code></td>
@@ -3338,6 +3348,10 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>From V4.2.0 onwards, Aggregation will be carried out at calendar start times for each granularity with GMT timezone</p>
+</div>
 <p><strong>Example</strong></p>
 <p>This Siddhi Application defines an aggregation named <code>TradeAggregation</code> to calculate the average and sum for the <code>price</code> attribute of events arriving at the <code>TradeStream</code> stream. These aggregates are calculated per every time granularity in the range second-year.</p>
 <div class="codehilite"><pre><span></span><span class="n">define</span> <span class="n">stream</span> <span class="n">TradeStream</span> <span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">price</span> <span class="n">double</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="k">timestamp</span> <span class="n">long</span><span class="p">);</span>
@@ -3387,6 +3401,10 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 </tbody>
 </table>
 <p><code>within</code> and <code>par</code> clauses also accept attribute values from the stream.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The timestamp of the aggregations can be accessed through the attribute AGG_TIMESTAMP</p>
+</div>
 <p><strong>Example</strong></p>
 <p>Following aggregation definition will be used for the examples. </p>
 <div class="codehilite"><pre><span></span><span class="n">define</span> <span class="n">stream</span> <span class="n">TradeStream</span> <span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">price</span> <span class="n">double</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="k">timestamp</span> <span class="n">long</span><span class="p">);</span>
@@ -3460,7 +3478,7 @@ Events can be inserted to a defined window from one or more queries and it can p
 </tr>
 <tr>
 <td><code>attribute name</code></td>
-<td>The schema of the window is defined by its attributes with uniquely identifiable attribute names (<code>camalCase</code> is used for attribute names as a convention.)</td>
+<td>The schema of the window is defined by its attributes with uniquely identifiable attribute names (<code>camelCase</code> is used for attribute names as a convention.)</td>
 </tr>
 <tr>
 <td><code>attribute type</code></td>
@@ -3658,7 +3676,7 @@ Functions defined via scripts can be accessed in queries similar to any other in
 <tbody>
 <tr>
 <td><code>function name</code></td>
-<td>The name of the function (<code>camalCase</code> is used for the function name) as a convention.</td>
+<td>The name of the function (<code>camelCase</code> is used for the function name) as a convention.</td>
 </tr>
 <tr>
 <td><code>language name</code></td>
