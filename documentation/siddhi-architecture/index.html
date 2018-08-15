@@ -525,6 +525,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/4.2.1/" title="4.2.1" class="md-nav__link">
+      4.2.1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/4.2.0/" title="4.2.0" class="md-nav__link">
       4.2.0
     </a>
@@ -1091,8 +1103,7 @@ a timer event or other means, it removes the expired event from the window and p
 <p>Join input stream query runtime is generated for join queries. This can consume events from two stream junctions and perform a join operation as depicted above. 
 It can also perform a join by consuming events from one stream junction and join against itself, or it can join against a 
 table, window or an incremental aggregation. When a join is performed with a table, window or incremental aggregation,
-the <code>WindowProcessor</code> in the image is replaced with the table, window or incremental aggregation. No<br />
-basic processors are used on their side. </p>
+the <code>WindowProcessor</code> in the image is replaced with the table, window or incremental aggregation. No basic processors are used on their side. </p>
 <p>The joining operation is triggered by the events that arrive from the stream junction.
 Here, when an event from one stream reaches the pre <code>JoinProcessor</code>, it matches against all the available events of the other stream's <code>WindowProcessor</code>. 
 When a match is found, those matched events are sent to the <code>QuerySelector</code> as current events, and at the same time, 
