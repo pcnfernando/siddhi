@@ -859,6 +859,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/4.2.3/" title="4.2.3" class="md-nav__link">
+      4.2.3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/4.2.2/" title="4.2.2" class="md-nav__link">
       4.2.2
     </a>
@@ -3312,7 +3324,49 @@ When constructing the <code>condition</code>, the table attribute must be always
 <h2 id="incremental-aggregation">Incremental Aggregation<a class="headerlink" href="#incremental-aggregation" title="Permanent link">&para;</a></h2>
 <p>Incremental aggregation allows you to obtain aggregates in an incremental manner for a specified set of time periods.</p>
 <p>This not only allows you to calculate aggregations with varied time granularity, but also allows you to access them in an interactive
- manner for reports, dashboards, and for further processing. Its schema is defined via the <strong>aggregation definition</strong>.</p>
+ manner for reports, dashboards, and for further processing. Its schema is defined via the <strong>aggregation definition</strong>. 
+ Incremental aggregation granularity data holders will be automatically purge with following retentions with a interval of 15 minutes.</p>
+<table>
+<thead>
+<tr>
+<th>Granularity</th>
+<th>Default retention</th>
+<th>Minimum retention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>second</code></td>
+<td><code>120</code> seconds</td>
+<td><code>120</code> seconds</td>
+</tr>
+<tr>
+<td><code>minute</code></td>
+<td><code>24</code>  hours</td>
+<td><code>120</code> minutes</td>
+</tr>
+<tr>
+<td><code>hour</code></td>
+<td><code>30</code>  days</td>
+<td><code>25</code>  hours</td>
+</tr>
+<tr>
+<td><code>day</code></td>
+<td><code>1</code>   year</td>
+<td><code>32</code>  days</td>
+</tr>
+<tr>
+<td><code>month</code></td>
+<td><code>All</code></td>
+<td><code>13</code>  month</td>
+</tr>
+<tr>
+<td><code>year</code></td>
+<td><code>All</code></td>
+<td><code>none</code></td>
+</tr>
+</tbody>
+</table>
 <p><strong>Purpose</strong></p>
 <p>Incremental aggregation allows you to retrieve the aggregate value for different time durations. 
 That is, it allows you to obtain aggregates such as <code>sum</code>, <code>count</code>, <code>avg</code>, <code>min</code>, <code>max</code>, <code>count</code> and <code>distinctCount</code>
@@ -3321,6 +3375,7 @@ of stream attributes for durations such as <code>sec</code>, <code>min</code>, <
 Furthermore, this ensures that the aggregations are not lost due to unexpected system failures because aggregates can be stored in different persistence <code>stores</code>.</p>
 <p><strong>Syntax</strong></p>
 <div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">store</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="ss">&quot;&lt;store type&gt;&quot;</span><span class="p">,</span> <span class="p">...)</span>
+<span class="o">@</span><span class="n">purge</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="ss">&quot;&lt;true or false&gt;&quot;</span><span class="p">,</span><span class="nb">interval</span><span class="o">=&lt;</span><span class="n">purging</span> <span class="nb">interval</span><span class="o">&gt;</span><span class="p">,</span><span class="o">@</span><span class="n">retentionPeriod</span><span class="p">(</span><span class="o">&lt;</span><span class="n">granularity</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">retension</span> <span class="n">period</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...)</span> <span class="p">)</span>
 <span class="n">define</span> <span class="n">aggregation</span> <span class="o">&lt;</span><span class="n">aggregator</span> <span class="n">name</span><span class="o">&gt;</span>
 <span class="k">from</span> <span class="o">&lt;</span><span class="k">input</span> <span class="n">stream</span><span class="o">&gt;</span>
 <span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">aggregate</span> <span class="k">function</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">as</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
@@ -3349,6 +3404,14 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 <tr>
 <td><code>@store</code></td>
 <td>This annotation is used to refer to the data store where the calculated <br/>aggregate results are stored. This annotation is optional. When <br/>no annotation is provided, the data is stored in the <code>in-memory</code> store.</td>
+</tr>
+<tr>
+<td><code>@purge</code></td>
+<td>This annotation is used to configure purging in aggregation granularities.<br/> when this annotation is not provided, above mentioned default purging will be applied.</td>
+</tr>
+<tr>
+<td><code>@retensionPeriod</code></td>
+<td>This annotation is used to configure the retention periods of data purging.<br/> when this annotation is not provided, default retention period will be applied.</td>
 </tr>
 <tr>
 <td><code>&lt;aggregator name&gt;</code></td>
@@ -3380,6 +3443,7 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 <p>This Siddhi Application defines an aggregation named <code>TradeAggregation</code> to calculate the average and sum for the <code>price</code> attribute of events arriving at the <code>TradeStream</code> stream. These aggregates are calculated per every time granularity in the range second-year.</p>
 <div class="codehilite"><pre><span></span><span class="n">define</span> <span class="n">stream</span> <span class="n">TradeStream</span> <span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">price</span> <span class="n">double</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="k">timestamp</span> <span class="n">long</span><span class="p">);</span>
 
+<span class="o">@</span><span class="n">purge</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span> <span class="nb">interval</span><span class="o">=</span><span class="s1">&#39;10 sec&#39;</span><span class="p">,</span><span class="o">@</span><span class="n">retentionPeriod</span><span class="p">(</span><span class="n">sec</span><span class="o">=</span><span class="s1">&#39;120 sec&#39;</span><span class="p">,</span><span class="k">min</span><span class="o">=</span><span class="s1">&#39;24 hours&#39;</span><span class="p">,</span><span class="n">hours</span><span class="o">=</span><span class="s1">&#39;30 days&#39;</span><span class="p">,</span><span class="n">days</span><span class="o">=</span><span class="s1">&#39;1 year&#39;</span><span class="p">,</span><span class="n">months</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span><span class="n">years</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">))</span>
 <span class="n">define</span> <span class="n">aggregation</span> <span class="n">TradeAggregation</span>
   <span class="k">from</span> <span class="n">TradeStream</span>
   <span class="k">select</span> <span class="n">symbol</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">as</span> <span class="n">avgPrice</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span>
