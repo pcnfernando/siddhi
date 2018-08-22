@@ -483,8 +483,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#limit" title="Limit" class="md-nav__link">
-    Limit
+  <a href="#limit-offset" title="Limit &amp; Offset" class="md-nav__link">
+    Limit &amp; Offset
   </a>
   
 </li>
@@ -852,6 +852,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/4.2.7/" title="4.2.7" class="md-nav__link">
+      4.2.7
+    </a>
+  </li>
+
         
           
           
@@ -1245,8 +1257,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#limit" title="Limit" class="md-nav__link">
-    Limit
+  <a href="#limit-offset" title="Limit &amp; Offset" class="md-nav__link">
+    Limit &amp; Offset
   </a>
   
 </li>
@@ -2512,29 +2524,43 @@ by ordering them in the ascending order of the room's avgTemp and then by the de
 </pre></div>
 
 
-<h3 id="limit">Limit<a class="headerlink" href="#limit" title="Permanent link">&para;</a></h3>
-<p>Limit allows you to limit the number of events to be emitted from an aggregated results batch. Users can provide the number of events to be
-emitted.</p>
+<h3 id="limit-offset">Limit &amp; Offset<a class="headerlink" href="#limit-offset" title="Permanent link">&para;</a></h3>
+<p>When events are emitted as a batch, offset allows you to offset beginning of the output event batch and limit allows you to limit the number of events in the batch from the defined offset. 
+With this users can specify which set of events need be emitted. </p>
 <p><strong>Syntax</strong>
-The syntax for the Limit clause is as follows:</p>
+The syntax for the Limit &amp; Offset clause is as follows:</p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="o">&lt;</span><span class="k">input</span> <span class="n">stream</span><span class="o">&gt;#</span><span class="n">window</span><span class="p">.</span><span class="o">&lt;</span><span class="n">window</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">(</span> <span class="p">...</span> <span class="p">)</span>
 <span class="k">select</span> <span class="o">&lt;</span><span class="k">aggregate</span> <span class="k">function</span><span class="o">&gt;</span><span class="p">(</span> <span class="o">&lt;</span><span class="k">parameter</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">parameter</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...)</span> <span class="k">as</span> <span class="o">&lt;</span><span class="n">attribute1</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute2</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
 <span class="k">group</span> <span class="k">by</span> <span class="o">&lt;</span><span class="n">attribute1</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute2</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">...</span>
 <span class="k">having</span> <span class="o">&lt;</span><span class="n">condition</span><span class="o">&gt;</span>
 <span class="k">order</span> <span class="k">by</span> <span class="o">&lt;</span><span class="n">attribute1</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="k">asc</span> <span class="o">|</span> <span class="k">desc</span><span class="p">)</span><span class="o">?</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute2</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">ascend</span><span class="o">/</span><span class="n">descend</span><span class="o">&gt;</span><span class="p">)</span><span class="o">?</span><span class="p">,</span> <span class="p">...</span>
-<span class="k">limit</span> <span class="o">&lt;</span><span class="n">positive</span> <span class="n">interger</span><span class="o">&gt;</span>
+<span class="k">limit</span> <span class="o">&lt;</span><span class="n">positive</span> <span class="n">interger</span><span class="o">&gt;?</span>
+<span class="k">offset</span> <span class="o">&lt;</span><span class="n">positive</span> <span class="n">interger</span><span class="o">&gt;?</span>
 <span class="k">insert</span> <span class="k">into</span> <span class="o">&lt;</span><span class="k">output</span> <span class="n">stream</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></div>
 
 
+<p>Here both <code>limit</code> and <code>offset</code> are optional where <code>limit</code> by default output all the events and <code>offset</code> by default set to <code>0</code>.</p>
 <p><strong>Example</strong>
 The following query calculates the average temperature per <code>roomNo</code> and <code>deviceID</code> combination, for events that arrive at the <code>TempStream</code> stream
-for every 10 minutes and emits two events with highest average temperature for each aggregate.</p>
+for every 10 minutes and emits two events with highest average temperature.</p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="n">TempStream</span><span class="o">#</span><span class="n">window</span><span class="p">.</span><span class="n">timeBatch</span><span class="p">(</span><span class="mi">10</span> <span class="k">min</span><span class="p">)</span>
 <span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="k">as</span> <span class="n">avgTemp</span><span class="p">,</span> <span class="n">roomNo</span><span class="p">,</span> <span class="n">deviceID</span>
 <span class="k">group</span> <span class="k">by</span> <span class="n">roomNo</span><span class="p">,</span> <span class="n">deviceID</span>
 <span class="k">order</span> <span class="k">by</span> <span class="n">avgTemp</span> <span class="k">desc</span>
 <span class="k">limit</span> <span class="mi">2</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">HighestAvgTempStream</span><span class="p">;</span>
+</pre></div>
+
+
+<p>The following query calculates the average temperature per <code>roomNo</code> and <code>deviceID</code> combination, for events that arrive at the <code>TempStream</code> stream
+for every 10 minutes and emits third, forth and fifth events when sorted in descending order based on their average temperature.</p>
+<div class="codehilite"><pre><span></span><span class="k">from</span> <span class="n">TempStream</span><span class="o">#</span><span class="n">window</span><span class="p">.</span><span class="n">timeBatch</span><span class="p">(</span><span class="mi">10</span> <span class="k">min</span><span class="p">)</span>
+<span class="k">select</span> <span class="k">avg</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="k">as</span> <span class="n">avgTemp</span><span class="p">,</span> <span class="n">roomNo</span><span class="p">,</span> <span class="n">deviceID</span>
+<span class="k">group</span> <span class="k">by</span> <span class="n">roomNo</span><span class="p">,</span> <span class="n">deviceID</span>
+<span class="k">order</span> <span class="k">by</span> <span class="n">avgTemp</span> <span class="k">desc</span>
+<span class="k">limit</span> <span class="mi">3</span>
+<span class="k">offset</span> <span class="mi">2</span>
 <span class="k">insert</span> <span class="k">into</span> <span class="n">HighestAvgTempStream</span><span class="p">;</span>
 </pre></div>
 
