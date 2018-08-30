@@ -859,6 +859,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/4.2.10/" title="4.2.10" class="md-nav__link">
+      4.2.10
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/4.2.9/" title="4.2.9" class="md-nav__link">
       4.2.9
     </a>
@@ -3410,8 +3422,8 @@ When constructing the <code>condition</code>, the table attribute must be always
 <h2 id="incremental-aggregation">Incremental Aggregation<a class="headerlink" href="#incremental-aggregation" title="Permanent link">&para;</a></h2>
 <p>Incremental aggregation allows you to obtain aggregates in an incremental manner for a specified set of time periods.</p>
 <p>This not only allows you to calculate aggregations with varied time granularity, but also allows you to access them in an interactive
- manner for reports, dashboards, and for further processing. Its schema is defined via the <strong>aggregation definition</strong>. 
- Incremental aggregation granularity data holders will be automatically purge with following retentions with a interval of 15 minutes.</p>
+ manner for reports, dashboards, and for further processing. Its schema is defined via the <strong>aggregation definition</strong>.</p>
+<p>Incremental aggregation granularity data holders are automatically purged every 15 minutes. When carrying out data purging, the retention period you have specified for each granularity in the incremental aggregation query is taken into account. The retention period defined for a granularity needs to be greater than or equal to its minimum retention period as specified in the table below. If no valid retention period is defined for a granularity, the default retention period (as specified in the table below) is applied. </p>
 <table>
 <thead>
 <tr>
@@ -3461,7 +3473,7 @@ of stream attributes for durations such as <code>sec</code>, <code>min</code>, <
 Furthermore, this ensures that the aggregations are not lost due to unexpected system failures because aggregates can be stored in different persistence <code>stores</code>.</p>
 <p><strong>Syntax</strong></p>
 <div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">store</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="ss">&quot;&lt;store type&gt;&quot;</span><span class="p">,</span> <span class="p">...)</span>
-<span class="o">@</span><span class="n">purge</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="ss">&quot;&lt;true or false&gt;&quot;</span><span class="p">,</span><span class="nb">interval</span><span class="o">=&lt;</span><span class="n">purging</span> <span class="nb">interval</span><span class="o">&gt;</span><span class="p">,</span><span class="o">@</span><span class="n">retentionPeriod</span><span class="p">(</span><span class="o">&lt;</span><span class="n">granularity</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">retension</span> <span class="n">period</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...)</span> <span class="p">)</span>
+<span class="o">@</span><span class="n">purge</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="ss">&quot;&lt;true or false&gt;&quot;</span><span class="p">,</span><span class="nb">interval</span><span class="o">=&lt;</span><span class="n">purging</span> <span class="nb">interval</span><span class="o">&gt;</span><span class="p">,</span><span class="o">@</span><span class="n">retentionPeriod</span><span class="p">(</span><span class="o">&lt;</span><span class="n">granularity</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">retention</span> <span class="n">period</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...)</span> <span class="p">)</span>
 <span class="n">define</span> <span class="n">aggregation</span> <span class="o">&lt;</span><span class="n">aggregator</span> <span class="n">name</span><span class="o">&gt;</span>
 <span class="k">from</span> <span class="o">&lt;</span><span class="k">input</span> <span class="n">stream</span><span class="o">&gt;</span>
 <span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">aggregate</span> <span class="k">function</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">as</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
@@ -3481,11 +3493,11 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 <tbody>
 <tr>
 <td><code>@BufferSize</code></td>
-<td><strong>DEPRECIATED FROM V4.2.0</strong>. This annotation is optional. The default value is buffer size 0. <br/>It is used to identify the number of 'expired' events to retain <br/>in a buffer, to handle out of order event processing. It's an optional parameter <br/>which is applicable, only if aggregation is based on external timestamp (since events <br/>aggregated based on event arrival time cannot be out of order). An event is identified <br/>as 'expired' with relation to the latest event's timestamp and the most granular duration <br/>for which aggregation is calculated. For example, if aggregation is for sec...year, the <br/>most granular duration is seconds. Hence, if buffer size is 3 and events for 51st second, <br/>52nd second, 53rd second and 54th second arrive, all of the older aggregations (for <br/>seconds 51, 52 and 53) would be kept in the buffer (since latest event is for 54th second)</td>
+<td><strong>DEPRECIATED FROM V4.2.0</strong>. This identifies the number of expired events to retain in a buffer in order<br/>to handle out of order event processing. This is an optional<br/>parameter that is applicable only if aggregation is based on external<br/>timestamps (because events aggregated based on event arrival<br/>time cannot be out of order). Siddhi determines whether an event is expired or not<br/>based on the timestamp of the latest event and the most granular duration for<br/>which aggregation is calculated.<br/> e.g., If the aggregation is calculated for <code>sec…year</code>, the most granular duration is seconds. Therefore, if the buffer size is <code>3</code> and events arrive during 51st, 52nd, 53rd and 54th seconds, all of the older aggregations (i.e., for 51st, 52nd and 53rd seconds) are kept in the buffer because the latest event arrived during the 54th second. <br/>The default value is <code>0</code>.</td>
 </tr>
 <tr>
 <td><code>@IgnoreEventsOlderThanBuffer</code></td>
-<td><strong>DEPRECIATED FROM V4.2.0</strong>.This annotation specifies whether or not to aggregate events older than the <br/>buffer. If this value is false (which is the default value as well), an event <br/>older than the buffer would be aggregated with the oldest event in buffer. If <br/>the value is true, an event older than the buffer would be dropped. This is an optional annotation. Default value is false.</td>
+<td><strong>DEPRECIATED FROM V4.2.0</strong>.This annotation specifies whether or not to aggregate events older than the <br/>buffer. If this parameter is set to <code>false</code> (which is default), any event <br/>older than the buffer is aggregated with the oldest event in buffer. If <br/>this parameter is set to <code>true</code>, any event older than the buffer is dropped. This is an optional annotation.</td>
 </tr>
 <tr>
 <td><code>@store</code></td>
@@ -3493,11 +3505,11 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 </tr>
 <tr>
 <td><code>@purge</code></td>
-<td>This annotation is used to configure purging in aggregation granularities.<br/> when this annotation is not provided, above mentioned default purging will be applied.</td>
+<td>This annotation is used to configure purging in aggregation granularities.<br/> If this annotation is not provided, the default purging mentioned above is applied.</td>
 </tr>
 <tr>
-<td><code>@retensionPeriod</code></td>
-<td>This annotation is used to configure the retention periods of data purging.<br/> when this annotation is not provided, default retention period will be applied.</td>
+<td><code>@retentionPeriod</code></td>
+<td>This annotation is used to specify the length of time the data needs to be retained when carrying out data purging.<br/> If this annotation is not provided, the default retention period is applied.</td>
 </tr>
 <tr>
 <td><code>&lt;aggregator name&gt;</code></td>
@@ -3523,10 +3535,10 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 </table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>From V4.2.0 onwards, Aggregation will be carried out at calendar start times for each granularity with GMT timezone</p>
+<p>From V4.2.0 onwards, aggregation is carried out at calendar start times for each granularity with the GMT timezone</p>
 </div>
 <p><strong>Example</strong></p>
-<p>This Siddhi Application defines an aggregation named <code>TradeAggregation</code> to calculate the average and sum for the <code>price</code> attribute of events arriving at the <code>TradeStream</code> stream. These aggregates are calculated per every time granularity in the range second-year.</p>
+<p>This Siddhi Application defines an aggregation named <code>TradeAggregation</code> to calculate the average and sum for the <code>price</code> attribute of events arriving at the <code>TradeStream</code> stream. These aggregates are calculated per every time granularity in the second-year range.</p>
 <div class="codehilite"><pre><span></span><span class="n">define</span> <span class="n">stream</span> <span class="n">TradeStream</span> <span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">price</span> <span class="n">double</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="k">timestamp</span> <span class="n">long</span><span class="p">);</span>
 
 <span class="o">@</span><span class="n">purge</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span> <span class="nb">interval</span><span class="o">=</span><span class="s1">&#39;10 sec&#39;</span><span class="p">,</span><span class="o">@</span><span class="n">retentionPeriod</span><span class="p">(</span><span class="n">sec</span><span class="o">=</span><span class="s1">&#39;120 sec&#39;</span><span class="p">,</span><span class="k">min</span><span class="o">=</span><span class="s1">&#39;24 hours&#39;</span><span class="p">,</span><span class="n">hours</span><span class="o">=</span><span class="s1">&#39;30 days&#39;</span><span class="p">,</span><span class="n">days</span><span class="o">=</span><span class="s1">&#39;1 year&#39;</span><span class="p">,</span><span class="n">months</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span><span class="n">years</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">))</span>
@@ -3577,7 +3589,7 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 <p><code>within</code> and <code>par</code> clauses also accept attribute values from the stream.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The timestamp of the aggregations can be accessed through the attribute AGG_TIMESTAMP</p>
+<p>The timestamp of the aggregations can be accessed through the <code>AGG_TIMESTAMP</code> attribute.</p>
 </div>
 <p><strong>Example</strong></p>
 <p>Following aggregation definition will be used for the examples. </p>
