@@ -859,6 +859,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/4.2.17/" title="4.2.17" class="md-nav__link">
+      4.2.17
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/4.2.16/" title="4.2.16" class="md-nav__link">
       4.2.16
     </a>
@@ -3577,7 +3589,7 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 </tr>
 <tr>
 <td><code>@purge</code></td>
-<td>This annotation is used to configure purging in aggregation granularities.<br/> If this annotation is not provided, the default purging mentioned above is applied.</td>
+<td>This annotation is used to configure purging in aggregation granularities.<br/> If this annotation is not provided, the default purging mentioned above is applied.<br/> If you want to disable automatic data purging, you can use this annotation as follows:</br>'@purge(enable=false)</br>/You should disable data purging if the aggregation query in included in the Siddhi application for read-only purposes.</td>
 </tr>
 <tr>
 <td><code>@retentionPeriod</code></td>
