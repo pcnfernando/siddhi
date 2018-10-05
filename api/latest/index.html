@@ -106,7 +106,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#api-docs-v4222" tabindex="1" class="md-skip">
+      <a href="#api-docs-v4223" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -371,6 +371,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.2.23/" title="4.2.23" class="md-nav__link">
+      4.2.23
+    </a>
+  </li>
+
         
           
           
@@ -1047,6 +1059,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#delay-window" title="delay (Window)" class="md-nav__link">
+    delay (Window)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#externaltime-window" title="externalTime (Window)" class="md-nav__link">
     externalTime (Window)
   </a>
@@ -1503,6 +1522,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#delay-window" title="delay (Window)" class="md-nav__link">
+    delay (Window)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#externaltime-window" title="externalTime (Window)" class="md-nav__link">
     externalTime (Window)
   </a>
@@ -1683,7 +1709,7 @@
                   <a href="https://github.com/wso2/siddhi/edit/master/docs/api/latest.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="api-docs-v4222">API Docs - v4.2.22<a class="headerlink" href="#api-docs-v4222" title="Permanent link">&para;</a></h1>
+                <h1 id="api-docs-v4223">API Docs - v4.2.23<a class="headerlink" href="#api-docs-v4223" title="Permanent link">&para;</a></h1>
 <h2 id="core">Core<a class="headerlink" href="#core" title="Permanent link">&para;</a></h2>
 <h3 id="and-aggregate-function">and <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#aggregate-function">(Aggregate Function)</a></em><a class="headerlink" href="#and-aggregate-function" title="Permanent link">&para;</a></h3>
 <p style="word-wrap: break-word">Returns the results of AND operation for all the events.</p>
@@ -3086,6 +3112,55 @@ insert into outputStream ;
 
 
 <p style="word-wrap: break-word">This will processed events as the output every 5 seconds.</p>
+
+<h3 id="delay-window">delay <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#window">(Window)</a></em><a class="headerlink" href="#delay-window" title="Permanent link">&para;</a></h3>
+<p style="word-wrap: break-word">A delay window holds events that arrived for a given delay time period before processing them.</p>
+
+<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<div class="codehilite"><pre><span></span>delay(&lt;INT|LONG|TIME&gt; window.delay)
+</pre></div>
+
+
+<p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
+<table>
+    <tr>
+        <th>Name</th>
+        <th style="min-width: 20em">Description</th>
+        <th>Default Value</th>
+        <th>Possible Data Types</th>
+        <th>Optional</th>
+        <th>Dynamic</th>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">window.delay</td>
+        <td style="vertical-align: top; word-wrap: break-word">The time period(sec, min, ms) for which  the window should delay the events.</td>
+        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top">INT<br>LONG<br>TIME</td>
+        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+</table></p>
+<p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
+<span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
+<div class="codehilite"><pre><span></span>define window delayWindow(symbol string, volume int) delay(1 hour);
+define stream purchaseStream(symbol string, volume int);
+define stream deliveryStream(symbol string);
+define stream outputStream(symbol string);
+
+@info(name=&#39;query1&#39;) 
+from purchaseStream
+select symbol, volume
+insert into delayWindow;
+
+@info(name=&#39;query2&#39;) 
+from delayWindow join deliveryStream
+on delayWindow.symbol == deliveryStream.symbol
+select delayWindow.symbol
+insert into outputStream;
+</pre></div>
+
+
+<p style="word-wrap: break-word">This will delay the events from purchaseStream for 1 hour and match them with events arrived from deliveryStream to check if delivery of the purchased item is done within 1 hour </p>
 
 <h3 id="externaltime-window">externalTime <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#window">(Window)</a></em><a class="headerlink" href="#externaltime-window" title="Permanent link">&para;</a></h3>
 <p style="word-wrap: break-word">A sliding time window based on external time. It holds events that arrived during the last windowTime period from the external timestamp, and gets updated on every monotonically increasing timestamp.</p>
