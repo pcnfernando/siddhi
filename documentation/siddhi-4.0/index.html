@@ -859,6 +859,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/4.2.27/" title="4.2.27" class="md-nav__link">
+      4.2.27
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/4.2.26/" title="4.2.26" class="md-nav__link">
       4.2.26
     </a>
@@ -3729,6 +3741,10 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>From V4.2.0 onwards, aggregation is carried out at calendar start times for each granularity with the GMT timezone</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>From V4.2.6 onwards, the same aggregation can be defined in multiple Siddhi apps for joining, however, <em>only one siddhi app should carry out the processing</em> (i.e. the aggregation input stream should only feed events to one aggregation definition). </p>
 </div>
 <p><strong>Example</strong></p>
 <p>This Siddhi Application defines an aggregation named <code>TradeAggregation</code> to calculate the average and sum for the <code>price</code> attribute of events arriving at the <code>TradeStream</code> stream. These aggregates are calculated per every time granularity in the second-year range.</p>
