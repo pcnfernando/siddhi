@@ -106,7 +106,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#api-docs-v4228" tabindex="1" class="md-skip">
+      <a href="#api-docs-v4229" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -371,6 +371,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.2.29/" title="4.2.29" class="md-nav__link">
+      4.2.29
+    </a>
+  </li>
+
         
           
           
@@ -1168,6 +1180,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#session-window" title="session (Window)" class="md-nav__link">
+    session (Window)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#sort-window" title="sort (Window)" class="md-nav__link">
     sort (Window)
   </a>
@@ -1631,6 +1650,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#session-window" title="session (Window)" class="md-nav__link">
+    session (Window)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#sort-window" title="sort (Window)" class="md-nav__link">
     sort (Window)
   </a>
@@ -1769,7 +1795,7 @@
                   <a href="https://github.com/wso2/siddhi/edit/master/docs/api/latest.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="api-docs-v4228">API Docs - v4.2.28<a class="headerlink" href="#api-docs-v4228" title="Permanent link">&para;</a></h1>
+                <h1 id="api-docs-v4229">API Docs - v4.2.29<a class="headerlink" href="#api-docs-v4229" title="Permanent link">&para;</a></h1>
 <h2 id="core">Core<a class="headerlink" href="#core" title="Permanent link">&para;</a></h2>
 <h3 id="and-aggregate-function">and <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#aggregate-function">(Aggregate Function)</a></em><a class="headerlink" href="#and-aggregate-function" title="Permanent link">&para;</a></h3>
 <p style="word-wrap: break-word">Returns the results of AND operation for all the events.</p>
@@ -3569,6 +3595,62 @@ insert all events into PotentialFraud;
 
 
 <p style="word-wrap: break-word">lossyFrequent(0.3, 0.05, cardNo) returns all the events of which the cardNo attributes frequency exceeds 0.3, with an error bound of 0.05.</p>
+
+<h3 id="session-window">session <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#window">(Window)</a></em><a class="headerlink" href="#session-window" title="Permanent link">&para;</a></h3>
+<p style="word-wrap: break-word">A session window that holds events into a session which has a grouping attribute (session key). After a session gap period, the session window would be expired. When a new event arrives with a value for session key, then it matches with a session window which has the same session key. A latency can be added to late arrival events to merge with the previous session windows. That latency time period should be less than the session gap time period. To have aggregate functions with session window, a 'group by' should be done with the session key. </p>
+
+<p><span id="syntax" class="md-typeset" style="display: block; font-weight: bold;">Syntax</span></p>
+<div class="codehilite"><pre><span></span>session(&lt;INT|LONG|TIME&gt; window.session, &lt;STRING&gt; window.key, &lt;INT|LONG|TIME&gt; window.allowedlatency)
+</pre></div>
+
+
+<p><span id="query-parameters" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">QUERY PARAMETERS</span>
+<table>
+    <tr>
+        <th>Name</th>
+        <th style="min-width: 20em">Description</th>
+        <th>Default Value</th>
+        <th>Possible Data Types</th>
+        <th>Optional</th>
+        <th>Dynamic</th>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">window.session</td>
+        <td style="vertical-align: top; word-wrap: break-word">The session gap time period(sec, min, ms).</td>
+        <td style="vertical-align: top"></td>
+        <td style="vertical-align: top">INT<br>LONG<br>TIME</td>
+        <td style="vertical-align: top">No</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">window.key</td>
+        <td style="vertical-align: top; word-wrap: break-word">The grouping attribute for events.</td>
+        <td style="vertical-align: top">default-key</td>
+        <td style="vertical-align: top">STRING</td>
+        <td style="vertical-align: top">Yes</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top">window.allowedlatency</td>
+        <td style="vertical-align: top; word-wrap: break-word">This will allow to alive session window for a defined time period</td>
+        <td style="vertical-align: top">0</td>
+        <td style="vertical-align: top">INT<br>LONG<br>TIME</td>
+        <td style="vertical-align: top">Yes</td>
+        <td style="vertical-align: top">No</td>
+    </tr>
+</table></p>
+<p><span id="examples" class="md-typeset" style="display: block; font-weight: bold;">Examples</span>
+<span id="example-1" class="md-typeset" style="display: block; color: rgba(0, 0, 0, 0.54); font-size: 12.8px; font-weight: bold;">EXAMPLE 1</span></p>
+<div class="codehilite"><pre><span></span>define stream purchaseEventStream (user string, item_number int, price float, quantity int);
+
+@info(name=&#39;query0) 
+from purchaseEventStream#window.session(5 sec, user, 2 sec) 
+select * 
+insert all events into outputStream;
+</pre></div>
+
+
+<p style="word-wrap: break-word">This will processing events that arrived from purchaseEvent stream with the user name as the session key and the session gap 5 seconds. It keeps the session window for 2 sec after session timeout.</p>
 
 <h3 id="sort-window">sort <em><a target="_blank" href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#window">(Window)</a></em><a class="headerlink" href="#sort-window" title="Permanent link">&para;</a></h3>
 <p style="word-wrap: break-word">This window holds a batch of events that equal the number specified as the windowLength and sorts them in the given order.</p>
