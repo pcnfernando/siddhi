@@ -516,6 +516,19 @@
     Logical Patterns
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detecting-non-occurring-events" title="Detecting Non-occurring Events" class="md-nav__link">
+    Detecting Non-occurring Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -852,6 +865,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/4.2.34/" title="4.2.34" class="md-nav__link">
+      4.2.34
+    </a>
+  </li>
+
         
           
           
@@ -1601,6 +1626,19 @@
   <a href="#logical-patterns" title="Logical Patterns" class="md-nav__link">
     Logical Patterns
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#detecting-non-occurring-events" title="Detecting Non-occurring Events" class="md-nav__link">
+    Detecting Non-occurring Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3122,6 +3160,87 @@ Square brackets can be used to indicate the event index where <code>1</code> can
 </tbody>
 </table>
 <p>Here the <code>not</code> pattern can be followed by either an <code>and</code> clause or the effective period of <code>not</code> can be concluded after a given <code>&lt;time period&gt;</code>. Further in Siddhi more than two streams cannot be matched with logical conditions using <code>and</code>, <code>or</code>, or <code>not</code> clauses at this point.</p>
+<h5 id="detecting-non-occurring-events">Detecting Non-occurring Events<a class="headerlink" href="#detecting-non-occurring-events" title="Permanent link">&para;</a></h5>
+<p>Siddhi allows you to detect non-occurring events via multiple combinations of the key words specified above as shown in the table below.</p>
+<p>In the patterns listed, P* can be either a regular event pattern, an absent event pattern or a logical pattern.</p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Detected Scenario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>not A for &lt;time period&gt;</code></td>
+<td>The non-occurrence of event A within <code>&lt;time period&gt;</code> after system start up.<br/> e.g., Generating an alert if a taxi has not reached its destination within 30 minutes, to indicate that the passenger might be in danger.</td>
+</tr>
+<tr>
+<td><code>not A for &lt;time period&gt; and B</code></td>
+<td>After system start up, event A does not occur within <code>time period</code>, but event B occurs at some point in time. <br/> e.g., Generating an alert if a taxi has not reached its destination within 30 minutes, and the passenger marked that he/she is in danger at some point in time.</td>
+</tr>
+<tr>
+<td><code>not A for &lt;time period 1&gt; and not B for &lt;time period 2&gt;</code></td>
+<td>After system start up, event A doess not occur within <code>time period 1</code>, and event B also does not occur within <code>&lt;time period 2&gt;</code>. <br/> e.g., Generating an alert if the driver of a taxi has not reached the destination within 30 minutes, and the passenger has not marked himself/herself to be in danger within that same time period.</td>
+</tr>
+<tr>
+<td><code>not A for &lt;time period&gt; or B</code></td>
+<td>After system start up, either event A does not occur within <code>&lt;time period&gt;</code>, or event B occurs at some point in time. <br/> e.g., Generating an alert if the taxi has not reached its destination within 30 minutes, or if the passenger has marked that he/she is in danger at some point in time.</td>
+</tr>
+<tr>
+<td><code>not A for &lt;time period 1&gt; or not B for &lt;time period 2&gt;</code></td>
+<td>After system start up, either event A does not occur within <code>&lt;time period 1&gt;</code>, or event B occurs within <code>&lt;time period 2&gt;</code>. <br/> e.g., Generating an alert to indicate that the driver is not on an expected route if the taxi has not reached destination A within 20 minutes, or reached destination B within 30 minutes.</td>
+</tr>
+<tr>
+<td><code>A → not B for &lt;time period&gt;</code></td>
+<td>Event B does not occur within <code>&lt;time period&gt;</code> after the occurrence of event A. e.g., Generating an alert if the taxi has reached its destination, but this was not followed by a payment record.</td>
+</tr>
+<tr>
+<td><code>P* → not A for &lt;time period&gt; and B</code></td>
+<td>After the occurrence of P*, event A does not occur within <code>&lt;time period&gt;</code>, and event B occurs at some point in time. <br/></td>
+</tr>
+<tr>
+<td><code>P* → not A for &lt;time period 1&gt; and not B for &lt;time period 2&gt;</code></td>
+<td>After the occurrence of P*, event A does not occur within <code>&lt;time period 1&gt;</code>, and event B does not occur within <code>&lt;time period 2&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>P* → not A for &lt;time period&gt; or B</code></td>
+<td>After the occurrence of P*, either event A does not occur within <code>&lt;time period&gt;</code>, or event B occurs at some point in time.</td>
+</tr>
+<tr>
+<td><code>P* → not A for &lt;time period 1&gt; or not B for &lt;time period 2&gt;</code></td>
+<td>After the occurrence of P*, either event A does not occur within <code>&lt;time period 1&gt;</code>, or event B does not occur within <code>&lt;time period 2&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>not A for &lt;time period&gt; → B</code></td>
+<td>Event A does occur within <code>&lt;time period&gt;</code> after the system start up, but event B occurs after that <code>&lt;time period&gt;</code> has elapsed.</td>
+</tr>
+<tr>
+<td><code>not A for &lt;time period&gt; and B → P*</code></td>
+<td>Event A does not occur within <code>&lt;time period&gt;</code>, and event B occurs at some point in time. Then P* occurs after the <code>&lt;time period&gt;</code> has elapsed, and after B has occurred.</td>
+</tr>
+<tr>
+<td><code>not A for &lt;time period 1&gt; and not B for &lt;time period 2&gt; → P*</code></td>
+<td>After system start up, event A does not occur within <code>&lt;time period 1&gt;</code>, and event B does not occur within <code>&lt;time period 2&gt;</code>. However, P* occurs after both A and B.</td>
+</tr>
+<tr>
+<td><code>not A for &lt;time period&gt; or B → P*</code></td>
+<td>After system start up, event A does not occur within <code>&lt;time period&gt;</code> or event B occurs at some point in time. The P* occurs after <code>&lt;time period&gt;</code> has elapsed, or after B has occurred.</td>
+</tr>
+<tr>
+<td><code>not A for &lt;time period 1&gt; or not B for &lt;time period 2&gt; → P*</code></td>
+<td>After system start up, either event A does not occur within <code>&lt;time period 1&gt;</code>, or event B does not occur within <code>&lt;time period 2&gt;</code>. Then P*  occurs after both <code>&lt;time period 1&gt;</code> and <code>&lt;time period 2&gt;</code> have elapsed.</td>
+</tr>
+<tr>
+<td><code>not A and B</code></td>
+<td>Event A does not occur before event B.</td>
+</tr>
+<tr>
+<td><code>A and not B</code></td>
+<td>Event B does not occur before event A.</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Example</strong></p>
 <p>Following Siddhi App, sends the <code>stop</code> control action to the regulator when the key is removed from the hotel room. </p>
 <div class="codehilite"><pre><span></span><span class="n">define</span> <span class="n">stream</span> <span class="n">RegulatorStateChangeStream</span><span class="p">(</span><span class="n">deviceID</span> <span class="n">long</span><span class="p">,</span> <span class="n">roomNo</span> <span class="nb">int</span><span class="p">,</span> <span class="n">tempSet</span> <span class="n">double</span><span class="p">,</span> <span class="n">action</span> <span class="n">string</span><span class="p">);</span>
