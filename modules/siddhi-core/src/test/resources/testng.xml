@@ -22,8 +22,9 @@
 <suite name="Siddhi-Core-Test-Suite">
     <test name="siddhi-core-tests" enabled="true" preserve-order="true" parallel="false">
         <classes>
-            <class name="org.wso2.siddhi.core.aggregation.AggregationTestCase"/>
-            <!--<class name="org.wso2.siddhi.core.aggregation.IncrementalPurgingTestCase"/>-->
+            <class name="org.wso2.siddhi.core.aggregation.Aggregation1TestCase"/>
+            <class name="org.wso2.siddhi.core.aggregation.Aggregation2TestCase"/>
+            <class name="org.wso2.siddhi.core.aggregation.IncrementalPurgingTestCase"/>
             <class name="org.wso2.siddhi.core.aggregation.DistinctCountAggregationTestCase"/>
             <class name="org.wso2.siddhi.core.aggregation.AggregationFindQueryValidationTestCase"/>
 
@@ -125,6 +126,7 @@
             <class name="org.wso2.siddhi.core.window.TimeBatchWindowTestCase"/>
             <class name="org.wso2.siddhi.core.window.TimeLengthWindowTestCase"/>
             <class name="org.wso2.siddhi.core.window.WindowDefinitionTestCase"/>
+            <class name="org.wso2.siddhi.core.window.BatchWindowTestCase"/>
 
             <class name="org.wso2.siddhi.core.query.BooleanCompareTestCase"/>
             <class name="org.wso2.siddhi.core.query.FilterTestCase1"/>
