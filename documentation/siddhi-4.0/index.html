@@ -639,8 +639,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#partial-aggregation" title="Partial Aggregation" class="md-nav__link">
-    Partial Aggregation
+  <a href="#distributed-aggregation" title="Distributed Aggregation" class="md-nav__link">
+    Distributed Aggregation
   </a>
   
 </li>
@@ -872,6 +872,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/4.3.7/" title="4.3.7" class="md-nav__link">
+      4.3.7
+    </a>
+  </li>
+
         
           
           
@@ -1913,8 +1925,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#partial-aggregation" title="Partial Aggregation" class="md-nav__link">
-    Partial Aggregation
+  <a href="#distributed-aggregation" title="Distributed Aggregation" class="md-nav__link">
+    Distributed Aggregation
   </a>
   
 </li>
@@ -4124,17 +4136,15 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 </pre></div>
 
 
-<h3 id="partial-aggregation">Partial Aggregation<a class="headerlink" href="#partial-aggregation" title="Permanent link">&para;</a></h3>
+<h3 id="distributed-aggregation">Distributed Aggregation<a class="headerlink" href="#distributed-aggregation" title="Permanent link">&para;</a></h3>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Partial Aggregation is only supported after V4.3.0</p>
+<p>Distributed Aggregation is only supported after v4.3.0</p>
 </div>
-<p>Partial Aggregation allows you to partially process aggregations in different run-times/shards. This allows one Siddhi
-app to be responsible only for processing a part of the aggregation.
-However for this, all the aggregations must have a physical database and must be linked to the same database. Further,
- a unique id should be provided for each runtime/shard through a system parameter(Config Manager) as a <code>shardId</code>.</p>
-<p><strong>Syntax</strong>
-The annotation <code>@PartitionById</code> should be added before the aggregation definition.</p>
+<p>Distributed Aggregation allows you to partially process aggregations in different shards. This allows Siddhi
+app in one shard to be responsible only for processing a part of the aggregation.
+However for this, all aggregations must be based on a common physical database(@store).</p>
+<p><strong>Syntax</strong></p>
 <div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">store</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="ss">&quot;&lt;store type&gt;&quot;</span><span class="p">,</span> <span class="p">...)</span>
 <span class="o">@</span><span class="n">PartitionById</span>
 <span class="n">define</span> <span class="n">aggregation</span> <span class="o">&lt;</span><span class="n">aggregator</span> <span class="n">name</span><span class="o">&gt;</span>
@@ -4145,6 +4155,37 @@ The annotation <code>@PartitionById</code> should be added before the aggregatio
 </pre></div>
 
 
+<p>Following table includes the <code>annotation</code> to be used
+Item | Description
+------|------
+<code>@PartitionById</code> | If the annotation is given, then the distributed aggregation is enabled. Further this can be disabled by using <code>enable</code> element, </br><code>@PartitionById(enable='false')</code>.</br></p>
+<table>
+<thead>
+<tr>
+<th>System Property</th>
+<th>Description</th>
+<th>Possible Values</th>
+<th>Optional</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>shardId</td>
+<td>The id of the shard one of the distributed aggregation is running in. This should be unique to a single shard</td>
+<td>Any string</td>
+<td>No</td>
+<td><Empty_String></td>
+</tr>
+<tr>
+<td>partitionById</td>
+<td>This allows user to enable/disable distributed aggregation for all aggregations running in one siddhi manager .(Available from v4.3.3)</td>
+<td>true/false</td>
+<td>Yesio</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>ShardIds should not be changed after the first configuration in order to keep data consistency.</p>
