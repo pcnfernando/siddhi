@@ -36,6 +36,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://wso2.github.io/siddhi/api/4.3.14/</loc>
+     <lastmod>2019-01-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://wso2.github.io/siddhi/api/4.3.13/</loc>
      <lastmod>2019-01-10</lastmod>
      <changefreq>daily</changefreq>
