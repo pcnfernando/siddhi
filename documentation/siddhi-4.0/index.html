@@ -879,6 +879,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/4.3.16/" title="4.3.16" class="md-nav__link">
+      4.3.16
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/4.3.15/" title="4.3.15" class="md-nav__link">
       4.3.15
     </a>
@@ -4209,7 +4221,7 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 </tr>
 <tr>
 <td><code>&lt;time periods&gt;</code></td>
-<td>The time periods can be given as a range separated by three dots, or as comma separated values. A range would be given as sec...year, where aggregation would be done per second, minute, hour, day, month and year. Comma separated values can be given as min, hour. However, skipping durations is not yet supported for comma separated values (e.g min, day is not a valid clause since hour duration has been skipped)</td>
+<td>Time periods can be specified as a range where the minimum and the maximum value are separated by three dots, or as comma-separated values. <br><br> e.g., A range can be specified as sec...year where aggregation is done per second, minute, hour, day, month and year. Comma-separated values can be specified as min, hour. <br><br> Skipping time durations (e.g., min, day where the hour duration is skipped) when specifying comma-separated values is supported only from v4.1.1 onwards</td>
 </tr>
 </tbody>
 </table>
