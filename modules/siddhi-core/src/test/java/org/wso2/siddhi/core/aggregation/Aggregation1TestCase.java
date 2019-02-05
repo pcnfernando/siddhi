@@ -279,7 +279,8 @@ public class Aggregation1TestCase {
                     new Object[]{1496290016000L, "IBM", 1000.0, 1000.0, 9000f}
             );
             SiddhiTestHelper.waitForEvents(100, 7, inEventCount, 60000);
-            AssertJUnit.assertEquals("In events matched", true, SiddhiTestHelper.isEventsMatch(inEventsList, expected));
+            AssertJUnit.assertEquals("In events matched", true,
+                    SiddhiTestHelper.isEventsMatch(inEventsList, expected));
             AssertJUnit.assertEquals("Number of success events", 7, inEventCount.get());
             AssertJUnit.assertEquals("Event arrived", true, eventArrived);
         }   finally {
@@ -952,7 +953,8 @@ AssertJUnit.assertEquals("Number of success events", 4, inEventCount.get());
                     new Object[]{1000.0, 1000.0, 9000f, "IBM", 1000f, 1000f}
             );
             SiddhiTestHelper.waitForEvents(100, 7, inEventCount, 60000);
-            AssertJUnit.assertEquals("In events matched", true, SiddhiTestHelper.isEventsMatch(inEventsList, expected));
+            AssertJUnit.assertEquals("In events matched", true,
+                    SiddhiTestHelper.isEventsMatch(inEventsList, expected));
             AssertJUnit.assertEquals("Number of success events", 7, inEventCount.get());
             AssertJUnit.assertEquals("Event arrived", true, eventArrived);
 
@@ -1171,7 +1173,8 @@ AssertJUnit.assertEquals("Number of success events", 4, inEventCount.get());
                     new Object[]{1606780800000L, "CISCO", 260.0, 260.0}
             );
             SiddhiTestHelper.waitForEvents(100, 9, inEventCount, 60000);
-            AssertJUnit.assertEquals("In events matched", true, SiddhiTestHelper.isEventsMatch(inEventsList, expected));
+            AssertJUnit.assertEquals("In events matched", true,
+                    SiddhiTestHelper.isEventsMatch(inEventsList, expected));
             AssertJUnit.assertEquals("Number of success events", 9, inEventCount.get());
             AssertJUnit.assertEquals("Event arrived", true, eventArrived);
         } finally {
@@ -2719,7 +2722,8 @@ AssertJUnit.assertEquals("Number of success events", 4, inEventCount.get());
                     new Object[]{1496289953000L, 100.0, 200.0, 9600f, 2L}
             );
             SiddhiTestHelper.waitForEvents(100, 5, inEventCount, 60000);
-            AssertJUnit.assertEquals("In events matched", true, SiddhiTestHelper.isEventsMatch(inEventsList, expected));
+            AssertJUnit.assertEquals("In events matched", true,
+                    SiddhiTestHelper.isEventsMatch(inEventsList, expected));
             AssertJUnit.assertEquals("Number of success events", 5, inEventCount.get());
             AssertJUnit.assertEquals("Event arrived", true, eventArrived);
         }  finally {
