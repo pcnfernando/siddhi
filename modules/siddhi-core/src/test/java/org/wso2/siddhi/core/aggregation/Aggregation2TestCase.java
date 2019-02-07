@@ -179,7 +179,8 @@ public class Aggregation2TestCase {
         }
     }
 
-    @Test(dependsOnMethods = {"incrementalStreamProcessorTest48"})
+    @Test
+            //(dependsOnMethods = {"incrementalStreamProcessorTest48"})
     public void incrementalStreamProcessorTest49() throws InterruptedException {
         LOG.info("incrementalStreamProcessorTest49 - Aggregate on system timestamp and retrieval on non root duration");
         SiddhiManager siddhiManager = new SiddhiManager();
