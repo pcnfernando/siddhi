@@ -796,6 +796,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#fault-streams" title="Fault Streams" class="md-nav__link">
+    Fault Streams
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#statistics" title="Statistics" class="md-nav__link">
     Statistics
   </a>
@@ -872,6 +879,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/4.4.6/" title="4.4.6" class="md-nav__link">
+      4.4.6
+    </a>
+  </li>
+
         
           
           
@@ -2298,6 +2317,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#fault-streams" title="Fault Streams" class="md-nav__link">
+    Fault Streams
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#statistics" title="Statistics" class="md-nav__link">
     Statistics
   </a>
@@ -2663,7 +2689,8 @@ the attributes in your preferred format. </p>
 <li>Some mappers such as <code>XML</code>, <code>JSON</code>, and <code>Test</code> accept only one output payload using the following format: <br/>
 <code>@payload( 'This is a test message from {{user}}.' )</code> </li>
 <li>Some mappers such <code>key-value</code> accept series of mapping values defined as follows: <br/>
-<code>@payload( key1='mapping_1', key2='user : {{user}}')</code> </li>
+<code>@payload( key1='mapping_1', 'key2'='user : {{user}}')</code> <br/>
+Here, apart from the dotted key names sush as <code>a.b.c</code>, any constant string value such as <code>'$abc'</code> can also by used as a key. </li>
 </ol>
 <p><strong>Supported Mapping Types</strong></p>
 <p>The following is a list of currently supported sink mapping types:</p>
@@ -5313,6 +5340,49 @@ behaviour. </p>
 </tr>
 </tbody>
 </table>
+<h3 id="fault-streams">Fault Streams<a class="headerlink" href="#fault-streams" title="Permanent link">&para;</a></h3>
+<p>When the <code>@OnError</code> annotation is added to a stream definition, it handles failover scenarios that occur during runtime gracefully.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;on_error_action&#39;</span><span class="p">)</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span> <span class="p">);</span>
+</pre></div>
+
+
+<p>The action parameter of the <code>@OnError</code> annotation defines the action to be executed during failure scenarios. </p>
+<p>The following action types can be specified via the <code>@OnError</code> annotation when defining a stream. If this annotation is not added, <code>LOG</code> is the action type by default.</p>
+<ul>
+<li><code>LOG</code> : Logs the event with an error, and then drops the event.</li>
+<li><code>STREAM</code>: A fault stream is automatically created for the base stream. The definition of the fault stream includes all the attributes of the base stream as well as an additional attribute named <code>_error</code>.
+The events are inserted into the fault stream during a failure. The error identified is captured as the value for the <code>_error</code> attribute.</li>
+</ul>
+<p>e.g., the following is a Siddhi application that includes the <code>@OnError</code> annotation to handle failures during runtime.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;STREAM&#39;</span><span class="p">)</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">StreamA</span> <span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">);</span>
+
+<span class="k">from</span> <span class="n">StreamA</span><span class="p">[</span><span class="n">custom</span><span class="p">:</span><span class="n">fault</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">volume</span><span class="p">]</span> 
+<span class="k">insert</span> <span class="k">into</span> <span class="n">StreamB</span><span class="p">;</span>
+
+<span class="k">from</span> <span class="o">!</span><span class="n">StreamA</span><span class="o">#</span><span class="n">log</span><span class="p">(</span><span class="ss">&quot;Error Occured&quot;</span><span class="p">)</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">tempStream</span><span class="p">;</span>
+</pre></div>
+
+
+<p><code>!StreamA</code>, fault stream is automatically created when you add the <code>@OnError</code> annotation. The definition of the corresponding fault stream is as follows.</p>
+<div class="codehilite"><pre><span></span><span class="o">!</span><span class="n">StreamA</span><span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="n">_error</span> <span class="k">object</span><span class="p">)</span>
+</pre></div>
+
+
+<p>If you include the <code>on.error</code> parameter in the sink configuration, failures are handled by Siddhi at the time the events are published from the <code>Sink</code>.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;sink_type&#39;</span><span class="p">,</span> <span class="k">on</span><span class="p">.</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;on.error.action&#39;</span><span class="p">)</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span> <span class="p">);</span>
+</pre></div>
+
+
+<p>The action types that can be specified via the <code>on.error</code> parameter when configuring a sink are as follows. If this parameter is not included in the sink configuration, <code>LOG</code> is the action type by default.</p>
+<ul>
+<li><code>LOG</code> : Logs the event with the error, and then drops the event.</li>
+<li><code>WAIT</code> : The thread waits in the <code>back-off and re-trying</code> state, and reconnects once the connection is re-established.</li>
+<li><code>STREAM</code>: Corresponding fault stream is populated with the failed event and the error while publishing. </li>
+</ul>
 <h3 id="statistics">Statistics<a class="headerlink" href="#statistics" title="Permanent link">&para;</a></h3>
 <p>Use <code>@app:statistics</code> app level annotation to evaluate the performance of an application, you can enable the statistics of a Siddhi application to be published. This is done via the <code>@app:statistics</code> annotation that can be added to a Siddhi application as shown in the following example.</p>
 <div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">app</span><span class="p">:</span><span class="k">statistics</span><span class="p">(</span><span class="n">reporter</span> <span class="o">=</span> <span class="s1">&#39;console&#39;</span><span class="p">)</span>
