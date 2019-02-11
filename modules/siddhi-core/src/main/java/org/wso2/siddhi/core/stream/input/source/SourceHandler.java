@@ -72,4 +72,9 @@ public abstract class SourceHandler implements InputEventHandlerCallback, Snapsh
 
         return inputHandler;
     }
+
+    @Override
+    public void clean() {
+        //ignore
+    }
 }
