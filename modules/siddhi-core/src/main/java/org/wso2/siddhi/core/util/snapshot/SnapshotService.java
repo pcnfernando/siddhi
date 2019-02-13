@@ -62,19 +62,33 @@ public class SnapshotService {
         return snapshotableMap;
     }
 
-    public synchronized void addSnapshotable(String queryName, Snapshotable snapshotable) {
+    public synchronized void addSnapshotable(String snapshotableName, Snapshotable snapshotable) {
         Boolean skipSnapshotable = skipSnapshotableThreadLocal.get();
         if (skipSnapshotable == null || !skipSnapshotable) {
-            Map<String, Snapshotable> snapshotableMap = this.snapshotableMap.get(queryName);
+            Map<String, Snapshotable> snapshotableMap = this.snapshotableMap.get(snapshotableName);
 
             // If List does not exist create it.
             if (snapshotableMap == null) {
                 snapshotableMap = new HashMap<String, Snapshotable>();
                 snapshotableMap.put(snapshotable.getElementId(), snapshotable);
-                this.snapshotableMap.put(queryName, snapshotableMap);
+                this.snapshotableMap.put(snapshotableName, snapshotableMap);
             } else {
                 // add if item is not already in list
                 snapshotableMap.putIfAbsent(snapshotable.getElementId(), snapshotable);
+            }
+        }
+    }
+
+    public synchronized void removeSnapshotable(String snapshotableName, Snapshotable snapshotable) {
+        Boolean skipSnapshotable = skipSnapshotableThreadLocal.get();
+        if (skipSnapshotable == null || !skipSnapshotable) {
+            Map<String, Snapshotable> snapshotableMap = this.snapshotableMap.get(snapshotableName);
+            if (snapshotableMap != null) {
+                snapshotableMap = new HashMap<>();
+                snapshotableMap.remove(snapshotable.getElementId(), snapshotable);
+                if (snapshotableMap.isEmpty()) {
+                    this.snapshotableMap.remove(snapshotableName);
+                }
             }
         }
     }
