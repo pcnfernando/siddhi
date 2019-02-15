@@ -855,6 +855,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../contribution/" title="Contribute" class="md-nav__link">
+      Contribute
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
     <a href="../../extensions/" title="Extensions" class="md-nav__link">
       Extensions
     </a>
@@ -868,17 +880,29 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
-    <label class="md-nav__link" for="nav-6">
+    <label class="md-nav__link" for="nav-7">
       API Docs
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-7">
         API Docs
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/5.0.0-m1/" title="5.0.0-m1" class="md-nav__link">
+      5.0.0-m1
+    </a>
+  </li>
+
         
           
           
@@ -2509,6 +2533,7 @@ All the events that are selected to be received into a specific stream have the 
 </tr>
 </tbody>
 </table>
+<p>To use and refer stream and attribute names that do not follow <code>[a-zA-Z_][a-zA-Z_0-9]*</code> format enclose them in <code>`. E.g. ```</code>$test(0)` ```.</p>
 <p>To make the stream process events in asynchronous and multi-threading manner use the <code>@Async</code> annotation as shown in 
 <a href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#threading-and-asynchronous">Threading and Asynchronous</a> configuration section.</p>
 <p><strong>Example</strong></p>
@@ -4507,9 +4532,13 @@ However for this, all aggregations must be based on a common physical database(@
 <td><code>per &lt;time granularity&gt;</code></td>
 <td>This specifies the time granularity by which the aggregate values must be grouped and returned. e.g., If you specify <code>days</code>, the retrieved aggregate values are grouped for each day within the selected time interval.</td>
 </tr>
+<tr>
+<td><code>AGG_TIMESTAMP</code></td>
+<td>This specifies the start time of the aggregations and can be used in the select clause.</td>
+</tr>
 </tbody>
 </table>
-<p><code>within</code> and <code>par</code> clauses also accept attribute values from the stream.</p>
+<p><code>within</code> and <code>per</code> clauses also accept attribute values from the stream.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The timestamp of the aggregations can be accessed through the <code>AGG_TIMESTAMP</code> attribute.</p>
@@ -4520,7 +4549,7 @@ However for this, all aggregations must be based on a common physical database(@
 
 <span class="n">define</span> <span class="n">aggregation</span> <span class="n">TradeAggregation</span>
   <span class="k">from</span> <span class="n">TradeStream</span>
-  <span class="k">select</span> <span class="n">symbol</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">as</span> <span class="n">avgPrice</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span>
+  <span class="k">select</span> <span class="n">AGG_TIMESTAMP</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="k">avg</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">as</span> <span class="n">avgPrice</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="n">price</span><span class="p">)</span> <span class="k">as</span> <span class="n">total</span>
     <span class="k">group</span> <span class="k">by</span> <span class="n">symbol</span>
     <span class="k">aggregate</span> <span class="k">by</span> <span class="k">timestamp</span> <span class="k">every</span> <span class="n">sec</span> <span class="p">...</span> <span class="k">year</span><span class="p">;</span>
 </pre></div>
@@ -5386,12 +5415,13 @@ The events are inserted into the fault stream during a failure. The error identi
 <span class="k">insert</span> <span class="k">into</span> <span class="n">StreamB</span><span class="p">;</span>
 
 <span class="k">from</span> <span class="o">!</span><span class="n">StreamA</span><span class="o">#</span><span class="n">log</span><span class="p">(</span><span class="ss">&quot;Error Occured&quot;</span><span class="p">)</span>
+<span class="k">select</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="n">_error</span>
 <span class="k">insert</span> <span class="k">into</span> <span class="n">tempStream</span><span class="p">;</span>
 </pre></div>
 
 
-<p><code>!StreamA</code>, fault stream is automatically created when you add the <code>@OnError</code> annotation. The definition of the corresponding fault stream is as follows.</p>
-<div class="codehilite"><pre><span></span><span class="o">!</span><span class="n">StreamA</span><span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="n">_error</span> <span class="k">object</span><span class="p">)</span>
+<p><code>!StreamA</code>, fault stream is automatically created when you add the <code>@OnError</code> annotation with the following attributes.</p>
+<div class="codehilite"><pre><span></span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="n">_error</span> <span class="k">object</span>
 </pre></div>
 
 
