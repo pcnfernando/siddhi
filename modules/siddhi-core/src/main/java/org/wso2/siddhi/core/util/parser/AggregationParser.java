@@ -172,6 +172,7 @@ public class AggregationParser {
                     throw new SiddhiAppCreationException("Configurations not provided for @partitionbyid " +
                             "annotation");
                 }
+                partitionById=true;
             }
 
             boolean isLatestEventAdded = populateIncomingAggregatorsAndExecutors(
@@ -271,7 +272,7 @@ public class AggregationParser {
             Map<TimePeriod.Duration, Table> aggregationTables = initDefaultTables(aggregatorName,
                     incrementalDurations, processedMetaStreamEvent.getOutputStreamDefinition(),
                     siddhiAppRuntimeBuilder, aggregationDefinition.getAnnotations(), groupByVariableList,
-                    isProcessingOnExternalTime);
+                    isProcessingOnExternalTime, partitionById);
 
             Element element = AnnotationHelper.getAnnotationElement(SiddhiConstants.ANNOTATION_BUFFER_SIZE, null,
                     aggregationDefinition.getAnnotations());
@@ -792,11 +793,10 @@ public class AggregationParser {
     private static HashMap<TimePeriod.Duration, Table> initDefaultTables(
             String aggregatorName, List<TimePeriod.Duration> durations,
             StreamDefinition streamDefinition, SiddhiAppRuntimeBuilder siddhiAppRuntimeBuilder,
-            List<Annotation> annotations, List<Variable> groupByVariableList, boolean isProcessingOnExternalTime) {
+            List<Annotation> annotations, List<Variable> groupByVariableList, boolean isProcessingOnExternalTime,
+            boolean partitionById) {
 
         HashMap<TimePeriod.Duration, Table> aggregationTableMap = new HashMap<>();
-        Annotation partitionById = AnnotationHelper.getAnnotation(SiddhiConstants.ANNOTATION_PARTITION_BY_ID,
-                annotations);
 
         // Create annotations for primary key
         Annotation primaryKeyAnnotation = new Annotation(SiddhiConstants.ANNOTATION_PRIMARY_KEY);
