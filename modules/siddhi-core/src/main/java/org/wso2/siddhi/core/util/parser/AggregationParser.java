@@ -172,7 +172,6 @@ public class AggregationParser {
                     throw new SiddhiAppCreationException("Configurations not provided for @partitionbyid " +
                             "annotation");
                 }
-                partitionById=true;
             }
 
             boolean isLatestEventAdded = populateIncomingAggregatorsAndExecutors(
@@ -272,7 +271,7 @@ public class AggregationParser {
             Map<TimePeriod.Duration, Table> aggregationTables = initDefaultTables(aggregatorName,
                     incrementalDurations, processedMetaStreamEvent.getOutputStreamDefinition(),
                     siddhiAppRuntimeBuilder, aggregationDefinition.getAnnotations(), groupByVariableList,
-                    isProcessingOnExternalTime, partitionById);
+                    isProcessingOnExternalTime);
 
             Element element = AnnotationHelper.getAnnotationElement(SiddhiConstants.ANNOTATION_BUFFER_SIZE, null,
                     aggregationDefinition.getAnnotations());
@@ -793,15 +792,16 @@ public class AggregationParser {
     private static HashMap<TimePeriod.Duration, Table> initDefaultTables(
             String aggregatorName, List<TimePeriod.Duration> durations,
             StreamDefinition streamDefinition, SiddhiAppRuntimeBuilder siddhiAppRuntimeBuilder,
-            List<Annotation> annotations, List<Variable> groupByVariableList, boolean isProcessingOnExternalTime,
-            boolean partitionById) {
+            List<Annotation> annotations, List<Variable> groupByVariableList, boolean isProcessingOnExternalTime) {
 
         HashMap<TimePeriod.Duration, Table> aggregationTableMap = new HashMap<>();
 
         // Create annotations for primary key
         Annotation primaryKeyAnnotation = new Annotation(SiddhiConstants.ANNOTATION_PRIMARY_KEY);
         primaryKeyAnnotation.element(null, AGG_START_TIMESTAMP_COL);
-
+        Annotation partitionById = AnnotationHelper.getAnnotation(SiddhiConstants.ANNOTATION_PARTITION_BY_ID,	
+                annotations);	
+        
         if (partitionById != null) {
             primaryKeyAnnotation.element(null, SHARD_ID_COL);
         }
