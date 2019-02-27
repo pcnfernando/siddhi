@@ -162,16 +162,22 @@ public class AggregationParser {
 
             Annotation partitionById = AnnotationHelper.getAnnotation(SiddhiConstants.ANNOTATION_PARTITION_BY_ID,
                     aggregationDefinition.getAnnotations());
+            boolean enablePartioning = false;
+            if (partitionById != null) {
+                String enableElement = partitionById.getElement("enable");
+                enablePartioning = enableElement == null || Boolean.parseBoolean(enableElement);
+            }
 
             ConfigManager configManager = siddhiAppContext.getSiddhiContext().getConfigManager();
             Boolean shouldPartitionById = Boolean.parseBoolean(configManager.extractProperty("partitionById"));
 
-            if (partitionById != null || shouldPartitionById) {
+            if (enablePartioning || shouldPartitionById) {
                 shardId = configManager.extractProperty("shardId");
                 if (shardId == null) {
                     throw new SiddhiAppCreationException("Configurations not provided for @partitionbyid " +
                             "annotation");
                 }
+                enablePartioning = true;
             }
 
             boolean isLatestEventAdded = populateIncomingAggregatorsAndExecutors(
@@ -271,7 +277,7 @@ public class AggregationParser {
             Map<TimePeriod.Duration, Table> aggregationTables = initDefaultTables(aggregatorName,
                     incrementalDurations, processedMetaStreamEvent.getOutputStreamDefinition(),
                     siddhiAppRuntimeBuilder, aggregationDefinition.getAnnotations(), groupByVariableList,
-                    isProcessingOnExternalTime);
+                    isProcessingOnExternalTime, enablePartioning);
 
             Element element = AnnotationHelper.getAnnotationElement(SiddhiConstants.ANNOTATION_BUFFER_SIZE, null,
                     aggregationDefinition.getAnnotations());
@@ -325,17 +331,17 @@ public class AggregationParser {
             if (siddhiAppContext.getStatisticsManager() != null) {
                 latencyTrackerFind = QueryParserHelper.createLatencyTracker(siddhiAppContext,
                         aggregationDefinition.getId(),
-                        SiddhiConstants.METRIC_INFIX_WINDOWS, SiddhiConstants.METRIC_TYPE_FIND);
+                        SiddhiConstants.METRIC_INFIX_AGGREGATIONS, SiddhiConstants.METRIC_TYPE_FIND);
                 latencyTrackerInsert = QueryParserHelper.createLatencyTracker(siddhiAppContext,
                         aggregationDefinition.getId(),
-                        SiddhiConstants.METRIC_INFIX_WINDOWS, SiddhiConstants.METRIC_TYPE_INSERT);
+                        SiddhiConstants.METRIC_INFIX_AGGREGATIONS, SiddhiConstants.METRIC_TYPE_INSERT);
 
                 throughputTrackerFind = QueryParserHelper.createThroughputTracker(siddhiAppContext,
                         aggregationDefinition.getId(),
-                        SiddhiConstants.METRIC_INFIX_WINDOWS, SiddhiConstants.METRIC_TYPE_FIND);
+                        SiddhiConstants.METRIC_INFIX_AGGREGATIONS, SiddhiConstants.METRIC_TYPE_FIND);
                 throughputTrackerInsert = QueryParserHelper.createThroughputTracker(siddhiAppContext,
                         aggregationDefinition.getId(),
-                        SiddhiConstants.METRIC_INFIX_WINDOWS, SiddhiConstants.METRIC_TYPE_INSERT);
+                        SiddhiConstants.METRIC_INFIX_AGGREGATIONS, SiddhiConstants.METRIC_TYPE_INSERT);
             }
 
             List<ExpressionExecutor> baseExecutors = cloneExpressionExecutors(processExpressionExecutorsList.get(0));
@@ -792,7 +798,8 @@ public class AggregationParser {
     private static HashMap<TimePeriod.Duration, Table> initDefaultTables(
             String aggregatorName, List<TimePeriod.Duration> durations,
             StreamDefinition streamDefinition, SiddhiAppRuntimeBuilder siddhiAppRuntimeBuilder,
-            List<Annotation> annotations, List<Variable> groupByVariableList, boolean isProcessingOnExternalTime) {
+            List<Annotation> annotations, List<Variable> groupByVariableList, boolean isProcessingOnExternalTime,
+            boolean enablePartioning) {
 
         HashMap<TimePeriod.Duration, Table> aggregationTableMap = new HashMap<>();
 
@@ -802,7 +809,7 @@ public class AggregationParser {
         Annotation partitionById = AnnotationHelper.getAnnotation(SiddhiConstants.ANNOTATION_PARTITION_BY_ID,	
                 annotations);	
         
-        if (partitionById != null) {
+        if (enablePartioning) {
             primaryKeyAnnotation.element(null, SHARD_ID_COL);
         }
         if (isProcessingOnExternalTime) {
