@@ -806,8 +806,6 @@ public class AggregationParser {
         // Create annotations for primary key
         Annotation primaryKeyAnnotation = new Annotation(SiddhiConstants.ANNOTATION_PRIMARY_KEY);
         primaryKeyAnnotation.element(null, AGG_START_TIMESTAMP_COL);
-        Annotation partitionById = AnnotationHelper.getAnnotation(SiddhiConstants.ANNOTATION_PARTITION_BY_ID,	
-                annotations);	
         
         if (enablePartioning) {
             primaryKeyAnnotation.element(null, SHARD_ID_COL);
