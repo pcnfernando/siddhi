@@ -13,7 +13,7 @@
         <meta name="description" content="Stream Processing and Complex Event Processing Engine">
       
       
-        <link rel="canonical" href="https://wso2.github.io/siddhi/documentation/siddhi-architecture/">
+        <link rel="canonical" href="http://siddhi.io/documentation/siddhi-architecture/">
       
       
         <meta name="author" content="WSO2">
@@ -115,7 +115,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://wso2.github.io/siddhi" title="Siddhi" class="md-header-nav__button md-logo">
+        <a href="http://siddhi.io" title="Siddhi" class="md-header-nav__button md-logo">
           
             <img src="../../images/siddhi-logo-w.svg" width="24" height="24">
           
@@ -537,6 +537,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../api/5.0.0-m3/" title="5.0.0-m3" class="md-nav__link">
+      5.0.0-m3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../api/5.0.0-m2/" title="5.0.0-m2" class="md-nav__link">
       5.0.0-m2
     </a>
@@ -907,7 +919,7 @@
 patterns on event data from multiple disparate live data sources. This allows developers to build applications that collect data, 
 analyze it, and communicate the results in real time.</p>
 <p>This section illustrates the architecture of Siddhi and guides you through its key functionality. We hope this article 
-helps developers to understand Siddhi and its the codebase better, and also contribute to improve Siddhi by reporting and fixing bugs.</p>
+helps developers to understand Siddhi and its codebase better, and also contribute to improve Siddhi by reporting and fixing bugs.</p>
 <h2 id="main-design-decisions">Main Design Decisions<a class="headerlink" href="#main-design-decisions" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Event by event processing of real-time streaming data to achieve low latency. </li>
@@ -915,7 +927,7 @@ helps developers to understand Siddhi and its the codebase better, and also cont
 event processing constructs such as Patterns.  </li>
 <li>Achieve high performance by processing all events in-memory and by storing their states in-memory. </li>
 <li>Optimizing performance by enforcing a strict schema for event streams and by pre-compiling the queries.</li>
-<li>Optimizing memory consumption by having only the absolutly necessary information in-memory and 
+<li>Optimizing memory consumption by having only the absolutely necessary information in-memory and 
 dropping the rest as soon as possible. </li>
 <li>Supporting multiple extension points to accommodate a diverse set of functionality such as supporting multiple sources, sinks, functions, 
 aggregation operations, windows, etc.</li>
@@ -966,7 +978,7 @@ for consuming and publishing events. To achieve these tasks, it uses the followi
 </li>
 <li>
 <p><a href="https://github.com/wso2/siddhi/blob/master/modules/siddhi-core/src/main/java/org/wso2/siddhi/core/config/SiddhiContext.java">SiddhiContext</a> : 
-This is a shared object for all the Siddhi Application Runtimes within the a Siddhi manager, and it contains references 
+This is a shared object for all the Siddhi Application Runtimes within the Siddhi manager, and it contains references 
 to the persistence store for periodic persistence, statistics manager to report performance statistics of Siddhi Application Runtimes, 
 and extension holders for loading Siddhi extensions. </p>
 </li>
@@ -1041,7 +1053,7 @@ where it  passes the Siddhi events in the existing format (i.e., the Siddhi even
 implementation to store events in-memory. When <code>@Store</code> annotation
 is used, it loads the associated Table implementation based on the defined <code>store</code> type. Most table implementations are 
 extended from the <a href="https://github.com/wso2/siddhi/blob/master/modules/siddhi-core/src/main/java/org/wso2/siddhi/core/table/record/AbstractRecordTable.java">AbstractRecordTable</a> 
-abstract class for the ease of development.</p>
+abstract class for ease of development.</p>
 </li>
 <li>
 <p><a href="https://github.com/wso2/siddhi/blob/master/modules/siddhi-core/src/main/java/org/wso2/siddhi/core/window/Window.java">Window</a></p>

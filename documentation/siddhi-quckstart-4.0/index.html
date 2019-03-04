@@ -13,7 +13,7 @@
         <meta name="description" content="Stream Processing and Complex Event Processing Engine">
       
       
-        <link rel="canonical" href="https://wso2.github.io/siddhi/documentation/siddhi-quckstart-4.0/">
+        <link rel="canonical" href="http://siddhi.io/documentation/siddhi-quckstart-4.0/">
       
       
         <meta name="author" content="WSO2">
@@ -115,7 +115,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="https://wso2.github.io/siddhi" title="Siddhi" class="md-header-nav__button md-logo">
+        <a href="http://siddhi.io" title="Siddhi" class="md-header-nav__button md-logo">
           
             <img src="../../images/siddhi-logo-w.svg" width="24" height="24">
           
@@ -454,6 +454,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../api/5.0.0-m3/" title="5.0.0-m3" class="md-nav__link">
+      5.0.0-m3
+    </a>
+  </li>
+
         
           
           
@@ -836,7 +848,7 @@ For Linux: ./editor.sh
 <p>Siddhi Streaming SQL is a rich, compact, easy-to-learn SQL-like language. <strong>Let's first learn how to find the total</strong> of values 
 coming into a data stream and output the current running total value with each event. Siddhi has lot of in-built functions and extensions 
 available for complex analysis, but to get started, let's use a simple one. You can find more information about the Siddhi grammar 
-and its functions in the <a href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/">Siddhi Query Guide</a>.</p>
+and its functions in the <a href="http://siddhi.io/documentation/siddhi-4.0/">Siddhi Query Guide</a>.</p>
 <p>Let's <strong>consider a scenario where we are loading cargo boxes into a ship</strong>. We need to keep track of the total 
 weight of the cargo added. <strong>Measuring the weight of a cargo box when loading is considered an event</strong>.</p>
 <p><img alt="" src="../../images/quickstart/loading-ship.jpeg?raw=true" title="Loading Cargo on Ship" /></p>
@@ -863,7 +875,7 @@ This contains only one data attribute:</li>
 <em>totalWeight</em> attribute that contains the total weight calculated so far. Here, we need to add a 
 <em>"sink"</em>  to log the <code>OutputStream</code> so that we can observe the output values. (<strong>Sink is the Siddhi way to publish 
 streams to external systems.</strong> This particular <code>log</code> type sink just logs the stream events. To learn more about sinks, see 
-<a href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#sink">sink</a>)</p>
+<a href="http://siddhi.io/documentation/siddhi-4.0/#sink">sink</a>)</p>
 <div class="codehilite"><pre><span></span>@sink(type=&#39;log&#39;, prefix=&#39;LOGGER&#39;)
 define stream OutputStream(weight int, totalWeight long);
 </pre></div>
@@ -909,7 +921,7 @@ You can see a log that contains <em>“outputData=[2, 2]”</em>. Click <strong>
 <p>This section demonstrates how to carry out <strong>temporal window processing</strong> with Siddhi.</p>
 <p>Up to this point, we have been carrying out the processing by having only the running sum value in-memory. 
 No events were stored during this process. </p>
-<p><a href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/#window">Window processing</a> 
+<p><a href="http://siddhi.io/documentation/siddhi-4.0/#window">Window processing</a>
 is a method that allows us to store some events in-memory for a given period so that we can perform operations 
 such as calculating the average, maximum, etc values within them.</p>
 <p>Let's imagine that when we are loading cargo boxes into the ship <strong>we need to keep track of the average weight of 
@@ -940,8 +952,8 @@ average value as <em>"averageWeight"</em> (Note: Now the <code>sum</code> also c
 cargo events.</p>
 <p>It is also notable that the defined <code>length window</code> only keeps 3 events in-memory. When the 4th event arrives, the 
 first event in the window is removed from memory. This ensures that the memory usage does not grow beyond a specific limit. There are also other 
-implementations done in Siddhi  to reduce the memory consumption. For more information, see <a href="https://wso2.github.io/siddhi/documentation/siddhi-architecture/">Siddhi Architecture</a>.  </p>
-<p>To learn more about the Siddhi functionality, see <a href="https://wso2.github.io/siddhi/documentation/siddhi-4.0/">Siddhi Query Guide</a>.</p>
+implementations done in Siddhi  to reduce the memory consumption. For more information, see <a href="http://siddhi.io/documentation/siddhi-architecture/">Siddhi Architecture</a>.</p>
+<p>To learn more about the Siddhi functionality, see <a href="http://siddhi.io/documentation/siddhi-4.0/">Siddhi Query Guide</a>.</p>
 <p>Feel free to try out Siddhi and event simulation to understand Siddhi better.</p>
 <p>If you have questions please post them to the <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">Stackoverflow</a> with <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">"Siddhi"</a> tag.</p>
                 
