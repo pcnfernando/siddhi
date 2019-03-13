@@ -24,6 +24,7 @@ import org.wso2.siddhi.core.aggregation.AggregationRuntime;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
 import org.wso2.siddhi.core.debugger.SiddhiDebugger;
 import org.wso2.siddhi.core.event.Event;
+import org.wso2.siddhi.core.exception.CannotClearSiddhiAppStateException;
 import org.wso2.siddhi.core.exception.CannotRestoreSiddhiAppStateException;
 import org.wso2.siddhi.core.exception.DefinitionNotExistException;
 import org.wso2.siddhi.core.exception.QueryNotExistException;
@@ -71,6 +72,7 @@ import org.wso2.siddhi.query.api.exception.SiddhiAppContextException;
 import org.wso2.siddhi.query.api.execution.query.StoreQuery;
 import org.wso2.siddhi.query.compiler.SiddhiCompiler;
 
+import java.beans.ExceptionListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -658,6 +660,18 @@ public class SiddhiAppRuntime {
         return revision;
     }
 
+    public void clearAllRevisions() throws CannotClearSiddhiAppStateException {
+        try {
+            // first, pause all the event sources
+            sourceMap.values().forEach(list -> list.forEach(Source::pause));
+            // start the restoring process
+            siddhiAppContext.getSnapshotService().clearAllRevisions();
+        } finally {
+            // at the end, resume the event sources
+            sourceMap.values().forEach(list -> list.forEach(Source::resume));
+        }
+    }
+
     private void monitorQueryMemoryUsage() {
         memoryUsageTracker = siddhiAppContext
                 .getSiddhiContext()
@@ -726,6 +740,10 @@ public class SiddhiAppRuntime {
 
     public void handleExceptionWith(ExceptionHandler<Object> exceptionHandler) {
         siddhiAppContext.setDisruptorExceptionHandler(exceptionHandler);
+    }
+
+    public void handleRuntimeExceptionWith(ExceptionListener exceptionListener) {
+        siddhiAppContext.setRuntimeExceptionListener(exceptionListener);
     }
 
     /**
