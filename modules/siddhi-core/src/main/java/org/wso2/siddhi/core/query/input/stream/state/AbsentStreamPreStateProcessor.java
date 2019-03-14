@@ -221,6 +221,7 @@ public class AbsentStreamPreStateProcessor extends StreamPreStateProcessor imple
         } else if (isStartState) {
             this.active = false;
         }
+
         if (thisStatePostProcessor.callbackPreStateProcessor != null) {
             thisStatePostProcessor.callbackPreStateProcessor.startStateReset();
         }

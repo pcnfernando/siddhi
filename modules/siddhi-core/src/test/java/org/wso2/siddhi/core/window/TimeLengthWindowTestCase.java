@@ -28,18 +28,21 @@ import org.wso2.siddhi.core.event.Event;
 import org.wso2.siddhi.core.query.output.callback.QueryCallback;
 import org.wso2.siddhi.core.stream.input.InputHandler;
 import org.wso2.siddhi.core.util.EventPrinter;
+import org.wso2.siddhi.core.util.SiddhiTestHelper;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TimeLengthWindowTestCase {
     private static final Logger log = Logger.getLogger(TimeLengthWindowTestCase.class);
-    private int inEventCount;
-    private int removeEventCount;
+    private AtomicInteger inEventCount;
+    private AtomicInteger removeEventCount;
     private boolean eventArrived;
     private int count = 0;
 
     @BeforeMethod
     public void init() {
-        inEventCount = 0;
-        removeEventCount = 0;
+        inEventCount = new AtomicInteger(0);
+        removeEventCount = new AtomicInteger(0);
         eventArrived = false;
     }
 
@@ -68,11 +71,12 @@ public class TimeLengthWindowTestCase {
                 public void receive(long timestamp, Event[] inEvents, Event[] removeEvents) {
                     EventPrinter.print(timestamp, inEvents, removeEvents);
                     if (inEvents != null) {
-                        inEventCount = inEventCount + inEvents.length;
+                        inEventCount.addAndGet(inEvents.length);
                     }
                     if (removeEvents != null) {
-                        AssertJUnit.assertTrue("InEvents arrived before RemoveEvents", inEventCount > removeEventCount);
-                        removeEventCount = removeEventCount + removeEvents.length;
+                        AssertJUnit.assertTrue("InEvents arrived before RemoveEvents", inEventCount.get() >
+                                removeEventCount.get());
+                        removeEventCount.addAndGet(removeEvents.length);
                     }
                     eventArrived = true;
                 }
@@ -88,10 +92,11 @@ public class TimeLengthWindowTestCase {
             inputHandler.send(new Object[]{"IBM", 700f, 3});
             Thread.sleep(500);
             inputHandler.send(new Object[]{"WSO2", 60.5f, 4});
-            Thread.sleep(5000);
 
-            AssertJUnit.assertEquals(4, inEventCount);
-            AssertJUnit.assertEquals(4, removeEventCount);
+            SiddhiTestHelper.waitForEvents(100, 4, inEventCount, 5000);
+            SiddhiTestHelper.waitForEvents(100, 4, removeEventCount, 5000);
+            AssertJUnit.assertEquals(4, inEventCount.get());
+            AssertJUnit.assertEquals(4, removeEventCount.get());
             AssertJUnit.assertTrue(eventArrived);
         } finally {
             siddhiAppRuntime.shutdown();
@@ -124,11 +129,12 @@ public class TimeLengthWindowTestCase {
                 public void receive(long timestamp, Event[] inEvents, Event[] removeEvents) {
                     EventPrinter.print(timestamp, inEvents, removeEvents);
                     if (inEvents != null) {
-                        inEventCount = inEventCount + inEvents.length;
+                        inEventCount.addAndGet(inEvents.length);
                     }
                     if (removeEvents != null) {
-                        AssertJUnit.assertTrue("InEvents arrived before RemoveEvents", inEventCount > removeEventCount);
-                        removeEventCount = removeEventCount + removeEvents.length;
+                        AssertJUnit.assertTrue("InEvents arrived before RemoveEvents", inEventCount.get() >
+                                removeEventCount.get());
+                        removeEventCount.addAndGet(removeEvents.length);
                     }
                     eventArrived = true;
                 }
@@ -144,9 +150,10 @@ public class TimeLengthWindowTestCase {
             inputHandler.send(new Object[]{"Google", 80.5f, 2});
             Thread.sleep(1200);
             inputHandler.send(new Object[]{"Yahoo", 90.5f, 3});
-            Thread.sleep(4000);
-            AssertJUnit.assertEquals(4, inEventCount);
-            AssertJUnit.assertEquals(4, removeEventCount);
+            SiddhiTestHelper.waitForEvents(100, 4, inEventCount, 5000);
+            SiddhiTestHelper.waitForEvents(100, 4, removeEventCount, 5000);
+            AssertJUnit.assertEquals(4, inEventCount.get());
+            AssertJUnit.assertEquals(4, removeEventCount.get());
             AssertJUnit.assertTrue(eventArrived);
         } finally {
             siddhiAppRuntime.shutdown();
@@ -179,11 +186,12 @@ public class TimeLengthWindowTestCase {
                 public void receive(long timestamp, Event[] inEvents, Event[] removeEvents) {
                     EventPrinter.print(timestamp, inEvents, removeEvents);
                     if (inEvents != null) {
-                        inEventCount = inEventCount + inEvents.length;
+                        inEventCount.addAndGet(inEvents.length);
                     }
                     if (removeEvents != null) {
-                        AssertJUnit.assertTrue("InEvents arrived before RemoveEvents", inEventCount > removeEventCount);
-                        removeEventCount = removeEventCount + removeEvents.length;
+                        AssertJUnit.assertTrue("InEvents arrived before RemoveEvents", inEventCount.get() >
+                                removeEventCount.get());
+                        removeEventCount.addAndGet(removeEvents.length);
                     }
                     eventArrived = true;
                 }
@@ -208,10 +216,10 @@ public class TimeLengthWindowTestCase {
             Thread.sleep(500);
             inputHandler.send(new Object[]{"id8", 80d});
 
-            Thread.sleep(2000);
-
-            AssertJUnit.assertEquals(8, inEventCount);
-            AssertJUnit.assertEquals(4, removeEventCount);
+            SiddhiTestHelper.waitForEvents(100, 8, inEventCount, 2000);
+            SiddhiTestHelper.waitForEvents(100, 4, removeEventCount, 2000);
+            AssertJUnit.assertEquals(8, inEventCount.get());
+            AssertJUnit.assertEquals(4, removeEventCount.get());
             AssertJUnit.assertTrue(eventArrived);
         } finally {
             siddhiAppRuntime.shutdown();
@@ -245,11 +253,12 @@ public class TimeLengthWindowTestCase {
                 public void receive(long timestamp, Event[] inEvents, Event[] removeEvents) {
                     EventPrinter.print(timestamp, inEvents, removeEvents);
                     if (inEvents != null) {
-                        inEventCount = inEventCount + inEvents.length;
+                        inEventCount.addAndGet(inEvents.length);
                     }
                     if (removeEvents != null) {
-                        AssertJUnit.assertTrue("InEvents arrived before RemoveEvents", inEventCount > removeEventCount);
-                        removeEventCount = removeEventCount + removeEvents.length;
+                        AssertJUnit.assertTrue("InEvents arrived before RemoveEvents", inEventCount.get() >
+                                removeEventCount.get());
+                        removeEventCount.addAndGet(removeEvents.length);
                     }
                     eventArrived = true;
                 }
@@ -269,10 +278,10 @@ public class TimeLengthWindowTestCase {
             Thread.sleep(500);
             inputHandler.send(new Object[]{"id6", 60d});
 
-            Thread.sleep(2100);
-
-            AssertJUnit.assertEquals(6, inEventCount);
-            AssertJUnit.assertEquals(6, removeEventCount);
+            SiddhiTestHelper.waitForEvents(100, 6, inEventCount, 5000);
+            SiddhiTestHelper.waitForEvents(100, 6, removeEventCount, 5000);
+            AssertJUnit.assertEquals(6, inEventCount.get());
+            AssertJUnit.assertEquals(6, removeEventCount.get());
             AssertJUnit.assertTrue(eventArrived);
         } finally {
             siddhiAppRuntime.shutdown();
@@ -315,7 +324,7 @@ public class TimeLengthWindowTestCase {
                         if (inEvents[0].getData(0).toString().equals("id8")) {
                             AssertJUnit.assertEquals("6", inEvents[0].getData(1).toString());
                         }
-                        inEventCount++;
+                        inEventCount.incrementAndGet();
                     }
 
                     if (removeEvents != null) {
@@ -328,7 +337,7 @@ public class TimeLengthWindowTestCase {
                         if (removeEvents[0].getData(0).toString().equals("id3")) {
                             AssertJUnit.assertEquals("5", removeEvents[0].getData(1).toString());
                         }
-                        removeEventCount++;
+                        removeEventCount.incrementAndGet();
                     }
                     eventArrived = true;
                 }
@@ -352,10 +361,10 @@ public class TimeLengthWindowTestCase {
             Thread.sleep(520);
             inputHandler.send(new Object[]{"id8", 1});
 
-            Thread.sleep(1000);
-
-            AssertJUnit.assertEquals(8, inEventCount);
-            AssertJUnit.assertEquals(4, removeEventCount);
+            SiddhiTestHelper.waitForEvents(100, 8, inEventCount, 5000);
+            SiddhiTestHelper.waitForEvents(100, 4, removeEventCount, 5000);
+            AssertJUnit.assertEquals(8, inEventCount.get());
+            AssertJUnit.assertEquals(4, removeEventCount.get());
             AssertJUnit.assertTrue(eventArrived);
         } finally {
             siddhiAppRuntime.shutdown();
@@ -444,18 +453,18 @@ public class TimeLengthWindowTestCase {
                     if (inEvents != null) {
                         for (Event event : inEvents) {
                             if (event.isExpired()) {
-                                removeEventCount++;
+                                removeEventCount.incrementAndGet();
                             } else {
-                                inEventCount++;
+                                inEventCount.incrementAndGet();
                             }
                         }
                     }
                     if (removeEvents != null) {
                         for (Event event : removeEvents) {
                             if (event.isExpired()) {
-                                removeEventCount++;
+                                removeEventCount.incrementAndGet();
                             } else {
-                                inEventCount++;
+                                inEventCount.incrementAndGet();
                             }
                         }
                     }
@@ -480,9 +489,10 @@ public class TimeLengthWindowTestCase {
             inputHandler.send(new Object[]{"IBM", 700f, 70});
             Thread.sleep(500);
             inputHandler.send(new Object[]{"WSO2", 60.5f, 80});
-            Thread.sleep(5000);
-            AssertJUnit.assertEquals("In event count", 8, inEventCount);
-            AssertJUnit.assertEquals("Remove event count", 3, removeEventCount);
+            SiddhiTestHelper.waitForEvents(100, 8, inEventCount, 5000);
+            SiddhiTestHelper.waitForEvents(100, 3, removeEventCount, 5000);
+            AssertJUnit.assertEquals("In event count", 8, inEventCount.get());
+            AssertJUnit.assertEquals("Remove event count", 3, removeEventCount.get());
             AssertJUnit.assertTrue(eventArrived);
         } finally {
             siddhiAppRuntime.shutdown();
