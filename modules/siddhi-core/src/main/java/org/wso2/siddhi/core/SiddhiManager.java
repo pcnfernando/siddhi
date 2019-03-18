@@ -120,7 +120,7 @@ public class SiddhiManager {
     }
 
     /**
-     * Method to set source handler manager that would create source handlers for each source
+     * Method to set source handler manager that would create source handlers for each source.
      *
      * @param sourceHandlerManager Source Handler Manager Implementation to be used.
      */
