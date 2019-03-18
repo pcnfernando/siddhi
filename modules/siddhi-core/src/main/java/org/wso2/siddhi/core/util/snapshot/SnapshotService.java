@@ -19,6 +19,7 @@ package org.wso2.siddhi.core.util.snapshot;
 
 import org.apache.log4j.Logger;
 import org.wso2.siddhi.core.config.SiddhiAppContext;
+import org.wso2.siddhi.core.exception.CannotClearSiddhiAppStateException;
 import org.wso2.siddhi.core.exception.CannotRestoreSiddhiAppStateException;
 import org.wso2.siddhi.core.exception.NoPersistenceStoreException;
 import org.wso2.siddhi.core.exception.PersistenceStoreException;
@@ -370,7 +371,7 @@ public class SnapshotService {
                 if (!entry.getKey().equals("partition")) {
                     Map<String, Snapshotable> map = entry.getValue();
                     try {
-                        for (Map.Entry snapshotableEntry  : map.entrySet()) {
+                        for (Map.Entry snapshotableEntry : map.entrySet()) {
                             Snapshotable snapshotable = (Snapshotable) snapshotableEntry.getValue();
                             Map<String, Map<Long, Map<IncrementalSnapshotInfo, byte[]>>> incrementalStateByElementId
                                     = snapshot.get(entry.getKey());
@@ -549,4 +550,23 @@ public class SnapshotService {
         }
         return revision;
     }
+
+    /**
+     * Clear all the revisions of persistence store of Siddhi App
+     */
+    public void clearAllRevisions() throws CannotClearSiddhiAppStateException {
+        PersistenceStore persistenceStore = siddhiAppContext.getSiddhiContext().getPersistenceStore();
+        IncrementalPersistenceStore incrementalPersistenceStore =
+                siddhiAppContext.getSiddhiContext().getIncrementalPersistenceStore();
+        String siddhiAppName = siddhiAppContext.getName();
+        if (persistenceStore != null) {
+            persistenceStore.clearAllRevisions(siddhiAppName);
+        } else if (incrementalPersistenceStore != null) {
+            incrementalPersistenceStore.clearAllRevisions(siddhiAppName);
+        } else {
+            throw new NoPersistenceStoreException("No persistence store assigned for siddhi app " + siddhiAppName);
+        }
+    }
+
+
 }

@@ -74,11 +74,6 @@ public class StreamInnerStateRuntime implements InnerStateRuntime {
         lastProcessor.setNextProcessor(commonProcessor);
     }
 
-    @Override
-    public void setStartState() {
-        firstProcessor.setStartState(true);
-    }
-
     public StateInputStream.Type getStateType() {
         return stateType;
     }
@@ -87,9 +82,7 @@ public class StreamInnerStateRuntime implements InnerStateRuntime {
     public void init() {
         singleStreamRuntimeList.get(0).getProcessStreamReceiver().setNext(firstProcessor);
         singleStreamRuntimeList.get(0).getProcessStreamReceiver().addStatefulProcessor(firstProcessor);
-        if (stateType == StateInputStream.Type.PATTERN) {
-            firstProcessor.init();
-        }
+        firstProcessor.init();
     }
 
     @Override

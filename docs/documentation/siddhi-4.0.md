@@ -85,6 +85,8 @@ The following parameters are configured in a stream definition.
 | `attribute name`   | The schema of an stream is defined by its attributes with uniquely identifiable attribute names. (It is recommended to define attribute names in `camelCase`.)|    |
 | `attribute type`   | The type of each attribute defined in the schema. <br/> This can be `STRING`, `INT`, `LONG`, `DOUBLE`, `FLOAT`, `BOOL` or `OBJECT`.     |
 
+To use and refer stream and attribute names that do not follow `[a-zA-Z_][a-zA-Z_0-9]*` format enclose them in ``. E.g. ``` `$test(0)` ```.
+ 
 To make the stream process events in asynchronous and multi-threading manner use the `@Async` annotation as shown in 
 [Threading and Asynchronous](https://wso2.github.io/siddhi/documentation/siddhi-4.0/#threading-and-asynchronous) configuration section.
 
@@ -143,6 +145,8 @@ The following is the list of source types that are currently supported:
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-twitter/">Twitter</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/">Amazon SQS</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-cdc/">CDC</a>
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-prometheus/">Prometheus</a>
+
 #### Source Mapper
 
 Each `@source` configuration has a mapping denoted by the `@map` annotation that converts the incoming messages format to Siddhi events.
@@ -179,6 +183,7 @@ The following is a list of currently supported source mapping types:
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-binary/">Binary</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-keyvalue/">Key Value</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-csv/">CSV</a>
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-avro/">Avro</a>
 
 **Example**
 
@@ -243,7 +248,8 @@ The following is a list of currently supported sink types.
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-http/">HTTP</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-kafka/">Kafka</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-tcp/">TCP</a>
-* <a target="_blank" href="https://wso2.github.io/siddhi/api/latest/#inmemory-sink">In-memory</a>     
+* <a target="_blank" href="https://wso2.github.io/siddhi/api/latest/#inmemory-sink">In-memory</a>  
+* <a target="_blank" href="https://wso2.github.io/siddhi/api/latest/#log-sink">Log</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/">WSO2Event</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-email/">Email</a> 
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-jms/">JMS</a> 
@@ -252,6 +258,7 @@ The following is a list of currently supported sink types.
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-mqtt/">MQTT</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-websocket/">WebSocket</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/">Amazon SQS</a>
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-prometheus/">Prometheus</a>
 
 #### Distributed Sink
 
@@ -325,7 +332,8 @@ There are two ways you can configure the `@payload` annotation.
 1. Some mappers such as `XML`, `JSON`, and `Test` accept only one output payload using the following format: <br/>
 ```@payload( 'This is a test message from {{user}}.' )``` 
 2. Some mappers such `key-value` accept series of mapping values defined as follows: <br/>
-```@payload( key1='mapping_1', key2='user : {{user}}')``` 
+```@payload( key1='mapping_1', 'key2'='user : {{user}}')``` <br/>
+Here, apart from the dotted key names sush as ```a.b.c```, any constant string value such as ```'$abc'``` can also by used as a key. 
 
 **Supported Mapping Types**
 
@@ -338,6 +346,7 @@ The following is a list of currently supported sink mapping types:
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-binary/">Binary</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-keyvalue/">Key Value</a>
 * <a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-csv/">CSV</a>
+* <a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-avro/">Avro</a>
 
 
 **Example**
@@ -1911,7 +1920,7 @@ The above syntax includes the following:
 |`<input stream>`              |The stream that feeds the aggregation. **Note! this stream should be <br/>already defined.**
 |`group by <attribute name>`   |The `group by` clause is optional. If it is included in a Siddhi application, aggregate values <br/> are calculated per each `group by` attribute. If it is not used, all the<br/> events are aggregated together.
 |`by <timestamp attribute>`    |This clause is optional. This defines the attribute that should be used as<br/> the timestamp. If this clause is not used, the event time is used by default.<br/> The timestamp could be given as either a `string` or a `long` value. If it is a `long` value,<br/> the unix timestamp in milliseconds is expected (e.g. `1496289950000`). If it is <br/>a `string` value, the supported formats are `<yyyy>-<MM>-<dd> <HH>:<mm>:<ss>` <br/>(if time is in GMT) and  `<yyyy>-<MM>-<dd> <HH>:<mm>:<ss> <Z>` (if time is <br/>not in GMT), here the ISO 8601 UTC offset must be provided for `<Z>` .<br/>(e.g., `+05:30`, `-11:00`).
-|`<time periods>`              |The time periods can be given as a range separated by three dots, or as comma separated values. A range would be given as sec...year, where aggregation would be done per second, minute, hour, day, month and year. Comma separated values can be given as min, hour. However, skipping durations is not yet supported for comma separated values (e.g min, day is not a valid clause since hour duration has been skipped)
+|`<time periods>`              |Time periods can be specified as a range where the minimum and the maximum value are separated by three dots, or as comma-separated values. <br><br> e.g., A range can be specified as sec...year where aggregation is done per second, minute, hour, day, month and year. Comma-separated values can be specified as min, hour. <br><br> Skipping time durations (e.g., min, day where the hour duration is skipped) when specifying comma-separated values is supported only from v4.1.1 onwards
 
 !!! Note
     From V4.2.0 onwards, aggregation is carried out at calendar start times for each granularity with the GMT timezone
@@ -1934,18 +1943,16 @@ define aggregation TradeAggregation
     aggregate by timestamp every sec ... year;
 ```
 
-### Partial Aggregation
+### Distributed Aggregation
 
 !!! Note
-    Partial Aggregation is only supported after V4.3.0
+    Distributed Aggregation is only supported after v4.3.0
 
-Partial Aggregation allows you to partially process aggregations in different run-times/shards. This allows one Siddhi
-app to be responsible only for processing a part of the aggregation.
-However for this, all the aggregations must have a physical database and must be linked to the same database. Further,
- a unique id should be provided for each runtime/shard through a system parameter(Config Manager) as a `shardId`.
+Distributed Aggregation allows you to partially process aggregations in different shards. This allows Siddhi
+app in one shard to be responsible only for processing a part of the aggregation.
+However for this, all aggregations must be based on a common physical database(@store).
 
 **Syntax**
-The annotation `@PartitionById` should be added before the aggregation definition.
 
 ```sql
 @store(type="<store type>", ...)
@@ -1956,6 +1963,22 @@ select <attribute name>, <aggregate function>(<attribute name>) as <attribute na
     group by <attribute name>
     aggregate by <timestamp attribute> every <time periods> ;
 ```
+
+Following table includes the `annotation` to be used to enable distributed aggregation, 
+
+Item | Description
+------|------
+`@PartitionById` | If the annotation is given, then the distributed aggregation is enabled. Further this can be disabled by using `enable` element, </br>`@PartitionById(enable='false')`.</br>
+
+
+Further, following system properties are also available,
+
+System Property| Description| Possible Values | Optional | Default Value 
+---------|---------|---------|---------|------
+shardId| The id of the shard one of the distributed aggregation is running in. This should be unique to a single shard | Any string | No | <Empty_String> 
+partitionById| This allows user to enable/disable distributed aggregation for all aggregations running in one siddhi manager .(Available from v4.3.3) | true/false | Yesio | false
+
+
 
 !!! Note
     ShardIds should not be changed after the first configuration in order to keep data consistency.
@@ -2868,6 +2891,53 @@ The following elements are configured with this annotation.
 |`buffer.size`|The size of the event buffer that will be used to handover the execution to other threads. | - |
 |`workers`|Number of worker threads that will be be used to process the buffered events.|`1`|
 |`batch.size.max`|The maximum number of events that will be processed together by a worker thread at a given time.| `buffer.size`|
+
+### Fault Streams
+
+When the `@OnError` annotation is added to a stream definition, it handles failover scenarios that occur during runtime gracefully.
+
+```sql
+@OnError(action='on_error_action')
+define stream <stream name> (<attribute name> <attribute type>, <attribute name> <attribute type>, ... );
+```
+
+The action parameter of the `@OnError` annotation defines the action to be executed during failure scenarios. 
+
+The following action types can be specified via the `@OnError` annotation when defining a stream. If this annotation is not added, `LOG` is the action type by default.
+
+* `LOG` : Logs the event with an error, and then drops the event.
+* `STREAM`: A fault stream is automatically created for the base stream. The definition of the fault stream includes all the attributes of the base stream as well as an additional attribute named `_error`.
+The events are inserted into the fault stream during a failure. The error identified is captured as the value for the `_error` attribute.
+ 
+e.g., the following is a Siddhi application that includes the `@OnError` annotation to handle failures during runtime.
+
+```sql
+@OnError(name='STREAM')
+define stream StreamA (symbol string, volume long);
+
+from StreamA[custom:fault() > volume] 
+insert into StreamB;
+
+from !StreamA#log("Error Occured")
+insert into tempStream;
+``` 
+
+`!StreamA`, fault stream is automatically created when you add the `@OnError` annotation. The definition of the corresponding fault stream is as follows.
+```sql
+!StreamA(symbol string, volume long, _error object)
+``` 
+
+If you include the `on.error` parameter in the sink configuration, failures are handled by Siddhi at the time the events are published from the `Sink`.
+```sql
+@sink(type='sink_type', on.error='on.error.action')
+define stream <stream name> (<attribute name> <attribute type>, <attribute name> <attribute type>, ... );
+```  
+
+The action types that can be specified via the `on.error` parameter when configuring a sink are as follows. If this parameter is not included in the sink configuration, `LOG` is the action type by default.
+
+* `LOG` : Logs the event with the error, and then drops the event.
+* `WAIT` : The thread waits in the `back-off and re-trying` state, and reconnects once the connection is re-established.
+* `STREAM`: Corresponding fault stream is populated with the failed event and the error while publishing. 
 
 ### Statistics
 

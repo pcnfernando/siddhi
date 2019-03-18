@@ -174,7 +174,7 @@ public class AggregationParser {
             if (enablePartioning || shouldPartitionById) {
                 shardId = configManager.extractProperty("shardId");
                 if (shardId == null) {
-                    throw new SiddhiAppCreationException("Configurations not provided for @partitionbyid " +
+                    throw new SiddhiAppCreationException("Configuration 'shardId' not provided for @partitionbyid " +
                             "annotation");
                 }
                 enablePartioning = true;
@@ -806,7 +806,7 @@ public class AggregationParser {
         // Create annotations for primary key
         Annotation primaryKeyAnnotation = new Annotation(SiddhiConstants.ANNOTATION_PRIMARY_KEY);
         primaryKeyAnnotation.element(null, AGG_START_TIMESTAMP_COL);
-        
+
         if (enablePartioning) {
             primaryKeyAnnotation.element(null, SHARD_ID_COL);
         }

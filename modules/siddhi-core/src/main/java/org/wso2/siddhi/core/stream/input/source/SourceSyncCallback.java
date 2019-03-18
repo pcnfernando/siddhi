@@ -24,4 +24,3 @@ package org.wso2.siddhi.core.stream.input.source;
 public interface SourceSyncCallback {
     void update(String[] transportSyncProperties);
 }
-

@@ -34,7 +34,6 @@ public abstract class SourceHandler implements InputEventHandlerCallback, Snapsh
 
     final void initSourceHandler(String siddhiAppName, SourceSyncCallback sourceSyncCallback, String elementId,
                                  StreamDefinition streamDefinition) {
-
         this.elementId = elementId;
         init(siddhiAppName, sourceSyncCallback, elementId, streamDefinition);
     }
@@ -59,17 +58,14 @@ public abstract class SourceHandler implements InputEventHandlerCallback, Snapsh
             throws InterruptedException;
 
     public String getElementId() {
-
         return elementId;
     }
 
     public void setInputHandler(InputHandler inputHandler) {
-
         this.inputHandler = inputHandler;
     }
 
     public InputHandler getInputHandler() {
-
         return inputHandler;
     }
 

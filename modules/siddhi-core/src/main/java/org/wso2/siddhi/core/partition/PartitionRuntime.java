@@ -137,7 +137,7 @@ public class PartitionRuntime implements Snapshotable {
                     outputStreamJunction = new StreamJunction(streamDefinition,
                             siddhiAppContext.getExecutorService(),
                             siddhiAppContext.getBufferSize(),
-                            siddhiAppContext);
+                            null, siddhiAppContext);
                     localStreamJunctionMap.putIfAbsent(id, outputStreamJunction);
                 }
                 insertIntoStreamCallback.init(localStreamJunctionMap.get(id));
@@ -150,7 +150,7 @@ public class PartitionRuntime implements Snapshotable {
                     outputStreamJunction = new StreamJunction(streamDefinition,
                             siddhiAppContext.getExecutorService(),
                             siddhiAppContext.getBufferSize(),
-                            siddhiAppContext);
+                            null, siddhiAppContext);
                     streamJunctionMap.putIfAbsent(id, outputStreamJunction);
                 }
                 insertIntoStreamCallback.init(streamJunctionMap.get(id));
@@ -168,7 +168,7 @@ public class PartitionRuntime implements Snapshotable {
                 outputStreamJunction = new StreamJunction(streamDefinition,
                         siddhiAppContext.getExecutorService(),
                         siddhiAppContext.getBufferSize(),
-                        siddhiAppContext);
+                        null, siddhiAppContext);
                 streamJunctionMap.putIfAbsent(id, outputStreamJunction);
             }
             insertIntoWindowCallback.getWindow().setPublisher(streamJunctionMap.get(insertIntoWindowCallback
@@ -293,7 +293,7 @@ public class PartitionRuntime implements Snapshotable {
                             streamJunction = new StreamJunction(streamDefinition, siddhiAppContext
                                     .getExecutorService(),
                                     siddhiAppContext.getBufferSize(),
-                                    siddhiAppContext);
+                                    null, siddhiAppContext);
                             localStreamJunctionMap.put(streamId + key, streamJunction);
                         }
                         streamJunction.subscribe(clonedQueryRuntime.getStreamRuntime().getSingleStreamRuntimes().get
