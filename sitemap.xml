@@ -66,6 +66,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>http://siddhi.io/api/5.0.0-m6/</loc>
+     <lastmod>2019-04-04</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>http://siddhi.io/api/5.0.0-m5/</loc>
      <lastmod>2019-04-04</lastmod>
      <changefreq>daily</changefreq>

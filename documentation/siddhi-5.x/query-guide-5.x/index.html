@@ -446,6 +446,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#error-handling" title="Error Handling" class="md-nav__link">
+    Error Handling
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1015,6 +1022,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../../api/5.0.0-m6/" title="5.0.0-m6" class="md-nav__link">
+      5.0.0-m6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../../api/5.0.0-m5/" title="5.0.0-m5" class="md-nav__link">
       5.0.0-m5
     </a>
@@ -1340,6 +1359,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#error-handling" title="Error Handling" class="md-nav__link">
+    Error Handling
+  </a>
   
 </li>
         
@@ -1934,13 +1960,13 @@ A stream definition contains the stream name and a set of attributes with specif
 </table>
 <p>To use and refer stream and attribute names that do not follow <code>[a-zA-Z_][a-zA-Z_0-9]*</code> format enclose them in <code>`</code>. E.g. <code>`$test(0)`</code>.</p>
 <p>To make the stream process events in multi-threading and asynchronous way use the <code>@Async</code> annotation as shown in
-<a href="http://siddhi.io/documentation/siddhi-4.0/siddhi-4.x.md#multi-threading-and-asynchronous-processing">Multi-threading and Asynchronous Processing</a> configuration section.</p>
+<a href="##multi-threading-and-asynchronous-processing">Multi-threading and Asynchronous Processing</a> configuration section.</p>
 <p><strong>Example</strong></p>
 <div class="codehilite"><pre><span></span><span class="n">define</span> <span class="n">stream</span> <span class="n">TempStream</span> <span class="p">(</span><span class="n">deviceID</span> <span class="n">long</span><span class="p">,</span> <span class="n">roomNo</span> <span class="nb">int</span><span class="p">,</span> <span class="n">temp</span> <span class="n">double</span><span class="p">);</span>
 </pre></div>
 
 
-<p>The above creates a stream named <code>TempStream</code> with the following attributes.</p>
+<p>The above creates a stream with name <code>TempStream</code> having the following attributes.</p>
 <ul>
 <li><code>deviceID</code> of type <code>long</code></li>
 <li><code>roomNo</code> of type <code>int</code></li>
@@ -1948,66 +1974,121 @@ A stream definition contains the stream name and a set of attributes with specif
 </ul>
 <h3 id="source">Source<a class="headerlink" href="#source" title="Permanent link">&para;</a></h3>
 <p>Sources receive events via multiple transports and in various data formats, and direct them into streams for processing.</p>
-<p>A source configuration allows you to define a mapping in order to convert each incoming event from its native data format to a Siddhi event. When customizations to such mappings are not provided, Siddhi assumes that the arriving event adheres to the predefined format based on the stream definition and the selected message format. </br></p>
+<p>A source configuration allows you to define a mapping in order to convert each incoming event from its native data format to a Siddhi event. When customizations to such mappings are not provided, Siddhi assumes that the arriving event adheres to the predefined format based on the stream definition and the configured message format.</p>
 <p><strong>Purpose</strong></p>
-<p>Source allows Siddhi to consume events from external systems, and map the events to adhere to the associated stream.</p>
+<p>Source provides a way to consume events from external systems using standard protocols, and converts them to adhere the associated stream for processing.</p>
 <p><strong>Syntax</strong></p>
-<p>To configure a stream that consumes events via a source, add the source configuration to a stream definition by adding the <code>@source</code> annotation with the required parameter values.
-The source syntax is as follows:</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;source_type&#39;</span><span class="p">,</span> <span class="k">static</span><span class="p">.</span><span class="k">option</span><span class="p">.</span><span class="n">key1</span><span class="o">=</span><span class="s1">&#39;static_option_value1&#39;</span><span class="p">,</span> <span class="k">static</span><span class="p">.</span><span class="k">option</span><span class="p">.</span><span class="n">keyN</span><span class="o">=</span><span class="s1">&#39;static_option_valueN&#39;</span><span class="p">,</span>
-    <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;map_type&#39;</span><span class="p">,</span> <span class="k">static</span><span class="p">.</span><span class="n">option_key1</span><span class="o">=</span><span class="s1">&#39;static_option_value1&#39;</span><span class="p">,</span> <span class="k">static</span><span class="p">.</span><span class="k">option</span><span class="p">.</span><span class="n">keyN</span><span class="o">=</span><span class="s1">&#39;static_option_valueN&#39;</span><span class="p">,</span>
-        <span class="o">@</span><span class="n">attributes</span><span class="p">(</span> <span class="n">attributeN</span><span class="o">=</span><span class="s1">&#39;attribute_mapping_N&#39;</span><span class="p">,</span> <span class="n">attribute1</span><span class="o">=</span><span class="s1">&#39;attribute_mapping_1&#39;</span><span class="p">)</span>
+<p>To configure a stream that consumes events via a source, add the source configuration to a stream definition by adding the <code>@source</code> annotation with the required parameter values.</p>
+<p>The source syntax is as follows:</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;&lt;source type&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">static</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">static</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span>
+    <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;&lt;map type&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">static</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">static</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span>
+        <span class="o">@</span><span class="n">attributes</span><span class="p">(</span> <span class="o">&lt;</span><span class="n">attribute1</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;attribute mapping&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attributeN</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;attribute mapping&gt;&#39;</span><span class="p">)</span>
     <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="n">StreamName</span> <span class="p">(</span><span class="n">attribute1</span> <span class="n">Type1</span><span class="p">,</span> <span class="n">attributeN</span> <span class="n">TypeN</span><span class="p">);</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute1</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attributeN</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">Type</span><span class="o">&gt;</span><span class="p">);</span>
 </pre></div>
 
 
-<p>This syntax includes the following annotations.
-<strong>Source</strong></p>
-<p>The <code>type</code> parameter of <code>@source</code> defines the source type that receives events. The other parameters to be configured
-depends on the source type selected, some of the the parameters are optional. </br></p>
-<p>For detailed information about the parameters see the documentation for the relevant source.</p>
-<p>The following is the list of source types that are currently supported:</p>
-<ul>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-http/">HTTP</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-kafka/">Kafka</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-tcp/">TCP</a></li>
-<li><a target="_blank" href="http://siddhi.io/api/latest/#inmemory-source">In-memory</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/">WSO2Event</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-email/">Email</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-jms/">JMS</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-file/">File</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-rabbitmq/">RabbitMQ</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-mqtt/">MQTT</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-websocket/">WebSocket</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-twitter/">Twitter</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/">Amazon SQS</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-cdc/">CDC</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-prometheus/">Prometheus</a></li>
-</ul>
+<p>This syntax includes the following annotations.</p>
+<p><strong>Source</strong></p>
+<p>The <code>type</code> parameter of <code>@source</code> annotation defines the source type that receives events.
+The other parameters of <code>@source</code> annotation depends upon the selected source type, and here
+some of the other parameters can be optional.</p>
+<p>For detailed information about the supported parameters see the documentation of the relevant source.</p>
+<p>The following is the list of source types supported by Siddhi:</p>
+<table>
+<thead>
+<tr>
+<th>Source types</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" href="http://siddhi.io/api/latest/#inmemory-source">In-memory</a></td>
+<td>Allow SiddhiApp to consume events from other SiddhiApps running on the same JVM.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-http/">HTTP</a></td>
+<td>Expose an HTTP service to consume messages.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-kafka/">Kafka</a></td>
+<td>Subscribe to Kafka topic to consume events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-tcp/">TCP</a></td>
+<td>Expose a TCP service to consume messages.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/">WSO2Event</a></td>
+<td>Expose a Thrift and TCP services to consume events formatted as WSO2Events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-email/">Email</a></td>
+<td>Consume emails via POP3 and SMTP protocols.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-jms/">JMS</a></td>
+<td>Subscribe to JMS topic or queue to consume events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-file/">File</a></td>
+<td>Reads files by tailing or as a whole to extract events out of them.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-rabbitmq/">RabbitMQ</a></td>
+<td>Subscribe to RabbitMQ topic to consume events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-mqtt/">MQTT</a></td>
+<td>Subscribe to MQTT brokers to consume events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-websocket/">WebSocket</a></td>
+<td>Create a web-socket connection to consume messages.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-twitter/">Twitter</a></td>
+<td>Subscribe to Twitter to consume tweets.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/">Amazon SQS</a></td>
+<td>Subscribe to Amazon SQS to consume events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-cdc/">CDC</a></td>
+<td>Perform change data capture on databases.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-prometheus/">Prometheus</a></td>
+<td>Consume data from Prometheus agent.</td>
+</tr>
+</tbody>
+</table>
+<p><a href="http://siddhi.io/api/latest/#inmemory-source">In-memory</a> is the only source inbuilt in Siddhi, and all other source types are implemented as extensions to Siddhi.   </p>
 <h4 id="source-mapper">Source Mapper<a class="headerlink" href="#source-mapper" title="Permanent link">&para;</a></h4>
-<p>Each <code>@source</code> configuration has a mapping denoted by the <code>@map</code> annotation that converts the incoming messages format to Siddhi events.</p>
-<p>The <code>type</code> parameter of the <code>@map</code> defines the map type to be used to map the data. The other parameters to be
-configured depends on the mapper selected. Some of these parameters are optional. </br>
-For detailed information about the parameters see the documentation for the relevant mapper.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>When the <code>@map</code> annotation is not provided, <code>@map(type='passThrough')</code> is used as default. This default mapper type can be used when source consumes Siddhi events and when it does not need any mappings.</p>
-</div>
+<p>Each <code>@source</code> configuration has a mapping denoted by the <code>@map</code> annotation that defines how to convert the incoming event format to Siddhi events.</p>
+<p>The <code>type</code> parameter of the <code>@map</code> defines the map type to be used in converting the incoming events. The other parameters
+of <code>@map</code> annotation depends on the mapper selected, and some of its parameters can be optional.</p>
+<p>For detailed information about the parameters see the documentation of the relevant mapper.</p>
 <p><strong>Map Attributes</strong></p>
 <p><code>@attributes</code> is an optional annotation used with <code>@map</code> to define custom mapping. When <code>@attributes</code> is not provided, each mapper
-assumes that the incoming events  adhere to its own default data format. By adding the <code>@attributes</code> annotation, you
-can configure mappers to extract data from the incoming message selectively, and assign them to attributes.</p>
-<p>There are two ways you can configure map attributes.</p>
+assumes that the incoming events adheres to its own default message format and attempt to convert the events from that format. 
+By adding the <code>@attributes</code> annotation, you can selectively extract data from the incoming message and assign them to the attributes.</p>
+<p>There are two ways to configure <code>@attributes</code>.</p>
 <ol>
-<li>Defining attributes as keys and mapping content as values in the following format: <br/>
-<code>@attributes( attributeN='mapping_N', attribute1='mapping_1')</code></li>
-<li>Defining the mapping content of all attributes in the same order as how the attributes are defined in stream definition: <br/>
-<code>@attributes( 'mapping_1', 'mapping_N')</code></li>
+<li>
+<p>Define attribute names as keys, and mapping configurations as values:<br/>
+  <code>@attributes( &lt;attribute1&gt;='&lt;mapping&gt;', &lt;attributeN&gt;='&lt;mapping&gt;')</code></p>
+</li>
+<li>
+<p>Define the mapping configurations in the same order as the attributes defined in stream definition:<br/>
+  <code>@attributes( '&lt;mapping for attribute1&gt;', '&lt;mapping for attributeN&gt;')</code></p>
+</li>
 </ol>
 <p><strong>Supported Mapping Types</strong></p>
-<p>The following is a list of currently supported source mapping types:</p>
+<p>The following is a list of supported source mapping types supported by Siddhi:</p>
 <ul>
 <li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-wso2event/">WSO2Event</a></li>
 <li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-xml/">XML</a></li>
@@ -2018,6 +2099,10 @@ can configure mappers to extract data from the incoming message selectively, and
 <li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-csv/">CSV</a></li>
 <li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-avro/">Avro</a></li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When the <code>@map</code> annotation is not provided, <code>@map(type='passThrough')</code> is used as default. This can be used when source consumes Siddhi events directly which it does not need any conversion.</p>
+</div>
 <p><strong>Example</strong></p>
 <p>This query receives events via the <code>HTTP</code> source in the <code>JSON</code> data format, and directs them to the <code>InputStream</code> stream for processing.
 Here the HTTP source is configured to receive events on all network interfaces on the <code>8080</code>port, on the <code>foo</code> context, and
@@ -2170,6 +2255,53 @@ or <code>http://localhost:8006/endpoint2</code> based on the partitioning key <c
      <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="n">publisher</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8005/endpoint1&#39;</span><span class="p">),</span>
      <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="n">publisher</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8006/endpoint2&#39;</span><span class="p">)))</span>
 <span class="n">define</span> <span class="n">stream</span> <span class="n">OutputStream</span> <span class="p">(</span><span class="n">name</span> <span class="n">string</span><span class="p">,</span> <span class="n">ang</span> <span class="nb">int</span><span class="p">,</span> <span class="n">country</span> <span class="n">string</span><span class="p">);</span>
+</pre></div>
+
+
+<h3 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h3>
+<p>When errors are thrown by Siddhi elements subscribed to the stream, the error gets propagated up to the stream which delivered
+the event to those Siddhi elements. By default the error is logged and dropped at the stream, but we can capture the error and
+the associated event and handle them gracefully by adding <code>@OnError</code> annotation to the corresponding stream definition.</p>
+<p>The <code>@OnError</code> annotation requires an <code>action</code> to be specified as bellow.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;on_error_action&#39;</span><span class="p">)</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span>
+                             <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span> <span class="p">);</span>
+</pre></div>
+
+
+<p>The <code>action</code> parameter of the <code>@OnError</code> annotation defines the action to be executed during failure scenarios.
+The following actions can be specified to <code>@OnError</code> annotation to handle erroneous scenarios.</p>
+<ul>
+<li><code>LOG</code> : Logs the event with the error, and drops the event. This is the default action performed even when <code>@OnError</code> annotation is not defined</li>
+<li><code>STREAM</code>: Creates a fault stream and redirects the event and the error to it. The created fault stream will have all the attributes defined in the base stream to include the error causing event, and in addition it contains <code>_error</code> attribute of type <code>object</code> to capture the error information. The fault stream can be referred by adding <code>!</code> in front of the base stream name.</li>
+</ul>
+<p><strong>Example</strong></p>
+<p>Following <code>TempStream</code> is defined with <code>@OnError</code> annotation to redirect errors to a fault stream.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;STREAM&#39;</span><span class="p">)</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">TempStream</span> <span class="p">(</span><span class="n">deviceID</span> <span class="n">long</span><span class="p">,</span> <span class="n">roomNo</span> <span class="nb">int</span><span class="p">,</span> <span class="n">temp</span> <span class="n">double</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Siddhi will infer and automatically defines the fault stream of <code>TempStream</code> as given bellow.</p>
+<div class="codehilite"><pre><span></span><span class="n">define</span> <span class="n">stream</span> <span class="o">!</span><span class="n">TempStream</span> <span class="p">(</span><span class="n">deviceID</span> <span class="n">long</span><span class="p">,</span> <span class="n">roomNo</span> <span class="nb">int</span><span class="p">,</span> <span class="n">temp</span> <span class="n">double</span><span class="p">,</span> <span class="n">_error</span> <span class="k">object</span><span class="p">);</span>
+</pre></div>
+
+
+<p>Following SiddhiApp demonstrate failure generation and handling with the use of <a href="#query">queries</a>.
+Note: Details on writing processing logics via <a href="#query">queries</a> will be explained in later sections.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;STREAM&#39;</span><span class="p">)</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">TempStream</span> <span class="p">(</span><span class="n">deviceID</span> <span class="n">long</span><span class="p">,</span> <span class="n">roomNo</span> <span class="nb">int</span><span class="p">,</span> <span class="n">temp</span> <span class="n">double</span><span class="p">);</span>
+
+<span class="c1">-- Failure generation through a custom function `createError`</span>
+<span class="o">@</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;failure-generation&#39;</span><span class="p">)</span>
+<span class="k">from</span> <span class="n">TempStream</span><span class="o">#</span><span class="n">custom</span><span class="p">:</span><span class="n">createError</span><span class="p">()</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">IgnoreStream1</span><span class="p">;</span>
+
+<span class="c1">-- Handling failure by simply logging the event and error.</span>
+<span class="o">@</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;handle-failure&#39;</span><span class="p">)</span>
+<span class="k">from</span> <span class="o">!</span><span class="n">TempStream</span><span class="o">#</span><span class="n">log</span><span class="p">(</span><span class="ss">&quot;Error Occoured!&quot;</span><span class="p">)</span>
+<span class="k">select</span> <span class="n">deviceID</span><span class="p">,</span> <span class="n">roomNo</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">_error</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">IgnoreStream2</span><span class="p">;</span>
 </pre></div>
 
 
