@@ -843,13 +843,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fault-streams" title="Fault Streams" class="md-nav__link">
-    Fault Streams
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#statistics" title="Statistics" class="md-nav__link">
     Statistics
   </a>
@@ -979,7 +972,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../contribution/" title="Contribute" class="md-nav__link">
+    <a href="../../../contribution/" title="Contribute" class="md-nav__link">
       Contribute
     </a>
   </li>
@@ -1015,6 +1008,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../api/5.0.0-m8/" title="5.0.0-m8" class="md-nav__link">
+      5.0.0-m8
+    </a>
+  </li>
+
         
           
           
@@ -1281,6 +1286,18 @@
   <li class="md-nav__item">
     <a href="../../../license/" title="License" class="md-nav__link">
       License
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../../season-of-docs-2019/" title="Google Season of Code 2019" class="md-nav__link">
+      Google Season of Code 2019
     </a>
   </li>
 
@@ -1771,13 +1788,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#fault-streams" title="Fault Streams" class="md-nav__link">
-    Fault Streams
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#statistics" title="Statistics" class="md-nav__link">
     Statistics
   </a>
@@ -1986,9 +1996,9 @@ A stream definition contains the stream name and a set of attributes with specif
 </ul>
 <h3 id="source">Source<a class="headerlink" href="#source" title="Permanent link">&para;</a></h3>
 <p>Sources receive events via multiple transports and in various data formats, and direct them into streams for processing.</p>
-<p>A source configuration allows you to define a mapping in order to convert each incoming event from its native data format to a Siddhi event. When customizations to such mappings are not provided, Siddhi assumes that the arriving event adheres to the predefined format based on the stream definition and the configured message format.</p>
+<p>A source configuration allows to define a mapping in order to convert each incoming event from its native data format to a Siddhi event. When customizations to such mappings are not provided, Siddhi assumes that the arriving event adheres to the predefined format based on the stream definition and the configured message mapping type.</p>
 <p><strong>Purpose</strong></p>
-<p>Source provides a way to consume events from external systems using standard protocols, and converts them to adhere the associated stream for processing.</p>
+<p>Source provides a way to consume events from external systems and convert them to be processed by the associated stream.</p>
 <p><strong>Syntax</strong></p>
 <p>To configure a stream that consumes events via a source, add the source configuration to a stream definition by adding the <code>@source</code> annotation with the required parameter values.</p>
 <p>The source syntax is as follows:</p>
@@ -1997,7 +2007,7 @@ A stream definition contains the stream name and a set of attributes with specif
         <span class="o">@</span><span class="n">attributes</span><span class="p">(</span> <span class="o">&lt;</span><span class="n">attribute1</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;attribute mapping&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attributeN</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;attribute mapping&gt;&#39;</span><span class="p">)</span>
     <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute1</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attributeN</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">Type</span><span class="o">&gt;</span><span class="p">);</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute1</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attributeN</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">type</span><span class="o">&gt;</span><span class="p">);</span>
 </pre></div>
 
 
@@ -2005,13 +2015,13 @@ A stream definition contains the stream name and a set of attributes with specif
 <p><strong>Source</strong></p>
 <p>The <code>type</code> parameter of <code>@source</code> annotation defines the source type that receives events.
 The other parameters of <code>@source</code> annotation depends upon the selected source type, and here
-some of the other parameters can be optional.</p>
+some of its parameters can be optional.</p>
 <p>For detailed information about the supported parameters see the documentation of the relevant source.</p>
 <p>The following is the list of source types supported by Siddhi:</p>
 <table>
 <thead>
 <tr>
-<th>Source types</th>
+<th>Source type</th>
 <th>Description</th>
 </tr>
 </thead>
@@ -2038,7 +2048,7 @@ some of the other parameters can be optional.</p>
 </tr>
 <tr>
 <td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-email/">Email</a></td>
-<td>Consume emails via POP3 and SMTP protocols.</td>
+<td>Consume emails via POP3 and IMAP protocols.</td>
 </tr>
 <tr>
 <td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-jms/">JMS</a></td>
@@ -2058,7 +2068,7 @@ some of the other parameters can be optional.</p>
 </tr>
 <tr>
 <td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-websocket/">WebSocket</a></td>
-<td>Create a web-socket connection to consume messages.</td>
+<td>Create a web-socket connection or expose a service to consume messages.</td>
 </tr>
 <tr>
 <td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-twitter/">Twitter</a></td>
@@ -2078,16 +2088,17 @@ some of the other parameters can be optional.</p>
 </tr>
 </tbody>
 </table>
-<p><a href="http://siddhi.io/api/latest/#inmemory-source">In-memory</a> is the only source inbuilt in Siddhi, and all other source types are implemented as extensions to Siddhi.   </p>
+<p><a href="http://siddhi.io/api/latest/#inmemory-source">In-memory</a> is the only source inbuilt in Siddhi, and all other source types are implemented as extensions.   </p>
 <h4 id="source-mapper">Source Mapper<a class="headerlink" href="#source-mapper" title="Permanent link">&para;</a></h4>
-<p>Each <code>@source</code> configuration has a mapping denoted by the <code>@map</code> annotation that defines how to convert the incoming event format to Siddhi events.</p>
+<p>Each <code>@source</code> configuration can have a mapping denoted by the <code>@map</code> annotation that defines how to convert the incoming event
+format to Siddhi events.</p>
 <p>The <code>type</code> parameter of the <code>@map</code> defines the map type to be used in converting the incoming events. The other parameters
 of <code>@map</code> annotation depends on the mapper selected, and some of its parameters can be optional.</p>
 <p>For detailed information about the parameters see the documentation of the relevant mapper.</p>
 <p><strong>Map Attributes</strong></p>
 <p><code>@attributes</code> is an optional annotation used with <code>@map</code> to define custom mapping. When <code>@attributes</code> is not provided, each mapper
-assumes that the incoming events adheres to its own default message format and attempt to convert the events from that format. 
-By adding the <code>@attributes</code> annotation, you can selectively extract data from the incoming message and assign them to the attributes.</p>
+assumes that the incoming events adheres to its own default message format and attempt to convert the events from that format.
+By adding the <code>@attributes</code> annotation, users can selectively extract data from the incoming message and assign them to the attributes.</p>
 <p>There are two ways to configure <code>@attributes</code>.</p>
 <ol>
 <li>
@@ -2099,183 +2110,417 @@ By adding the <code>@attributes</code> annotation, you can selectively extract d
   <code>@attributes( '&lt;mapping for attribute1&gt;', '&lt;mapping for attributeN&gt;')</code></p>
 </li>
 </ol>
-<p><strong>Supported Mapping Types</strong></p>
-<p>The following is a list of supported source mapping types supported by Siddhi:</p>
-<ul>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-wso2event/">WSO2Event</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-xml/">XML</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-text/">TEXT</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-json/">JSON</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-binary/">Binary</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-keyvalue/">Key Value</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-csv/">CSV</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-avro/">Avro</a></li>
-</ul>
+<p><strong>Supported Source Mapping Types</strong></p>
+<p>The following is the list of source mapping types supported by Siddhi:</p>
+<table>
+<thead>
+<tr>
+<th>Source mapping type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" href="http://siddhi.io/api/latest/#passthrough-source-mapper">PassThrough</a></td>
+<td>Omits data conversion on Siddhi events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-json/">JSON</a></td>
+<td>Converts JSON messages to Siddhi events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-xml/">XML</a></td>
+<td>Converts XML messages to Siddhi events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-text/">TEXT</a></td>
+<td>Converts plain text messages to Siddhi events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-avro/">Avro</a></td>
+<td>Converts Avro events to Siddhi events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-wso2event/">WSO2Event</a></td>
+<td>Converts WSO2Events to Siddhi events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-binary/">Binary</a></td>
+<td>Converts Siddhi specific binary events to Siddhi events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-keyvalue/">Key Value</a></td>
+<td>Converts key-value HashMaps to Siddhi events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-csv/">CSV</a></td>
+<td>Converts CSV like delimiter separated events to Siddhi events.</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>When the <code>@map</code> annotation is not provided, <code>@map(type='passThrough')</code> is used as default. This can be used when source consumes Siddhi events directly which it does not need any conversion.</p>
+<p>When the <code>@map</code> annotation is not provided <code>@map(type='passThrough')</code> is used as default, that passes the consumed Siddhi events directly to the streams without any data conversion.</p>
 </div>
-<p><strong>Example</strong></p>
-<p>This query receives events via the <code>HTTP</code> source in the <code>JSON</code> data format, and directs them to the <code>InputStream</code> stream for processing.
-Here the HTTP source is configured to receive events on all network interfaces on the <code>8080</code>port, on the <code>foo</code> context, and
-it is secured via basic authentication.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">receiver</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:8080/foo&#39;</span><span class="p">,</span> <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">enabled</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span>
+<p><a href="http://siddhi.io/api/latest/#passthrough-source-mapper">PassThrough</a> is the only source mapper inbuilt in Siddhi, and all other source mappers are implemented as extensions.</p>
+<p><strong>Example 1</strong></p>
+<p>Receive <code>JSON</code> messages by exposing an <code>HTTP</code> service, and direct them to <code>InputStream</code> stream for processing.
+Here the <code>HTTP</code> service will be secured with basic authentication, receives events on all network interfaces on port <code>8080</code> and context <code>/foo</code>. The service expects the <code>JSON</code> messages to be on the default data format that's supported by the <code>JSON</code> mapper as follows.</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Paul&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span>
+  <span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;UK&quot;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The configuration of the <code>HTTP</code> source and <code>JSON</code> source mapper to achieve the above is as follows.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">receiver</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:8080/foo&#39;</span><span class="p">,</span>
   <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
 <span class="n">define</span> <span class="n">stream</span> <span class="n">InputStream</span> <span class="p">(</span><span class="n">name</span> <span class="n">string</span><span class="p">,</span> <span class="n">age</span> <span class="nb">int</span><span class="p">,</span> <span class="n">country</span> <span class="n">string</span><span class="p">);</span>
 </pre></div>
 
 
+<p><strong>Example 2</strong></p>
+<p>Receive <code>JSON</code> messages by exposing an <code>HTTP</code> service, and direct them to <code>StockStream</code> stream for processing.
+Here the incoming <code>JSON</code>, as given bellow, do not adhere to the default data format that's supported by the <code>JSON</code> mapper.</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;portfolio&quot;</span><span class="p">:{</span>
+    <span class="nt">&quot;stock&quot;</span><span class="p">:{</span>
+      <span class="nt">&quot;volume&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+      <span class="nt">&quot;company&quot;</span><span class="p">:{</span>
+        <span class="nt">&quot;symbol&quot;</span><span class="p">:</span><span class="s2">&quot;FB&quot;</span>
+      <span class="p">},</span>
+      <span class="nt">&quot;price&quot;</span><span class="p">:</span><span class="mf">55.6</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>The configuration of the <code>HTTP</code> source and the custom <code>JSON</code> source mapping to achieve the above is as follows.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">receiver</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:8080/foo&#39;</span><span class="p">,</span>
+  <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">enclosing</span><span class="p">.</span><span class="n">element</span><span class="o">=</span><span class="ss">&quot;$.portfolio&quot;</span><span class="p">,</span>
+    <span class="o">@</span><span class="n">attributes</span><span class="p">(</span><span class="n">symbol</span> <span class="o">=</span> <span class="ss">&quot;stock.company.symbol&quot;</span><span class="p">,</span> <span class="n">price</span> <span class="o">=</span> <span class="ss">&quot;stock.price&quot;</span><span class="p">,</span>
+                <span class="n">volume</span> <span class="o">=</span> <span class="ss">&quot;stock.volume&quot;</span><span class="p">)))</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">StockStream</span> <span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">price</span> <span class="nb">float</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">);</span>
+</pre></div>
+
+
+<p>The same can also be configured by omitting the attribute names as bellow.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="k">source</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">receiver</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://0.0.0.0:8080/foo&#39;</span><span class="p">,</span>
+  <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">enclosing</span><span class="p">.</span><span class="n">element</span><span class="o">=</span><span class="ss">&quot;$.portfolio&quot;</span><span class="p">,</span>
+    <span class="o">@</span><span class="n">attributes</span><span class="p">(</span><span class="ss">&quot;stock.company.symbol&quot;</span><span class="p">,</span> <span class="ss">&quot;stock.price&quot;</span><span class="p">,</span> <span class="ss">&quot;stock.volume&quot;</span><span class="p">)))</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">StockStream</span> <span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">price</span> <span class="nb">float</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">);</span>
+</pre></div>
+
+
 <h3 id="sink">Sink<a class="headerlink" href="#sink" title="Permanent link">&para;</a></h3>
-<p>Sinks publish events from the streams via multiple transports to external endpoints in various data formats.</p>
-<p>A sink configuration allows you to define a mapping to convert the Siddhi event to the required output data format (such as <code>JSON</code>, <code>TEXT</code>, <code>XML</code>, etc.).
-When customization to such mappings is not provided, Siddhi converts events to its default format based on the stream definition and
-the selected data format to publish the events.</p>
+<p>Sinks consumes events from streams and publish them via multiple transports to external endpoints in various data formats.</p>
+<p>A sink configuration allows users to define a mapping to convert the Siddhi events in to the required output data format (such as <code>JSON</code>, <code>TEXT</code>, <code>XML</code>, etc.) and publish the events to the configured endpoints. When customizations to such mappings are not provided, Siddhi converts events to the predefined event format based on the stream definition and the configured message mapper type before publishing the events.</p>
 <p><strong>Purpose</strong></p>
-<p>Sinks provide a way to publish Siddhi events to external systems in the preferred data format.</p>
+<p>Sink provides a way to publish Siddhi events of a stream to external systems by converting events to their supported format.</p>
 <p><strong>Syntax</strong></p>
 <p>To configure a stream to publish events via a sink, add the sink configuration to a stream definition by adding the <code>@sink</code>
-annotation with the required parameter values. The sink syntax is as follows:</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;sink_type&#39;</span><span class="p">,</span> <span class="n">static_option_key1</span><span class="o">=</span><span class="s1">&#39;static_option_value1&#39;</span><span class="p">,</span> <span class="n">dynamic_option_key1</span><span class="o">=</span><span class="s1">&#39;{{dynamic_option_value1}}&#39;</span><span class="p">,</span>
-    <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;map_type&#39;</span><span class="p">,</span> <span class="n">static_option_key1</span><span class="o">=</span><span class="s1">&#39;static_option_value1&#39;</span><span class="p">,</span> <span class="n">dynamic_option_key1</span><span class="o">=</span><span class="s1">&#39;{{dynamic_option_value1}}&#39;</span><span class="p">,</span>
-        <span class="o">@</span><span class="n">payload</span><span class="p">(</span><span class="s1">&#39;payload_mapping&#39;</span><span class="p">)</span>
+annotation with the required parameter values.</p>
+<p>The sink syntax is as follows:</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;&lt;sink type&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">static</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">dynamic</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;{{&lt;value&gt;}}&#39;</span><span class="p">,</span>
+    <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;&lt;map type&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">static</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">dynamic</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;{{&lt;value&gt;}}&#39;</span><span class="p">,</span>
+        <span class="o">@</span><span class="n">payload</span><span class="p">(</span><span class="s1">&#39;&lt;payload mapping&gt;&#39;</span><span class="p">)</span>
     <span class="p">)</span>
 <span class="p">)</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="n">StreamName</span> <span class="p">(</span><span class="n">attribute1</span> <span class="n">Type1</span><span class="p">,</span> <span class="n">attributeN</span> <span class="n">TypeN</span><span class="p">);</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute1</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attributeN</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">type</span><span class="o">&gt;</span><span class="p">);</span>
 </pre></div>
 
 
 <div class="admonition note">
 <p class="admonition-title">Dynamic Properties</p>
-<p>The sink and sink mapper properties that are categorized as <code>dynamic</code> have the ability to absorb attributes values
-from their associated streams. This can be done by using the attribute names in double curly braces as <code>{{...}}</code> when configuring the property value.</p>
+<p>The sink and sink mapper properties that are categorized as <code>dynamic</code> have the ability to absorb attribute values
+dynamically from the Siddhi events of their associated streams. This can be configured by enclosing the relevant
+attribute names in double curly braces as<code>{{...}}</code>, and using it within the property values.</p>
 <p>Some valid dynamic properties values are:</p>
 <ul>
 <li><code>'{{attribute1}}'</code></li>
 <li><code>'This is {{attribute1}}'</code></li>
 <li><code>{{attribute1}} &gt; {{attributeN}}</code>  </li>
 </ul>
-<p>Here the attribute names in the double curly braces will be replaced with event values during execution.</p>
+<p>Here the attribute names in the double curly braces will be replaced with the values from the events before they are published.</p>
 </div>
 <p>This syntax includes the following annotations.</p>
 <p><strong>Sink</strong></p>
-<p>The <code>type</code> parameter of the <code>@sink</code> annotation defines the sink type that publishes the events. The other parameters to be configured
-depends on the sink type selected. Some of these parameters are optional, and some can have dynamic values. </br></p>
-<p>For detailed information about the parameters see documentation for the relevant sink.</p>
-<p>The following is a list of currently supported sink types.</p>
-<ul>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-http/">HTTP</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-kafka/">Kafka</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-tcp/">TCP</a></li>
-<li><a target="_blank" href="http://siddhi.io/api/latest/#inmemory-sink">In-memory</a></li>
-<li><a target="_blank" href="http://siddhi.io/api/latest/#log-sink">Log</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/">WSO2Event</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-email/">Email</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-jms/">JMS</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-file/">File</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-rabbitmq/">RabbitMQ</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-mqtt/">MQTT</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-websocket/">WebSocket</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/">Amazon SQS</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-prometheus/">Prometheus</a></li>
-</ul>
+<p>The <code>type</code> parameter of the <code>@sink</code> annotation defines the sink type that publishes the events.
+The other parameters of the <code>@sink</code> annotation depends upon the selected sink type, and here
+some of its parameters can be optional and/or dynamic.</p>
+<p>For detailed information about the supported parameters see documentation of the relevant sink.</p>
+<p>The following is a list of sink types supported by Siddhi:</p>
+<table>
+<thead>
+<tr>
+<th>Source type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" href="http://siddhi.io/api/latest/#inmemory-sink">In-memory</a></td>
+<td>Allow SiddhiApp to publish events to other SiddhiApps running on the same JVM.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="http://siddhi.io/api/latest/#log-sink">Log</a></td>
+<td>Logs the events appearing on the streams.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-http/">HTTP</a></td>
+<td>Publish events to an HTTP endpoint.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-kafka/">Kafka</a></td>
+<td>Publish events to Kafka topic.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-tcp/">TCP</a></td>
+<td>Publish events to a TCP service.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-wso2event/">WSO2Event</a></td>
+<td>Publish WSO2Events via Thrift or TCP protocols.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-email/">Email</a></td>
+<td>Send emails via SMTP protocols.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-jms/">JMS</a></td>
+<td>Publish events to JMS topics or queues.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-file/">File</a></td>
+<td>Writes events to files.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-rabbitmq/">RabbitMQ</a></td>
+<td>Publish events to RabbitMQ topics.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-mqtt/">MQTT</a></td>
+<td>Publish events to MQTT topics.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-websocket/">WebSocket</a></td>
+<td>Create a web-socket connection or expose a service to publish messages.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-sqs/">Amazon SQS</a></td>
+<td>Publish events to Amazon SQS.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-io-prometheus/">Prometheus</a></td>
+<td>Expose data through Prometheus agent.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="distributed-sink">Distributed Sink<a class="headerlink" href="#distributed-sink" title="Permanent link">&para;</a></h4>
-<p>Distributed Sinks publish events from a defined stream to multiple destination endpoints using load balancing and partitioning strategies.</p>
-<p>Any ordinary sink can be used as a distributed sink. A distributed sink configuration allows you to define a common mapping to convert the Siddhi events for all its destination endpoints,
-allows you to define a distribution strategy (e.g. <code>roundRobin</code>, <code>partitioned</code>), and configuration for each specific endpoint destination.</p>
+<p>Distributed Sinks publish events from a defined stream to multiple endpoints using load balancing or partitioning strategies.</p>
+<p>Any sink can be used as a distributed sink. A distributed sink configuration allows users to define a common mapping to convert
+and send the Siddhi events for all its destination endpoints.</p>
 <p><strong>Purpose</strong></p>
-<p>Distributed sinks provide a way to publish Siddhi events to multiple destination endpoints in the preferred data format.</p>
+<p>Distributed sink provides a way to publish Siddhi events to multiple endpoints in the configured event format.</p>
 <p><strong>Syntax</strong></p>
-<p>To configure a stream to publish events via a distributed sink, add the sink configuration to a stream definition by adding the <code>@sink</code>
-annotation and add the configuration parameters that are common of all the destination endpoints inside the <code>@sink</code> annotation
-along with <code>@distribution</code> and <code>@destination</code> annotations providing distribution strategy and endpoint specific configurations.
-The distributed sink syntax is as follows:</p>
-<p><em>RoundRobin Distributed Sink</em></p>
+<p>To configure distributed sink add the sink configuration to a stream definition by adding the <code>@sink</code>
+annotation and add the configuration parameters that are common of all the destination endpoints inside it,
+along with the common parameters also add the <code>@distribution</code> annotation specifying the distribution strategy (i.e. <code>roundRobin</code> or <code>partitioned</code>) and <code>@destination</code> annotations providing each endpoint specific configurations.</p>
+<p>The distributed sink syntax is as follows:</p>
+<p><strong><em>RoundRobin Distributed Sink</em></strong></p>
 <p>Publishes events to defined destinations in a round robin manner.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;sink_type&#39;</span><span class="p">,</span> <span class="n">common_option_key1</span><span class="o">=</span><span class="s1">&#39;common_option_value1&#39;</span><span class="p">,</span> <span class="n">common_option_key2</span><span class="o">=</span><span class="s1">&#39;{{common_option_value1}}&#39;</span><span class="p">,</span>
-    <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;map_type&#39;</span><span class="p">,</span> <span class="n">option_key1</span><span class="o">=</span><span class="s1">&#39;option_value1&#39;</span><span class="p">,</span> <span class="n">option_key2</span><span class="o">=</span><span class="s1">&#39;{{option_value1}}&#39;</span><span class="p">,</span>
-        <span class="o">@</span><span class="n">payload</span><span class="p">(</span><span class="s1">&#39;payload_mapping&#39;</span><span class="p">)</span>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;&lt;sink type&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">common</span><span class="p">.</span><span class="k">static</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">common</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;{{&lt;value&gt;}}&#39;</span><span class="p">,</span>
+    <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;&lt;map type&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">static</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">dynamic</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;{{&lt;value&gt;}}&#39;</span><span class="p">,</span>
+        <span class="o">@</span><span class="n">payload</span><span class="p">(</span><span class="s1">&#39;&lt;payload mapping&gt;&#39;</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="o">@</span><span class="n">distribution</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;roundRobin&#39;</span><span class="p">,</span>
-        <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="n">specific_option_key1</span><span class="o">=</span><span class="s1">&#39;specific_option_value1&#39;</span><span class="p">),</span>
-        <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="n">specific_option_key1</span><span class="o">=</span><span class="s1">&#39;specific_option_value2&#39;</span><span class="p">)))</span>
+        <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="o">&lt;</span><span class="n">destination</span><span class="p">.</span><span class="k">specific</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">),</span>
+        <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="o">&lt;</span><span class="n">destination</span><span class="p">.</span><span class="k">specific</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">)))</span>
 <span class="p">)</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="n">StreamName</span> <span class="p">(</span><span class="n">attribute1</span> <span class="n">Type1</span><span class="p">,</span> <span class="n">attributeN</span> <span class="n">TypeN</span><span class="p">);</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute1</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attributeN</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">type</span><span class="o">&gt;</span><span class="p">);</span>
 </pre></div>
 
 
-<p><em>Partitioned Distributed Sink</em></p>
-<p>Publishes events to defined destinations by partitioning based on the hashcode of the events partition key.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;sink_type&#39;</span><span class="p">,</span> <span class="n">common_option_key1</span><span class="o">=</span><span class="s1">&#39;common_option_value1&#39;</span><span class="p">,</span> <span class="n">common_option_key2</span><span class="o">=</span><span class="s1">&#39;{{common_option_value1}}&#39;</span><span class="p">,</span>
-    <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;map_type&#39;</span><span class="p">,</span> <span class="n">option_key1</span><span class="o">=</span><span class="s1">&#39;option_value1&#39;</span><span class="p">,</span> <span class="n">option_key2</span><span class="o">=</span><span class="s1">&#39;{{option_value1}}&#39;</span><span class="p">,</span>
-        <span class="o">@</span><span class="n">payload</span><span class="p">(</span><span class="s1">&#39;payload_mapping&#39;</span><span class="p">)</span>
+<p><strong><em>Partitioned Distributed Sink</em></strong></p>
+<p>Publishes events to defined destinations by partitioning them based on the partitioning key.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;&lt;sink type&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">common</span><span class="p">.</span><span class="k">static</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">common</span><span class="p">.</span><span class="k">dynamic</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;{{&lt;value&gt;}}&#39;</span><span class="p">,</span>
+    <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;&lt;map type&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">static</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">dynamic</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;{{&lt;value&gt;}}&#39;</span><span class="p">,</span>
+        <span class="o">@</span><span class="n">payload</span><span class="p">(</span><span class="s1">&#39;&lt;payload mapping&gt;&#39;</span><span class="p">)</span>
     <span class="p">)</span>
-    <span class="o">@</span><span class="n">distribution</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;partitioned&#39;</span><span class="p">,</span> <span class="n">partitionKey</span><span class="o">=</span><span class="s1">&#39;partition_key&#39;</span><span class="p">,</span>
-        <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="n">specific_option_key1</span><span class="o">=</span><span class="s1">&#39;specific_option_value1&#39;</span><span class="p">),</span>
-        <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="n">specific_option_key1</span><span class="o">=</span><span class="s1">&#39;specific_option_value2&#39;</span><span class="p">)))</span>
+    <span class="o">@</span><span class="n">distribution</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;partitioned&#39;</span><span class="p">,</span> <span class="n">partitionKey</span><span class="o">=</span><span class="s1">&#39;&lt;partition key&gt;&#39;</span><span class="p">,</span>
+        <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="o">&lt;</span><span class="n">destination</span><span class="p">.</span><span class="k">specific</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">),</span>
+        <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="o">&lt;</span><span class="n">destination</span><span class="p">.</span><span class="k">specific</span><span class="p">.</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">)))</span>
 <span class="p">)</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="n">StreamName</span> <span class="p">(</span><span class="n">attribute1</span> <span class="n">Type1</span><span class="p">,</span> <span class="n">attributeN</span> <span class="n">TypeN</span><span class="p">);</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute1</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attributeN</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">type</span><span class="o">&gt;</span><span class="p">);</span>
 </pre></div>
 
 
 <h4 id="sink-mapper">Sink Mapper<a class="headerlink" href="#sink-mapper" title="Permanent link">&para;</a></h4>
-<p>Each <code>@sink</code> annotation has a mapping denoted by the  <code>@map</code> annotation that converts the Siddhi event to an outgoing message format.</p>
-<p>The <code>type</code> parameter of the <code>@map</code> annotation defines the map type based on which the event is mapped. The other parameters to be configured depends on the mapper selected. Some of these parameters are optional and some have dynamic values. </br></p>
-<p>For detailed information about the parameters see the documentation for the relevant mapping type.</p>
+<p>Each <code>@sink</code> configuration can have a mapping denoted by the <code>@map</code> annotation that defines how to convert Siddhi events to outgoing messages with the defined format.</p>
+<p>The <code>type</code> parameter of the <code>@map</code> defines the map type to be used in converting the outgoing events. The other parameters of <code>@map</code> annotation depends on the mapper selected, and some of its parameters can be optional and/or dynamic.</p>
+<p>For detailed information about the parameters see the documentation of the relevant mapper.</p>
+<p><strong>Map Payload</strong></p>
+<p><code>@payload</code> is an optional annotation used with <code>@map</code> to define custom mapping. When the <code>@payload</code> annotation is not provided, each mapper maps the outgoing events to its own default event format. The <code>@payload</code> annotation allow users to configure mappers to produce the output payload of their choice, and by using dynamic properties within the payload they can selectively extract and add data from the published Siddhi events.</p>
+<p>There are two ways you to configure <code>@payload</code> annotation.</p>
+<ol>
+<li>Some mappers such as <code>XML</code>, <code>JSON</code>, and <code>Test</code> only accept one output payload: <br/>
+  <code>@payload( 'This is a test message from {{user}}.')</code></li>
+<li>Some mappers such <code>key-value</code> accept series of mapping values: <br/>
+  <code>@payload( key1='mapping_1', 'key2'='user : {{user}}')</code> <br/>
+  Here, the keys of payload mapping can be defined using the dot notation as <code>a.b.c</code>, or using any constant string value as <code>'$abc'</code>.</li>
+</ol>
+<p><strong>Supported Sink Mapping Types</strong></p>
+<p>The following is a list of sink mapping types supported by Siddhi:</p>
+<table>
+<thead>
+<tr>
+<th>Sink mapping type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a target="_blank" href="http://siddhi.io/api/latest/#passthrough-sink-mapper">PassThrough</a></td>
+<td>Omits data conversion on outgoing Siddhi events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-json/">JSON</a></td>
+<td>Converts Siddhi events to JSON messages.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-xml/">XML</a></td>
+<td>Converts Siddhi events to XML messages.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-text/">TEXT</a></td>
+<td>Converts Siddhi events to plain text messages.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-avro/">Avro</a></td>
+<td>Converts Siddhi events to Avro Events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-wso2event/">WSO2Event</a></td>
+<td>Converts Siddhi events to WSO2Event events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-binary/">Binary</a></td>
+<td>Converts Siddhi events to Siddhi specific binary events.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-keyvalue/">Key Value</a></td>
+<td>Converts Siddhi events to key-value HashMaps.</td>
+</tr>
+<tr>
+<td><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-csv/">CSV</a></td>
+<td>Converts Siddhi events to CSV like delimiter separated events.</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>When the <code>@map</code> annotation is not provided, <code>@map(type='passThrough')</code> is used by default. This can be used when the sink publishes in the Siddhi event format, or when it does not need any mappings.</p>
+<p>When the <code>@map</code> annotation is not provided <code>@map(type='passThrough')</code> is used as default, that passes the outgoing Siddhi events directly to the sinks without any data conversion.</p>
 </div>
-<p><strong>Map Payload</strong></p>
-<p><code>@payload</code> is an optional annotation used with the <code>@map</code> annotation to define a custom mapping. When the <code>@payload</code> annotation is not provided, each mapper
-maps the outgoing events to its own default data format. By defining the <code>@payload</code> annotation you can configure mappers to produce the output payload with attribute names of your choice, using dynamic properties by selectively assigning
-the attributes in your preferred format.</p>
-<p>There are two ways you can configure the <code>@payload</code> annotation.</p>
-<ol>
-<li>Some mappers such as <code>XML</code>, <code>JSON</code>, and <code>Test</code> accept only one output payload using the following format: <br/>
-<code>@payload( 'This is a test message from {{user}}.' )</code></li>
-<li>Some mappers such <code>key-value</code> accept series of mapping values defined as follows: <br/>
-<code>@payload( key1='mapping_1', 'key2'='user : {{user}}')</code> <br/>
-Here, apart from the dotted key names sush as <code>a.b.c</code>, any constant string value such as <code>'$abc'</code> can also by used as a key.</li>
-</ol>
-<p><strong>Supported Mapping Types</strong></p>
-<p>The following is a list of currently supported sink mapping types:</p>
-<ul>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-wso2event/">WSO2Event</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-xml/">XML</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-text/">TEXT</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-json/">JSON</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-binary/">Binary</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-keyvalue/">Key Value</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-csv/">CSV</a></li>
-<li><a target="_blank" href="https://wso2-extensions.github.io/siddhi-map-avro/">Avro</a></li>
-</ul>
-<p><strong>Example</strong></p>
-<p>Following query publishes events from the <code>OutputStream</code> stream to an <code>HTTP</code> endpoint. Here the events are mapped to the default <code>JSON</code> payloads and sent to <code>http://localhost:8005/endpoint</code>
- using the <code>POST</code> method, with the<code>Accept</code> header, and secured via basic authentication where <code>admin</code> is both the username and the password.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">publisher</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8005/endpoint&#39;</span><span class="p">,</span> <span class="k">method</span><span class="o">=</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">&#39;Accept-Date:20/02/2017&#39;</span><span class="p">,</span>
-  <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">password</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">enabled</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span>
-  <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="n">OutputStream</span> <span class="p">(</span><span class="n">name</span> <span class="n">string</span><span class="p">,</span> <span class="n">ang</span> <span class="nb">int</span><span class="p">,</span> <span class="n">country</span> <span class="n">string</span><span class="p">);</span>
+<p><a href="http://siddhi.io/api/latest/#passthrough-sink-mapper">PassThrough</a> is the only sink mapper inbuilt in Siddhi, and all other sink mappers are implemented as extensions.</p>
+<p><strong>Example 1</strong></p>
+<p>Publishes <code>OutputStream</code> events by converting them to <code>JSON</code> messages with the default format, and by sending to an <code>HTTP</code> endpoint <code>http://localhost:8005/endpoint1</code>, using <code>POST</code> method, <code>Accept</code> header, and basic authentication having <code>admin</code> is both username and password.</p>
+<p>The configuration of the <code>HTTP</code> sink and <code>JSON</code> sink mapper to achieve the above is as follows.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">publisher</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8005/endpoint&#39;</span><span class="p">,</span>
+      <span class="k">method</span><span class="o">=</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="s1">&#39;Accept-Date:20/02/2017&#39;</span><span class="p">,</span>
+      <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">enabled</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span> <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span>
+      <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">password</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span>
+      <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">))</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">OutputStream</span> <span class="p">(</span><span class="n">name</span> <span class="n">string</span><span class="p">,</span> <span class="n">age</span> <span class="nb">int</span><span class="p">,</span> <span class="n">country</span> <span class="n">string</span><span class="p">);</span>
 </pre></div>
 
 
-<p>Following query publishes events from the <code>OutputStream</code> stream to multiple the <code>HTTP</code> endpoints using partitioning strategy. Here the events sent to either <code>http://localhost:8005/endpoint1</code>
-or <code>http://localhost:8006/endpoint2</code> based on the partitioning key <code>country</code>. It uses default <code>JSON</code> mapping, <code>POST</code> method, and used <code>admin</code> as both the username and the password when publishing to both the endpoints.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="k">method</span><span class="o">=</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">password</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span>
-  <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">enabled</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span> <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">),</span>
-  <span class="o">@</span><span class="n">distribution</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;partitioned&#39;</span><span class="p">,</span> <span class="n">partitionKey</span><span class="o">=</span><span class="s1">&#39;country&#39;</span><span class="p">,</span>
-     <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="n">publisher</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8005/endpoint1&#39;</span><span class="p">),</span>
-     <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="n">publisher</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8006/endpoint2&#39;</span><span class="p">)))</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="n">OutputStream</span> <span class="p">(</span><span class="n">name</span> <span class="n">string</span><span class="p">,</span> <span class="n">ang</span> <span class="nb">int</span><span class="p">,</span> <span class="n">country</span> <span class="n">string</span><span class="p">);</span>
+<p>This will publish a <code>JSON</code> message on the following format:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span><span class="p">:{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Paul&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span>
+    <span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;UK&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p><strong>Example 2</strong></p>
+<p>Publishes <code>StockStream</code> events by converting them to user defined <code>JSON</code> messages, and by sending to an <code>HTTP</code> endpoint <code>http://localhost:8005/stocks</code>.</p>
+<p>The configuration of the <code>HTTP</code> sink and custom <code>JSON</code> sink mapping to achieve the above is as follows.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">publisher</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8005/stocks&#39;</span><span class="p">,</span>
+      <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">,</span> <span class="n">validate</span><span class="p">.</span><span class="n">json</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span> <span class="n">enclosing</span><span class="p">.</span><span class="n">element</span><span class="o">=</span><span class="s1">&#39;$.Portfolio&#39;</span><span class="p">,</span>
+           <span class="o">@</span><span class="n">payload</span><span class="p">(</span><span class="ss">&quot;&quot;&quot;{&quot;</span><span class="n">StockData</span><span class="ss">&quot;:{ &quot;</span><span class="n">Symbol</span><span class="ss">&quot;:&quot;</span><span class="err">{{</span><span class="n">symbol</span><span class="err">}}</span><span class="ss">&quot;, &quot;</span><span class="n">Price</span><span class="ss">&quot;:{{price}} }}&quot;&quot;&quot;</span><span class="p">)))</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">StockStream</span> <span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">price</span> <span class="nb">float</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">);</span>
+</pre></div>
+
+
+<p>This will publish a single event as the <code>JSON</code> message on the following format:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;Portfolio&quot;</span><span class="p">:{</span>
+    <span class="nt">&quot;StockData&quot;</span><span class="p">:{</span>
+      <span class="nt">&quot;Symbol&quot;</span><span class="p">:</span><span class="s2">&quot;GOOG&quot;</span><span class="p">,</span>
+      <span class="nt">&quot;Price&quot;</span><span class="p">:</span><span class="mf">55.6</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This can also publish multiple events together as a <code>JSON</code> message on the following format:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;Portfolio&quot;</span><span class="p">:[</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;StockData&quot;</span><span class="p">:{</span>
+        <span class="nt">&quot;Symbol&quot;</span><span class="p">:</span><span class="s2">&quot;GOOG&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Price&quot;</span><span class="p">:</span><span class="mf">55.6</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="nt">&quot;StockData&quot;</span><span class="p">:{</span>
+        <span class="nt">&quot;Symbol&quot;</span><span class="p">:</span><span class="s2">&quot;FB&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;Price&quot;</span><span class="p">:</span><span class="mf">57.0</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">]</span>  
+<span class="p">}</span>
+</pre></div>
+
+
+<p><strong>Example 3</strong></p>
+<p>Publishes events from the <code>OutputStream</code> stream to multiple the <code>HTTP</code> endpoints using a partitioning strategy. Here the events are sent to either <code>http://localhost:8005/endpoint1</code> or <code>http://localhost:8006/endpoint2</code> based on the partitioning key <code>country</code>. It uses default <code>JSON</code> mapping, <code>POST</code> method, and used <code>admin</code> as both the username and the password when publishing to both the endpoints.</p>
+<p>The configuration of the distributed <code>HTTP</code> sink and <code>JSON</code> sink mapper to achieve the above is as follows.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="k">method</span><span class="o">=</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">enabled</span><span class="o">=</span><span class="s1">&#39;true&#39;</span><span class="p">,</span>
+      <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">username</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">basic</span><span class="p">.</span><span class="n">auth</span><span class="p">.</span><span class="n">password</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span>
+      <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;json&#39;</span><span class="p">),</span>
+      <span class="o">@</span><span class="n">distribution</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;partitioned&#39;</span><span class="p">,</span> <span class="n">partitionKey</span><span class="o">=</span><span class="s1">&#39;country&#39;</span><span class="p">,</span>
+        <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="n">publisher</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8005/endpoint1&#39;</span><span class="p">),</span>
+        <span class="o">@</span><span class="n">destination</span><span class="p">(</span><span class="n">publisher</span><span class="p">.</span><span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://localhost:8006/endpoint2&#39;</span><span class="p">)))</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">OutputStream</span> <span class="p">(</span><span class="n">name</span> <span class="n">string</span><span class="p">,</span> <span class="n">age</span> <span class="nb">int</span><span class="p">,</span> <span class="n">country</span> <span class="n">string</span><span class="p">);</span>
+</pre></div>
+
+
+<p>This will partition the outgoing events and publish all events with the same country attribute value to the same endpoint. The <code>JSON</code> message published will be on the following format:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;event&quot;</span><span class="p">:{</span>
+    <span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Paul&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;age&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span>
+    <span class="nt">&quot;country&quot;</span><span class="p">:</span><span class="s2">&quot;UK&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 
 <h3 id="error-handling">Error Handling<a class="headerlink" href="#error-handling" title="Permanent link">&para;</a></h3>
-<p>When errors are thrown by Siddhi elements subscribed to the stream, the error gets propagated up to the stream which delivered
-the event to those Siddhi elements. By default the error is logged and dropped at the stream, but we can capture the error and
-the associated event and handle them gracefully by adding <code>@OnError</code> annotation to the corresponding stream definition.</p>
-<p>The <code>@OnError</code> annotation requires an <code>action</code> to be specified as bellow.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;on_error_action&#39;</span><span class="p">)</span>
+<p>Errors in Siddhi can be handled at the Streams and in Sinks.</p>
+<p><strong><em>Error Handling at Stream</em></strong></p>
+<p>When errors are thrown by Siddhi elements subscribed to the stream, the error gets propagated up to the stream that delivered the event to those Siddhi elements. By default the error is logged and dropped at the stream, but this behavior can be altered by by adding <code>@OnError</code> annotation to the corresponding stream definition.
+<code>@OnError</code> annotation can help users to capture the error and the associated event, and handle them gracefully by sending them to a fault stream.</p>
+<p>The <code>@OnError</code> annotation and the required <code>action</code> to be specified as bellow.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;on error action&#39;</span><span class="p">)</span>
 <span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span>
                              <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span> <span class="p">);</span>
 </pre></div>
@@ -2284,11 +2529,12 @@ the associated event and handle them gracefully by adding <code>@OnError</code> 
 <p>The <code>action</code> parameter of the <code>@OnError</code> annotation defines the action to be executed during failure scenarios.
 The following actions can be specified to <code>@OnError</code> annotation to handle erroneous scenarios.</p>
 <ul>
-<li><code>LOG</code> : Logs the event with the error, and drops the event. This is the default action performed even when <code>@OnError</code> annotation is not defined</li>
-<li><code>STREAM</code>: Creates a fault stream and redirects the event and the error to it. The created fault stream will have all the attributes defined in the base stream to include the error causing event, and in addition it contains <code>_error</code> attribute of type <code>object</code> to capture the error information. The fault stream can be referred by adding <code>!</code> in front of the base stream name.</li>
+<li><code>LOG</code> : Logs the event with the error, and drops the event. This is the default action performed even when <code>@OnError</code> annotation is not defined.</li>
+<li><code>STREAM</code>: Creates a fault stream and redirects the event and the error to it. The created fault stream will have all the attributes defined in the base stream to capture the error causing event, and in addition it also contains <code>_error</code> attribute of type <code>object</code> to containing the error information. The fault stream can be referred by adding <code>!</code> in front of the base stream name as <code>!&lt;stream name&gt;</code>.</li>
 </ul>
 <p><strong>Example</strong></p>
-<p>Following <code>TempStream</code> is defined with <code>@OnError</code> annotation to redirect errors to a fault stream.</p>
+<p>Handle errors in <code>TempStream</code> by redirecting the errors to a fault stream.</p>
+<p>The configuration of <code>TempStream</code> stream and <code>@OnError</code> annotation is as follows.</p>
 <div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;STREAM&#39;</span><span class="p">)</span>
 <span class="n">define</span> <span class="n">stream</span> <span class="n">TempStream</span> <span class="p">(</span><span class="n">deviceID</span> <span class="n">long</span><span class="p">,</span> <span class="n">roomNo</span> <span class="nb">int</span><span class="p">,</span> <span class="n">temp</span> <span class="n">double</span><span class="p">);</span>
 </pre></div>
@@ -2299,21 +2545,65 @@ The following actions can be specified to <code>@OnError</code> annotation to ha
 </pre></div>
 
 
-<p>Following SiddhiApp demonstrate failure generation and handling with the use of <a href="#query">queries</a>.
-Note: Details on writing processing logics via <a href="#query">queries</a> will be explained in later sections.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;STREAM&#39;</span><span class="p">)</span>
+<p>The SiddhiApp extending the above the use-case by adding failure generation and error handling with the use of <a href="#query">queries</a> is as follows.</p>
+<p>Note: Details on writing processing logics via <a href="#query">queries</a> will be explained in later sections.</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- Define fault stream to handle error occurred at TempStream subscribers</span>
+<span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;STREAM&#39;</span><span class="p">)</span>
 <span class="n">define</span> <span class="n">stream</span> <span class="n">TempStream</span> <span class="p">(</span><span class="n">deviceID</span> <span class="n">long</span><span class="p">,</span> <span class="n">roomNo</span> <span class="nb">int</span><span class="p">,</span> <span class="n">temp</span> <span class="n">double</span><span class="p">);</span>
 
-<span class="c1">-- Failure generation through a custom function `createError`</span>
-<span class="o">@</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;failure-generation&#39;</span><span class="p">)</span>
+<span class="c1">-- Error generation through a custom function `createError()`</span>
+<span class="o">@</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;error-generation&#39;</span><span class="p">)</span>
 <span class="k">from</span> <span class="n">TempStream</span><span class="o">#</span><span class="n">custom</span><span class="p">:</span><span class="n">createError</span><span class="p">()</span>
 <span class="k">insert</span> <span class="k">into</span> <span class="n">IgnoreStream1</span><span class="p">;</span>
 
-<span class="c1">-- Handling failure by simply logging the event and error.</span>
-<span class="o">@</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;handle-failure&#39;</span><span class="p">)</span>
-<span class="k">from</span> <span class="o">!</span><span class="n">TempStream</span><span class="o">#</span><span class="n">log</span><span class="p">(</span><span class="ss">&quot;Error Occoured!&quot;</span><span class="p">)</span>
+<span class="c1">-- Handling error by simply logging the event and error.</span>
+<span class="o">@</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;handle-error&#39;</span><span class="p">)</span>
+<span class="k">from</span> <span class="o">!</span><span class="n">TempStream</span><span class="o">#</span><span class="n">log</span><span class="p">(</span><span class="ss">&quot;Error Occurred!&quot;</span><span class="p">)</span>
 <span class="k">select</span> <span class="n">deviceID</span><span class="p">,</span> <span class="n">roomNo</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">_error</span>
 <span class="k">insert</span> <span class="k">into</span> <span class="n">IgnoreStream2</span><span class="p">;</span>
+</pre></div>
+
+
+<p><strong><em>Error Handling at Sink</em></strong></p>
+<p>There can be cases where external systems becoming unavailable or coursing errors when the events are published to them. By default sinks log and drop the events causing event losses, and this can be handled gracefully by configuring <code>on.error</code> parameter of the <code>@sink</code> annotation.</p>
+<p>The <code>on.error</code> parameter of the <code>@sink</code> annotation can be specified as bellow.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;&lt;sink type&gt;&#39;</span><span class="p">,</span> <span class="k">on</span><span class="p">.</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;&lt;on error action&gt;&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">key</span><span class="o">&gt;=</span><span class="s1">&#39;&lt;value&gt;&#39;</span><span class="p">,</span> <span class="p">...)</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span>
+                             <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span> <span class="p">);</span>
+</pre></div>
+
+
+<p>The following actions can be specified to <code>on.error</code> parameter of <code>@sink</code> annotation to handle erroneous scenarios.</p>
+<ul>
+<li><code>LOG</code> : Logs the event with the error, and drops the event. This is the default action performed even when <code>on.error</code> parameter is not defined on the <code>@sink</code> annotation.</li>
+<li><code>WAIT</code> : Publishing threads wait in <code>back-off and re-trying</code> mode, and only send the events when the connection is re-established. During this time the threads will not consume any new messages causing the systems to introduce back pressure on the systems that publishes to it.</li>
+<li><code>STREAM</code>: Pushes the failed events with the corresponding error to the associated fault stream the sink belongs to.</li>
+</ul>
+<p><strong>Example 1</strong></p>
+<p>Introduce back pressure on the threads who bring events via <code>TempStream</code> when the system cannot connect to Kafka.</p>
+<p>The configuration of <code>TempStream</code> stream and <code>@sink</code> Kafka annotation with <code>on.error</code> property is as follows.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span> <span class="k">on</span><span class="p">.</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;WAIT&#39;</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;{{roomNo}}&#39;</span><span class="p">,</span>
+      <span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span>
+      <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;xml&#39;</span><span class="p">))</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">TempStream</span> <span class="p">(</span><span class="n">deviceID</span> <span class="n">long</span><span class="p">,</span> <span class="n">roomNo</span> <span class="nb">int</span><span class="p">,</span> <span class="n">temp</span> <span class="n">double</span><span class="p">);</span>
+</pre></div>
+
+
+<p><strong>Example 2</strong></p>
+<p>Send events to the fault stream of <code>TempStream</code> when the system cannot connect to Kafka.</p>
+<p>The configuration of <code>TempStream</code> stream with associated fault stream, <code>@sink</code> Kafka annotation with <code>on.error</code> property and a <a href="#query">queries</a> to handle the error is as follows.</p>
+<p>Note: Details on writing processing logics via <a href="#query">queries</a> will be explained in later sections.</p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;STREAM&#39;</span><span class="p">)</span>
+<span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;kafka&#39;</span><span class="p">,</span> <span class="k">on</span><span class="p">.</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;STREAM&#39;</span><span class="p">,</span> <span class="n">topic</span><span class="o">=</span><span class="s1">&#39;{{roomNo}}&#39;</span><span class="p">,</span>
+      <span class="n">bootstrap</span><span class="p">.</span><span class="n">servers</span><span class="o">=</span><span class="s1">&#39;localhost:9092&#39;</span><span class="p">,</span>
+      <span class="o">@</span><span class="k">map</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;xml&#39;</span><span class="p">))</span>
+<span class="n">define</span> <span class="n">stream</span> <span class="n">TempStream</span> <span class="p">(</span><span class="n">deviceID</span> <span class="n">long</span><span class="p">,</span> <span class="n">roomNo</span> <span class="nb">int</span><span class="p">,</span> <span class="n">temp</span> <span class="n">double</span><span class="p">);</span>
+
+<span class="c1">-- Handling error by simply logging the event and error.</span>
+<span class="o">@</span><span class="n">name</span><span class="p">(</span><span class="s1">&#39;handle-error&#39;</span><span class="p">)</span>
+<span class="k">from</span> <span class="o">!</span><span class="n">TempStream</span><span class="o">#</span><span class="n">log</span><span class="p">(</span><span class="ss">&quot;Error Occurred!&quot;</span><span class="p">)</span>
+<span class="k">select</span> <span class="n">deviceID</span><span class="p">,</span> <span class="n">roomNo</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">_error</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">IgnoreStream</span><span class="p">;</span>
 </pre></div>
 
 
@@ -5029,50 +5319,6 @@ behaviour.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="fault-streams">Fault Streams<a class="headerlink" href="#fault-streams" title="Permanent link">&para;</a></h3>
-<p>When the <code>@OnError</code> annotation is added to a stream definition, it handles failover scenarios that occur during runtime gracefully.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;on_error_action&#39;</span><span class="p">)</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span> <span class="p">);</span>
-</pre></div>
-
-
-<p>The action parameter of the <code>@OnError</code> annotation defines the action to be executed during failure scenarios.</p>
-<p>The following action types can be specified via the <code>@OnError</code> annotation when defining a stream. If this annotation is not added, <code>LOG</code> is the action type by default.</p>
-<ul>
-<li><code>LOG</code> : Logs the event with an error, and then drops the event.</li>
-<li><code>STREAM</code>: A fault stream is automatically created for the base stream. The definition of the fault stream includes all the attributes of the base stream as well as an additional attribute named <code>_error</code>.
-The events are inserted into the fault stream during a failure. The error identified is captured as the value for the <code>_error</code> attribute.</li>
-</ul>
-<p>e.g., the following is a Siddhi application that includes the <code>@OnError</code> annotation to handle failures during runtime.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">OnError</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;STREAM&#39;</span><span class="p">)</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="n">StreamA</span> <span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">);</span>
-
-<span class="k">from</span> <span class="n">StreamA</span><span class="p">[</span><span class="n">custom</span><span class="p">:</span><span class="n">fault</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">volume</span><span class="p">]</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">StreamB</span><span class="p">;</span>
-
-<span class="k">from</span> <span class="o">!</span><span class="n">StreamA</span><span class="o">#</span><span class="n">log</span><span class="p">(</span><span class="ss">&quot;Error Occured&quot;</span><span class="p">)</span>
-<span class="k">select</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="n">_error</span>
-<span class="k">insert</span> <span class="k">into</span> <span class="n">tempStream</span><span class="p">;</span>
-</pre></div>
-
-
-<p><code>!StreamA</code>, fault stream is automatically created when you add the <code>@OnError</code> annotation with the following attributes.</p>
-<div class="codehilite"><pre><span></span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="n">_error</span> <span class="k">object</span>
-</pre></div>
-
-
-<p>If you include the <code>on.error</code> parameter in the sink configuration, failures are handled by Siddhi at the time the events are published from the <code>Sink</code>.</p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">sink</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="s1">&#39;sink_type&#39;</span><span class="p">,</span> <span class="k">on</span><span class="p">.</span><span class="n">error</span><span class="o">=</span><span class="s1">&#39;on.error.action&#39;</span><span class="p">)</span>
-<span class="n">define</span> <span class="n">stream</span> <span class="o">&lt;</span><span class="n">stream</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span> <span class="p">);</span>
-</pre></div>
-
-
-<p>The action types that can be specified via the <code>on.error</code> parameter when configuring a sink are as follows. If this parameter is not included in the sink configuration, <code>LOG</code> is the action type by default.</p>
-<ul>
-<li><code>LOG</code> : Logs the event with the error, and then drops the event.</li>
-<li><code>WAIT</code> : The thread waits in the <code>back-off and re-trying</code> state, and reconnects once the connection is re-established.</li>
-<li><code>STREAM</code>: Corresponding fault stream is populated with the failed event and the error while publishing.</li>
-</ul>
 <h3 id="statistics">Statistics<a class="headerlink" href="#statistics" title="Permanent link">&para;</a></h3>
 <p>Use <code>@app:statistics</code> app level annotation to evaluate the performance of an application, you can enable the statistics of a Siddhi application to be published. This is done via the <code>@app:statistics</code> annotation that can be added to a Siddhi application as shown in the following example.</p>
 <div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">app</span><span class="p">:</span><span class="k">statistics</span><span class="p">(</span><span class="n">reporter</span> <span class="o">=</span> <span class="s1">&#39;console&#39;</span><span class="p">)</span>
