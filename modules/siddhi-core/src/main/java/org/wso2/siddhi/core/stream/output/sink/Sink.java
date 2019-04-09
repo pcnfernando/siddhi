@@ -205,7 +205,7 @@ public abstract class Sink implements SinkListener, Snapshotable {
         return mapper;
     }
 
-    public final SinkHandler getHandler() {
+    public SinkHandler getHandler() {
         return handler;
     }
 
