@@ -101,7 +101,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
     
-      <a href="#system-requirements" tabindex="1" class="md-skip">
+      <a href="#siddhi-5x-user-guide" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -339,6 +339,8 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="toc">
         User Guide
@@ -351,6 +353,8 @@
       
 <nav class="md-nav md-nav--secondary">
   
+  
+    
   
   
     <label class="md-nav__title" for="toc">Table of contents</label>
@@ -821,6 +825,8 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="toc">Table of contents</label>
     <ul class="md-nav__list" data-md-scrollfix>
@@ -926,9 +932,7 @@
                   <a href="https://github.com/wso2/siddhi/edit/master/docs/documentation/siddhi-5.x/user-guide-5.x.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>User Guide</h1>
-                
-                <p># Siddhi 5.x User Guide</p>
+                <h1 id="siddhi-5x-user-guide">Siddhi 5.x User Guide<a class="headerlink" href="#siddhi-5x-user-guide" title="Permanent link">&para;</a></h1>
 <h2 id="system-requirements">System Requirements<a class="headerlink" href="#system-requirements" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Memory</strong>   - 128 MB (minimum), 500 MB (recommended), higher memory might be needed based on in-memory data stored for processing</li>
@@ -1003,10 +1007,10 @@
     <li>Run the SiddhiApp by executing following commands from the distribution directory
         <ul>
             <li>Linux/Mac :
-            <pre style="white-space:pre-wrap;">./bin/runner.sh -Dapps=<absolute-siddhi-file-path>/CountOverTime.siddhi</pre>
+            <pre style="white-space:pre-wrap;">./bin/runner.sh -Dapps=&lt;absolute-siddhi-file-path&gt;/CountOverTime.siddhi</pre>
             </li>
             <li>Windows :
-            <pre style="white-space:pre-wrap;">bin\runner.bat -Dapps=<absolute-siddhi-file-path>\CountOverTime.siddhi</pre>
+            <pre style="white-space:pre-wrap;">bin\runner.bat -Dapps=&lt;absolute-siddhi-file-path&gt;\CountOverTime.siddhi</pre>
             </li>
         </ul>
     </li>
@@ -1059,12 +1063,12 @@ curl -X POST http://localhost:8006/production \
     <li>Run the SiddhiApp by executing following commands from the distribution directory
         <ul>
             <li>Linux/Mac :
-            <pre style="white-space:pre-wrap;">./bin/runner.sh -Dapps=<absolute-siddhi-file-path>/ConsumeAndStore.siddhi \
-  -Dconfig=<absolute-config-yaml-path>/TestDb.yaml</pre>
+            <pre style="white-space:pre-wrap;">./bin/runner.sh -Dapps=&lt;absolute-siddhi-file-path&gt;/ConsumeAndStore.siddhi \
+  -Dconfig=&lt;absolute-config-yaml-path&gt;/TestDb.yaml</pre>
             </li>
             <li>Windows :
-            <pre style="white-space:pre-wrap;">bin\runner.sh -Dapps=<absolute-siddhi-file-path>\ConsumeAndStore.siddhi ^
-  -Dconfig=<absolute-config-yaml-path>\TestDb.yaml</pre>
+            <pre style="white-space:pre-wrap;">bin\runner.sh -Dapps=&lt;absolute-siddhi-file-path&gt;\ConsumeAndStore.siddhi ^
+  -Dconfig=&lt;absolute-config-yaml-path&gt;\TestDb.yaml</pre>
             </li>
         </ul>
     </li>
@@ -1146,25 +1150,26 @@ curl -X POST https://localhost:9443/stores/query \
     <li>Set environment variables by running following in the termial Siddhi is about to run: 
          <pre style="white-space:pre-wrap;">
 export THRESHOLD=20
-export TO_EMAIL=<to email address>
-export EMAIL_ADDRESS=<gmail address>
-export EMAIL_USERNAME=<gmail username>
-export EMAIL_PASSWORD=<gmail password>
-         </pre>
-        Or they can also be passed as system variables by adding <code>-DTHRESHOLD=20 -DTO_EMAIL=<to email address> -DEMAIL_ADDRESS=<gmail address> -DEMAIL_USERNAME=<gmail username> -DEMAIL_PASSWORD=<gmail password></code>
+export TO_EMAIL=&lt;to email address&gt; 
+export EMAIL_ADDRESS=&lt;gmail address&gt;
+export EMAIL_USERNAME=&lt;gmail username&gt;
+export EMAIL_PASSWORD=&lt;gmail password&gt;</pre>
+        Or they can also be passed as system variables by adding 
+        <pre style="white-space:pre-wrap;">-DTHRESHOLD=20 -DTO_EMAIL=&gt;to email address&gt; -DEMAIL_ADDRESS=&lt;gmail address&gt; 
+ -DEMAIL_USERNAME=&lt;gmail username&gt; -DEMAIL_PASSWORD=&lt;gmail password&gt;</pre>
         to the end of the runner startup script.
     </li>
         <li>Run the SiddhiApp by executing following commands from the distribution directory
         <ul>
             <li>Linux/Mac :
             <pre style="white-space:pre-wrap;">
-./bin/runner.sh -Dapps=<absolute-file-path>/TemplatedFilterAndEmail.siddhi \
-  -Dconfig=<absolute-config-yaml-path>/EmailConfig.yaml</pre>
+./bin/runner.sh -Dapps=&lt;absolute-file-path&gt;/TemplatedFilterAndEmail.siddhi \
+  -Dconfig=&lt;absolute-config-yaml-path&gt;/EmailConfig.yaml</pre>
             </li>
             <li>Windows :
             <pre style="white-space:pre-wrap;">
-bin\runner.bat -Dapps=<absolute-file-path>\TemplatedFilterAndEmail.siddhi ^
-  -Dconfig=<absolute-config-yaml-path>\EmailConfig.yaml</pre>
+bin\runner.bat -Dapps=&lt;absolute-file-path&gt;\TemplatedFilterAndEmail.siddhi ^
+  -Dconfig=&lt;absolute-config-yaml-path&gt;\EmailConfig.yaml</pre>
             </li>
         </ul>
     </li>

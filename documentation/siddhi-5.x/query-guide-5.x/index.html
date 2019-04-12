@@ -462,6 +462,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#value" title="Value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#select" title="Select" class="md-nav__link">
     Select
   </a>
@@ -673,8 +680,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#incremental-aggregation" title="Incremental Aggregation" class="md-nav__link">
-    Incremental Aggregation
+  <a href="#named-aggregation" title="Named Aggregation" class="md-nav__link">
+    Named Aggregation
   </a>
   
     <nav class="md-nav">
@@ -700,8 +707,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#defined-window" title="(Defined) Window" class="md-nav__link">
-    (Defined) Window
+  <a href="#named-window" title="Named Window" class="md-nav__link">
+    Named Window
   </a>
   
     <nav class="md-nav">
@@ -1323,6 +1330,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#value" title="Value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#select" title="Select" class="md-nav__link">
     Select
   </a>
@@ -1534,8 +1548,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#incremental-aggregation" title="Incremental Aggregation" class="md-nav__link">
-    Incremental Aggregation
+  <a href="#named-aggregation" title="Named Aggregation" class="md-nav__link">
+    Named Aggregation
   </a>
   
     <nav class="md-nav">
@@ -1561,8 +1575,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#defined-window" title="(Defined) Window" class="md-nav__link">
-    (Defined) Window
+  <a href="#named-window" title="Named Window" class="md-nav__link">
+    Named Window
   </a>
   
     <nav class="md-nav">
@@ -1789,15 +1803,15 @@ how <strong>event flows</strong> through the elements.</p>
 </tr>
 <tr>
 <td>Table</td>
-<td>A structured representation of data stored with a defined schema. Stored data can be backed by <code>In-Memory</code>, or external data stores such as <code>RDBMs</code>, <code>MongoDB</code>, etc. The tables can be accessed and manipulated at runtime.</td>
+<td>A structured representation of data stored with a defined schema. Stored data can be backed by <code>In-Memory</code>, or external data stores such as <code>RDBMS</code>, <code>MongoDB</code>, etc. The tables can be accessed and manipulated at runtime.</td>
 </tr>
 <tr>
-<td>Window</td>
-<td>A structured representation of data stored with a defined schema and eviction policy. Window data is stored <code>In-Memory</code> and automatically cleared by the defined window constrain. Other siddhi elements can only query the values in windows at runtime but they cannot modify them.</td>
+<td>Named Window</td>
+<td>A structured representation of data stored with a defined schema and eviction policy. Window data is stored <code>In-Memory</code> and automatically cleared by the named window constrain. Other siddhi elements can only query the values in windows at runtime but they cannot modify them.</td>
 </tr>
 <tr>
-<td>Aggregation</td>
-<td>A structured representation of data that's incrementally aggregated and stored with a defined schema and aggregation granularity such as seconds, minutes, hours, etc. Aggregation data is stored both <code>In-Memory</code>and in external data stores such as <code>RDBMs</code>. Other siddhi elements can only query the values in windows at runtime but they cannot modify them.</td>
+<td>Named Aggregation</td>
+<td>A structured representation of data that's incrementally aggregated and stored with a defined schema and aggregation granularity such as seconds, minutes, hours, etc. Aggregation data is stored both <code>In-Memory</code> and in external data stores such as <code>RDBMS</code>. Other siddhi elements can only query the values in windows at runtime but they cannot modify them.</td>
 </tr>
 <tr>
 <td>Query</td>
@@ -1831,7 +1845,7 @@ how <strong>event flows</strong> through the elements.</p>
 </table>
 <p><strong>Grammar</strong></p>
 <p>SiddhiApp is a collection of Siddhi Streaming SQL elements composed together as a script.
-Here each Siddhi element must be separated by a semicolon <code>( ; )</code>.</p>
+Here each Siddhi element must be separated by a semicolon <code>;</code>.</p>
 <p>Hight level syntax of SiddhiApp is as follows.</p>
 <div class="codehilite"><pre><span></span>&lt;siddhi app&gt;  :
         &lt;app annotation&gt; *
@@ -2519,7 +2533,7 @@ The following actions can be specified to <code>@OnError</code> annotation to ha
 
 
 <h2 id="query">Query<a class="headerlink" href="#query" title="Permanent link">&para;</a></h2>
-<p>Query defines the processing logic in Siddhi. It consumes events from one or more streams, <a href="#defined-window">defined-windows</a>, <a href="#table">tables</a>, and/or <a href="#aggregation">aggregations</a>, process the events in a streaming manner, and generate output events into a <a href="#stream">stream</a>, <a href="#defined-window">defined-window</a>, or <a href="#table">table</a>.</p>
+<p>Query defines the processing logic in Siddhi. It consumes events from one or more streams, <a href="#named-window">named-windows</a>, <a href="#table">tables</a>, and/or <a href="#named-aggregation">named-aggregations</a>, process the events in a streaming manner, and generate output events into a <a href="#stream">stream</a>, <a href="#named-window">named-window</a>, or <a href="#table">table</a>.</p>
 <p><strong>Purpose</strong></p>
 <p>A query provides a way to process the events in the order they arrive and produce output using both stateful and stateless complex event processing and stream processing operations.</p>
 <p><strong>Syntax</strong></p>
@@ -2546,7 +2560,7 @@ The following actions can be specified to <code>@OnError</code> annotation to ha
 </tr>
 <tr>
 <td><code>input</code></td>
-<td>Defines the means of event consumption via <a href="#stream">streams</a>, <a href="#named-window">named-windows</a>, <a href="#table">tables</a>, and/or <a href="#named-aggregation">named-aggregations</a>, and defines the processing logic using <a href="#filter">filters</a>, <a href="#window">windows</a>, <a href="#stream-function">stream-functions</a>, <a href="#join">joins</a>, <a href="#pattern">patterns</a> and <a href="#sequence">sequences</a>.</td>
+<td>Defines the means of event consumption via <a href="#stream">streams</a>, <a href="#named-window">named-windows</a>, <a href="#table">tables</a>, and/or <a href="#named-aggregations">named-aggregations</a>, and defines the processing logic using <a href="#filter">filters</a>, <a href="#window">windows</a>, <a href="#stream-function">stream-functions</a>, <a href="#join">joins</a>, <a href="#pattern">patterns</a> and <a href="#sequence">sequences</a>.</td>
 </tr>
 <tr>
 <td><code>projection</code></td>
@@ -2575,6 +2589,130 @@ The following actions can be specified to <code>@OnError</code> annotation to ha
 <p class="admonition-title">Inferred Stream</p>
 <p>Here, the <code>RoomTempStream</code> and <code>AnotherRoomTempStream</code> streams are an inferred streams, which means their stream definitions are inferred from the queries and they can be used same as any other defined stream without any restrictions.  </p>
 </div>
+<h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
+<p>Values are typed data, that can be manipulated, transferred and stored. Values can be referred by the attributes defined in definitions such as streams, and tables.</p>
+<p>Siddhi supports values of type <code>STRING</code>, <code>INT</code> (Integer), <code>LONG</code>, <code>DOUBLE</code>, <code>FLOAT</code>, <code>BOOL</code> (Boolean) and <code>OBJECT</code>.
+The syntax of each type and their example use as a constant value is as follows,</p>
+<table style="width:100%">
+    <tr>
+        <th style="width:10%">Attribute Type</th>
+        <th style="width:50%">Format</th>
+        <th style="width:40%">Example</th>
+    </tr>
+    <tr>
+        <td>int</td>
+        <td><code>&ltdigit&gt+</code></td>
+        <td><code>123</code>, <code>-75</code>, <code>+95</code></td>
+    </tr>
+    <tr>
+        <td>long</td>
+        <td><code>&ltdigit&gt+L</code></td>
+        <td><code>123000L</code>, <code>-750l</code>, <code>+154L</code></td>
+    </tr>
+    <tr>
+        <td>float</td>
+        <td><code>(&ltdigit&gt+)?('.'&ltdigit&gt*)?<br/>(E(-|+)?&ltdigit&gt+)?F</code></td>
+        <td><code>123.0f</code>, <code>-75.0e-10F</code>,<br/><code>+95.789f</code></td>
+    </tr>
+    <tr>
+        <td>double</td>
+        <td><code>(&ltdigit&gt+)?('.'&ltdigit&gt*)?<br/>(E(-|+)?&ltdigit&gt+)?D?</code></td>
+        <td><code>123.0</code>,<code>123.0D</code>,<br/><code>-75.0e-10D</code>,<code>+95.789d</code></td>
+    </tr>
+    <tr>
+        <td>bool</td>
+        <td><code>(true|false)</code></td>
+        <td><code>true</code>, <code>false</code>, <code>TRUE</code>, <code>FALSE</code></td>
+    </tr>
+    <tr>
+        <td>string</td>
+        <td><code>'(&lt;char&gt;* !('|"|"""|&ltnew line&gt))'</code> or <br/> <code>"(&lt;char&gt;* !("|"""|&ltnew line&gt))"</code> or <br/><code>"""(&lt;char&gt;* !("""))"""</code> </td>
+        <td><code>'Any text.'</code>, <br/><code>"Text with 'single' quotes."</code>, <br/><pre>"""
+Text with 'single' quotes,
+"double" quotes, and new lines.
+"""</pre></td>
+    </tr>
+</table>
+
+<p><strong><em>Time</em></strong></p>
+<p>Time is a special type of <code>LONG</code> value that denotes time using digits and their unit in the format <code>(&lt;digit&gt;+ &lt;unit&gt;)+</code>. At execution, the <code>time</code> gets converted into <strong>milliseconds</strong> and returns a <code>LONG</code> value.</p>
+<table style="width:100%">
+    <tr>
+        <th>
+            Unit  
+        </th>
+        <th>
+            Syntax
+        </th>
+    </tr>
+    <tr>
+        <td>
+            Year
+        </td>
+        <td>
+            <code>year</code> | <code>years</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Month
+        </td>
+        <td>
+            <code>month</code> | <code>months</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Week
+        </td>
+        <td>
+            <code>week</code> | <code>weeks</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Day
+        </td>
+        <td>
+            <code>day</code> | <code>days</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Hour
+        </td>
+        <td>
+           <code>hour</code> | <code>hours</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+           Minutes
+        </td>
+        <td>
+           <code>minute</code> | <code>minutes</code> | <code>min</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+           Seconds
+        </td>
+        <td>
+           <code>second</code> | <code>seconds</code> | <code>sec</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+           Milliseconds
+        </td>
+        <td>
+           <code>millisecond</code> | <code>milliseconds</code>
+        </td>
+    </tr>
+</table>
+
+<p><strong>Example</strong></p>
+<p>1 hour and 25 minutes can by written as <code>1 hour and 25 minutes</code> which is equal to the <code>LONG</code> value <code>5100000</code>.</p>
 <h3 id="select">Select<a class="headerlink" href="#select" title="Permanent link">&para;</a></h3>
 <p>The select clause in Siddhi query defines the output event attributes of the query. Following are some basic query projection operations supported by select.</p>
 <table style="width:100%">
@@ -2612,48 +2750,8 @@ The following actions can be specified to <code>@OnError</code> annotation to ha
         <td>Constant values as attributes</td>
         <td>Creates output attributes with a constant value.
             <br></br>
-            The constant values can be defined as follows.
-            <table style="width:100%">
-                <tr>
-                    <th style="width:10%">Attribute Type</th>
-                    <th style="width:50%">Format</th>
-                    <th style="width:40%">Example</th>
-                </tr>
-                <tr>
-                    <td>int</td>
-                    <td><code>&ltdigit&gt+</code></td>
-                    <td><code>123</code>, <code>-75</code>, <code>+95</code></td>
-                </tr>
-                <tr>
-                    <td>long</td>
-                    <td><code>&ltdigit&gt+L</code></td>
-                    <td><code>123000L</code>, <code>-750l</code>, <code>+154L</code></td>
-                </tr>
-                <tr>
-                    <td>float</td>
-                    <td><code>(&ltdigit&gt+)?('.'&ltdigit&gt*)?<br/>(E(-|+)?&ltdigit&gt+)?F</code></td>
-                    <td><code>123.0f</code>, <code>-75.0e-10F</code>,<br/><code>+95.789f</code></td>
-                </tr>
-                <tr>
-                    <td>double</td>
-                    <td><code>(&ltdigit&gt+)?('.'&ltdigit&gt*)?<br/>(E(-|+)?&ltdigit&gt+)?D?</code></td>
-                    <td><code>123.0</code>,<code>123.0D</code>,<br/><code>-75.0e-10D</code>,<code>+95.789d</code></td>
-                </tr>
-                <tr>
-                    <td>bool</td>
-                    <td><code>(true|false)</code></td>
-                    <td><code>true</code>, <code>false</code>, <code>TRUE</code>, <code>FALSE</code></td>
-                </tr>
-                <tr>
-                    <td>string</td>
-                    <td><code>'(<char>* !('|"|"""|&ltnew line&gt))'</code> or <br/> <code>"(<char>* !("|"""|&ltnew line&gt))"</code> or <br/><code>"""(<char>* !("""))"""</code> </td>
-                    <td><code>'Any text.'</code>, <br/><code>"Text with 'single' quotes."</code>, <br/><pre>"""
-Text with 'single' quotes,
-"double" quotes, and new lines.
-"""</pre></td>
-                </tr>
-            </table>
-
+            Any constant value of type <code>STRING</code>, <code>INT</code>, <code>LONG</code>, <code>DOUBLE</code>, <code>FLOAT</code>, <code>BOOL</code>, and <code>time</code> as given in the <a href="#value">values section</a> can be defined.
+            </br>
             E.g., Query specifying <code>'C'</code> as the constant value for the <code>scale</code> attribute.
             <pre>from TempStream<br/>select roomNo, temp, 'C' as scale<br>insert into RoomTempStream;</pre>    
         </td>
@@ -2730,91 +2828,30 @@ Text with 'single' quotes,
 <p>Function are pre-configured operations that can consumes zero, or more parameters and always produce a single value as result. It can be used anywhere an attribute can be used.</p>
 <p><strong>Purpose</strong></p>
 <p>Functions encapsulate pre-configured reusable execution logic allowing users to execute the logic anywhere just by calling the function. This also make writing SiddhiApps simple and easy to understand.</p>
-<p><strong>Function Parameters</strong></p>
-<p>Functions parameters are the input to the function. They can be attributes, constant values, results of other functions, results of mathematical or logical expressions, or time values. The number and type of parameters a function accepts depend on the function itself.</p>
+<p><strong>Syntax</strong></p>
+<p>The syntax of function is as follows,</p>
+<div class="codehilite"><pre><span></span><span class="o">&lt;</span><span class="k">function</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">(</span> <span class="o">&lt;</span><span class="k">parameter</span><span class="o">&gt;*</span> <span class="p">)</span>
+</pre></div>
+
+
+<p>Here <code>&lt;function name&gt;</code> uniquely identifies the function. The <code>&lt;parameter&gt;</code> defined input parameters the function can accept. The input parameters can be attributes, constant values, results of other functions, results of mathematical or logical expressions, or time values. The number and type of parameters a function accepts depend on the function itself.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Functions, mathematical expressions, and logical expressions can be used in a nested manner.</p>
 </div>
-<p><em>Time</em></p>
-<p>Time is a special parameter that denotes time using digits and their unit in the format <code>(&lt;digit&gt;+ &lt;unit&gt;)+</code>. During the execution, the time parameters get converted into milliseconds and return as long values.</p>
-<table style="width:100%">
-    <tr>
-        <th>
-            Unit  
-        </th>
-        <th>
-            Syntax
-        </th>
-    </tr>
-    <tr>
-        <td>
-            Year
-        </td>
-        <td>
-            <code>year</code> | <code>years</code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Month
-        </td>
-        <td>
-            <code>month</code> | <code>months</code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Week
-        </td>
-        <td>
-            <code>week</code> | <code>weeks</code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Day
-        </td>
-        <td>
-            <code>day</code> | <code>days</code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Hour
-        </td>
-        <td>
-           <code>hour</code> | <code>hours</code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-           Minutes
-        </td>
-        <td>
-           <code>minute</code> | <code>minutes</code> | <code>min</code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-           Seconds
-        </td>
-        <td>
-           <code>second</code> | <code>seconds</code> | <code>sec</code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-           Milliseconds
-        </td>
-        <td>
-           <code>millisecond</code> | <code>milliseconds</code>
-        </td>
-    </tr>
-</table>
+<p><strong>Example 1</strong></p>
+<p>Function name <code>add</code> accepting two input parameters, is called with an attribute named <code>input</code> and a constant value <code>75</code>.  </p>
+<div class="codehilite"><pre><span></span>add(input, 75)
+</pre></div>
 
-<p>E.g. Pass <code>1 hour and 25 minutes</code> as the input for <code>test()</code> function. <br/></p>
-<p><code>test(1 hour 25 min)</code></p>
+
+<p><strong>Example 2</strong></p>
+<p>Function name <code>alertAfter</code> accepting two input parameters, is called with a time value of <code>1 hour and 25 minutes</code> and a mathematical addition operation of <code>startTime</code> + <code>56</code>.</p>
+<div class="codehilite"><pre><span></span>add(1 hour and 25 minutes, startTime + 56)
+</pre></div>
+
+
+<p><strong>Inbuilt functions</strong></p>
 <p>Following are some inbuilt Siddhi functions, for more functions refer <a href="http://siddhi.io/extensions/">execution extensions</a> .</p>
 <table>
 <thead>
@@ -2901,17 +2938,19 @@ Text with 'single' quotes,
 <p><strong>Example</strong></p>
 <p>Query that converts the <code>roomNo</code> to <code>string</code> using <code>convert</code> function, finds the maximum temperature reading with <code>maximum</code> function, and adds a unique <code>messageID</code> using the <code>UUID</code> function.</p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="n">TempStream</span>
-<span class="k">select</span> <span class="k">convert</span><span class="p">(</span><span class="n">roomNo</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">roomNo</span><span class="p">,</span> <span class="n">maximum</span><span class="p">(</span><span class="n">tempReading1</span><span class="p">,</span> <span class="n">tempReading2</span><span class="p">)</span> <span class="k">as</span> <span class="n">temp</span><span class="p">,</span> <span class="n">UUID</span><span class="p">()</span> <span class="k">as</span> <span class="n">messageID</span>
+<span class="k">select</span> <span class="k">convert</span><span class="p">(</span><span class="n">roomNo</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">roomNo</span><span class="p">,</span>
+       <span class="n">maximum</span><span class="p">(</span><span class="n">tempReading1</span><span class="p">,</span> <span class="n">tempReading2</span><span class="p">)</span> <span class="k">as</span> <span class="n">temp</span><span class="p">,</span>
+       <span class="n">UUID</span><span class="p">()</span> <span class="k">as</span> <span class="n">messageID</span>
 <span class="k">insert</span> <span class="k">into</span> <span class="n">RoomTempStream</span><span class="p">;</span>
 </pre></div>
 
 
 <h3 id="filter">Filter<a class="headerlink" href="#filter" title="Permanent link">&para;</a></h3>
-<p>Filters are included in queries to filter information from input streams based on a specified condition.</p>
+<p>Filters provide a way of filtering input stream events based on a specified condition. It accepts any type of condition including a combination of functions and/or attributes  that produces a Boolean result. Filters allow events to pass through if the condition results in <code>true</code>, and drops if it results in a <code>false</code>.  </p>
 <p><strong>Purpose</strong></p>
-<p>A filter allows you to separate events that match a specific condition as the output, or for further processing.</p>
+<p>Filter helps to select the events that are relevant for the processing and omit the ones that are not needed.</p>
 <p><strong>Syntax</strong></p>
-<p>Filter conditions should be defined in square brackets next to the input stream name as shown below.</p>
+<p>Filter conditions should be defined in square brackets next to the input stream as shown below.</p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="o">&lt;</span><span class="k">input</span> <span class="n">stream</span><span class="o">&gt;</span><span class="p">[</span><span class="o">&lt;</span><span class="n">filter</span> <span class="n">condition</span><span class="o">&gt;</span><span class="p">]</span>
 <span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
 <span class="k">insert</span> <span class="k">into</span> <span class="o">&lt;</span><span class="k">output</span> <span class="n">stream</span><span class="o">&gt;</span>
@@ -2919,8 +2958,8 @@ Text with 'single' quotes,
 
 
 <p><strong>Example</strong></p>
-<p>This query filters all server rooms of which the room number is within the range of 100-210, and having temperature greater than 40 degrees
-from the <code>TempStream</code> stream, and inserts the results into the <code>HighTempStream</code> stream.</p>
+<p>Query to filter <code>TempStream</code> stream events, having <code>roomNo</code> within the range of 100-210 and temperature greater than 40 degrees,
+and insert them into <code>HighTempStream</code> stream.</p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="n">TempStream</span><span class="p">[(</span><span class="n">roomNo</span> <span class="o">&gt;=</span> <span class="mi">100</span> <span class="k">and</span> <span class="n">roomNo</span> <span class="o">&lt;</span> <span class="mi">210</span><span class="p">)</span> <span class="k">and</span> <span class="n">temp</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">]</span>
 <span class="k">select</span> <span class="n">roomNo</span><span class="p">,</span> <span class="n">temp</span>
 <span class="k">insert</span> <span class="k">into</span> <span class="n">HighTempStream</span><span class="p">;</span>
@@ -3221,7 +3260,7 @@ Streams are stateless. Therefore, in order to join two streams, they need to be 
 stream's window based on the given condition, and the output events are generated for all the matching event pairs.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Join can also be performed with <a href="#join-table">stored data</a>, <a href="#join-aggregation">aggregation</a> or externally <a href="#join-window">defined windows</a>.</p>
+<p>Join can also be performed with <a href="#join-table">stored data</a>, <a href="#join-aggregation">aggregation</a> or externally <a href="#join-window">named windows</a>.</p>
 </div>
 <p><strong>Syntax</strong></p>
 <p>The syntax for a join is as follows:</p>
@@ -3987,7 +4026,7 @@ For more information, see <a href="#output-event-types">output event type</a></p
 <p>This allows a stream to retrieve information from a table in a streaming manner.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Joins can also be performed with <a href="#join-stream">two streams</a>, <a href="#join-aggregation">aggregation</a> or against externally <a href="#join-window">defined windows</a>.</p>
+<p>Joins can also be performed with <a href="#join-stream">two streams</a>, <a href="#join-aggregation">aggregation</a> or against externally <a href="#join-window">named windows</a>.</p>
 </div>
 <p><strong>Syntax</strong></p>
 <div class="codehilite"><pre><span></span><span class="k">from</span> <span class="o">&lt;</span><span class="k">input</span> <span class="n">stream</span><span class="o">&gt;</span> <span class="k">join</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">&gt;</span>
@@ -4162,11 +4201,11 @@ When constructing the <code>condition</code>, the table attribute must be always
 </pre></div>
 
 
-<h2 id="incremental-aggregation">Incremental Aggregation<a class="headerlink" href="#incremental-aggregation" title="Permanent link">&para;</a></h2>
-<p>Incremental aggregation allows you to obtain aggregates in an incremental manner for a specified set of time periods.</p>
+<h2 id="named-aggregation">Named Aggregation<a class="headerlink" href="#named-aggregation" title="Permanent link">&para;</a></h2>
+<p>Named aggregation allows you to obtain aggregates in an incremental manner for a specified set of time periods.</p>
 <p>This not only allows you to calculate aggregations with varied time granularity, but also allows you to access them in an interactive
  manner for reports, dashboards, and for further processing. Its schema is defined via the <strong>aggregation definition</strong>.</p>
-<p>Incremental aggregation granularity data holders are automatically purged every 15 minutes. When carrying out data purging, the retention period you have specified for each granularity in the incremental aggregation query is taken into account. The retention period defined for a granularity needs to be greater than or equal to its minimum retention period as specified in the table below. If no valid retention period is defined for a granularity, the default retention period (as specified in the table below) is applied.</p>
+<p>Named aggregation's granularity data holders are automatically purged every 15 minutes. When carrying out data purging, the retention period you have specified for each granularity in the named aggregation query is taken into account. The retention period defined for a granularity needs to be greater than or equal to its minimum retention period as specified in the table below. If no valid retention period is defined for a granularity, the default retention period (as specified in the table below) is applied.</p>
 <table>
 <thead>
 <tr>
@@ -4209,7 +4248,7 @@ When constructing the <code>condition</code>, the table attribute must be always
 </tbody>
 </table>
 <p><strong>Purpose</strong></p>
-<p>Incremental aggregation allows you to retrieve the aggregate values for different time durations.
+<p>Named aggregation allows you to retrieve the aggregate values for different time durations.
 That is, it allows you to obtain aggregates such as <code>sum</code>, <code>count</code>, <code>avg</code>, <code>min</code>, <code>max</code>, <code>count</code> and <code>distinctCount</code>
 of stream attributes for durations such as <code>sec</code>, <code>min</code>, <code>hour</code>, etc.</p>
 <p>This is of considerable importance in many Analytics scenarios because aggregate values are often needed for several time periods.
@@ -4367,7 +4406,7 @@ However for this, all aggregations must be based on a common physical database(@
 <p>This allows a stream to retrieve calculated aggregate values from the aggregation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>A join can also be performed with <a href="#join-stream">two streams</a>, with a <a href="#join-table">table</a> and a stream, or with a stream against externally <a href="#join-window">defined windows</a>.</p>
+<p>A join can also be performed with <a href="#join-stream">two streams</a>, with a <a href="#join-table">table</a> and a stream, or with a stream against externally <a href="#join-window">named windows</a>.</p>
 </div>
 <p><strong>Syntax</strong></p>
 <p>A join with aggregation is similer to the join with <a href="#join-table">table</a>, but with additional <code>within</code> and <code>per</code> clauses.</p>
@@ -4476,11 +4515,11 @@ having null values for the attributes of the right aggregation.</p>
 It returns all the events of the right stream even if there are no matching events in the left aggregation.</p>
 </li>
 </ul>
-<h2 id="defined-window"><em>(Defined)</em> Window<a class="headerlink" href="#defined-window" title="Permanent link">&para;</a></h2>
-<p>A defined window is a window that can be shared across multiple queries.
-Events can be inserted to a defined window from one or more queries and it can produce output events based on the defined window type.</p>
+<h2 id="named-window">Named Window<a class="headerlink" href="#named-window" title="Permanent link">&para;</a></h2>
+<p>A named window is a window that can be shared across multiple queries.
+Events can be inserted to a named window from one or more queries and it can produce output events based on the named window type.</p>
 <p><strong>Syntax</strong></p>
-<p>The syntax for a defined window is as follows:</p>
+<p>The syntax for a named window is as follows:</p>
 <div class="codehilite"><pre><span></span><span class="n">define</span> <span class="n">window</span> <span class="o">&lt;</span><span class="n">window</span> <span class="n">name</span><span class="o">&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span> <span class="p">)</span> <span class="o">&lt;</span><span class="n">window</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="k">parameter</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">parameter</span><span class="o">&gt;</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="o">&lt;</span><span class="k">output</span> <span class="n">event</span> <span class="k">type</span><span class="o">&gt;</span><span class="p">;</span>
 </pre></div>
 
@@ -4537,8 +4576,8 @@ Events can be inserted to a defined window from one or more queries and it can p
 </pre></div>
 
 
-<p><strong>Operators on Defined Windows</strong></p>
-<p>The following operators can be performed on defined windows.</p>
+<p><strong>Operators on Named Windows</strong></p>
+<p>The following operators can be performed on named windows.</p>
 <h3 id="insert_1">Insert<a class="headerlink" href="#insert_1" title="Permanent link">&para;</a></h3>
 <p>This allows events to be inserted into windows. This is similar to inserting events into streams.</p>
 <p><strong>Syntax</strong></p>
