@@ -421,6 +421,33 @@
     Using Siddhi as Docker Micro Service
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-siddhi-app_1" title="Running Siddhi App" class="md-nav__link">
+    Running Siddhi App
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-with-runner-config_1" title="Running with runner config" class="md-nav__link">
+    Running with runner config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-with-environmentalsystem-variables_1" title="Running with environmental/system variables" class="md-nav__link">
+    Running with environmental/system variables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -469,6 +496,40 @@
   <a href="#deploy-and-run-a-siddhi-application" title="Deploy and run a siddhi application" class="md-nav__link">
     Deploy and run a siddhi application
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-the-status" title="Monitoring the status" class="md-nav__link">
+    Monitoring the status
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listing-the-siddhi-processes" title="Listing the siddhi processes" class="md-nav__link">
+    Listing the siddhi processes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view-siddhi-process-configs" title="View siddhi process configs" class="md-nav__link">
+    View siddhi process configs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view-siddhi-process-logs" title="View siddhi process logs" class="md-nav__link">
+    View siddhi process logs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -939,6 +1000,33 @@
     Using Siddhi as Docker Micro Service
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-siddhi-app_1" title="Running Siddhi App" class="md-nav__link">
+    Running Siddhi App
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-with-runner-config_1" title="Running with runner config" class="md-nav__link">
+    Running with runner config
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-with-environmentalsystem-variables_1" title="Running with environmental/system variables" class="md-nav__link">
+    Running with environmental/system variables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -987,6 +1075,40 @@
   <a href="#deploy-and-run-a-siddhi-application" title="Deploy and run a siddhi application" class="md-nav__link">
     Deploy and run a siddhi application
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring-the-status" title="Monitoring the status" class="md-nav__link">
+    Monitoring the status
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listing-the-siddhi-processes" title="Listing the siddhi processes" class="md-nav__link">
+    Listing the siddhi processes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view-siddhi-process-configs" title="View siddhi process configs" class="md-nav__link">
+    View siddhi process configs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view-siddhi-process-logs" title="View siddhi process logs" class="md-nav__link">
+    View siddhi process logs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1309,7 +1431,239 @@ Thank you</pre>
 </ul>
 
 <h3 id="using-siddhi-as-docker-micro-service"><strong>Using Siddhi as Docker Micro Service</strong><a class="headerlink" href="#using-siddhi-as-docker-micro-service" title="Permanent link">&para;</a></h3>
-<p>WIP</p>
+<p>Siddhi can also run on Docker by passing the SiddhiApps and required configurations to it.</p>
+<ul>
+<li>Pull the the latest Siddhi Runner image from <a href="https://hub.docker.com/">Docker Hub</a>.</li>
+</ul>
+<div class="codehilite"><pre><span></span>docker pull siddhiio/siddhi-runner-alpine:latest
+</pre></div>
+
+
+<ul>
+<li>Start SiddhiApps with the runner config by executing the following docker command.<br/></li>
+</ul>
+<div class="codehilite"><pre><span></span>docker run -it -v &lt;local-siddhi-file-path&gt;:&lt;siddhi-file-mount-path&gt; -v &lt;local-conf-file-path&gt;:&lt;conf-file-mount-path&gt; siddhiio/siddhi-runner-alpine:latest -Dapps=&lt;siddhi-file-mount-path&gt; -Dconfig=&lt;conf-file-mount-path&gt;
+</pre></div>
+
+
+<p>E.g.,</p>
+<div class="codehilite"><pre><span></span>docker run -it -v /home/me/siddhi-apps:/apps -v /home/me/siddhi-configs:/configs siddhiio/siddhi-runner-alpine:latest -Dapps=/apps/Foo.siddhi -Dconfig=/configs/siddhi-config.yaml
+</pre></div>
+
+
+<div class="admonition tip">
+<p class="admonition-title">Running multiple SiddhiApps in one runner instance.</p>
+<p>To run multiple SiddhiApps in one runtime instance, have all SiddhiApps in a directory, mount the directory and pass its location through <code>-Dapps</code> parameter as follows,<br/>
+<code>-Dapps=&lt;siddhi-apps-directory&gt;</code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Always use <strong>absolute path</strong> for SiddhiApps and runner configs.</p>
+<p>Providing absolute path of SiddhiApp file, or directory in <code>-Dapps</code> parameter, and when providing the Siddhi runner config yaml on <code>-Dconfig</code> parameter while starting Siddhi runner.</p>
+</div>
+<p><strong>Samples</strong></p>
+<h4 id="running-siddhi-app_1">Running Siddhi App<a class="headerlink" href="#running-siddhi-app_1" title="Permanent link">&para;</a></h4>
+<p>Following SiddhiApp collects events via HTTP and logs the number of events arrived during last 15 seconds.  </p>
+<script src="https://gist.github.com/suhothayan/8b0471cbe86a0089db5d6afb1c46f765.js"></script>
+
+<ul>
+    <li>Copy the above SiddhiApp, and create the SiddhiApp file <code>CountOverTime.siddhi</code>.</li>
+    <li>Run the SiddhiApp by executing following commands from the distribution directory
+        <ul>
+            <li>
+            <pre style="white-space:pre-wrap;">docker run -it -p 8006:8006 -v &lt;local-absolute-siddhi-file-path&gt;/CountOverTime.siddhi:/apps/CountOverTime.siddhi siddhiio/siddhi-runner-alpine -Dapps=/apps/CountOverTime.siddhi
+</pre>
+            </li>
+        </ul>
+    </li>
+    <li>Test the SiddhiApp by calling the HTTP endpoint using curl or Postman as follows
+        <ul>
+            <li><b>Publish events with curl command:</b><br/>
+            Publish few json to the http endpoint as follows,
+<pre style="white-space:pre-wrap;">
+curl -X POST http://localhost:8006/production \
+  --header "Content-Type:application/json" \
+  -d '{"event":{"name":"Cake","amount":20.12}}'
+</pre>
+            </li>
+            <li><b>Publish events with Postman:</b>
+              <ol>
+                <li>Install 'Postman' application from Chrome web store</li>
+                <li>Launch the application</li>
+                <li>Make a 'Post' request to 'http://localhost:8006/production' endpoint. Set the Content-Type to <code>'application/json'</code> and set the request body in json format as follows,
+<pre>
+{
+  "event": {
+    "name": "Cake",
+    "amount": 20.12
+  }
+}</pre>
+                </li>
+              </ol>
+            </li>
+        </ul>
+    </li>
+    <li>Runner logs the total count on the console. Note, how the count increments with every event sent.
+<pre style="white-space:pre-wrap;">
+[2019-04-11 13:36:03,517]  INFO {io.siddhi.core.stream.output.sink.LogSink} - CountOverTime : TotalCountStream : Event{timestamp=1554969963512, data=[1], isExpired=false}
+[2019-04-11 13:36:10,267]  INFO {io.siddhi.core.stream.output.sink.LogSink} - CountOverTime : TotalCountStream : Event{timestamp=1554969970267, data=[2], isExpired=false}
+[2019-04-11 13:36:41,694]  INFO {io.siddhi.core.stream.output.sink.LogSink} - CountOverTime : TotalCountStream : Event{timestamp=1554970001694, data=[1], isExpired=false}
+</pre>
+    </li>
+</ul>
+
+<h4 id="running-with-runner-config_1">Running with runner config<a class="headerlink" href="#running-with-runner-config_1" title="Permanent link">&para;</a></h4>
+<p>When running SiddhiApps users can optionally provide a config yaml to Siddhi runner to manage configurations such as state persistence, databases connections and secure vault.</p>
+<p>Following SiddhiApp collects events via HTTP and store them in H2 Database.</p>
+<script src="https://gist.github.com/suhothayan/2413a6f886219befe736bf4447af02de.js"></script>
+
+<p>The runner config can be configured with the relevant datasource information and passed when starting the runner</p>
+<script src="https://gist.github.com/suhothayan/015ae003d4ba8d4aeaadc19e4c9516fd.js"></script>
+
+<ul>
+    <li>Copy the above SiddhiApp, & config yaml, and create corresponding the SiddhiApp file <code>ConsumeAndStore.siddhi</code> and <code>TestDb.yaml</code> files.</li>
+    <li>Run the SiddhiApp by executing following command
+        <ul>
+            <li>
+             <pre style="white-space:pre-wrap;">docker run -it -p 8006:8006 -p 9443:9443 -v &lt;local-absolute-siddhi-file-path&gt;/ConsumeAndStore.siddhi:/apps/ConsumeAndStore.siddhi -v &lt;local-absolute-config-yaml-path&gt;/TestDb.yaml:/conf/TestDb.yaml siddhiio/siddhi-runner-alpine -Dapps=/apps/ConsumeAndStore.siddhi -Dconfig=/conf/TestDb.yaml</pre>
+            </li>
+        </ul>
+    </li>
+    <li>Test the SiddhiApp by calling the HTTP endpoint using curl or Postman as follows
+        <ul>
+            <li><b>Publish events with curl command:</b><br/>
+            Publish few json to the http endpoint as follows,
+<pre style="white-space:pre-wrap;">
+curl -X POST http://localhost:8006/production \
+  --header "Content-Type:application/json" \
+  -d '{"event":{"name":"Cake","amount":20.12}}'
+</pre>
+            </li>
+            <li><b>Publish events with Postman:</b>
+              <ol>
+                <li>Install 'Postman' application from Chrome web store</li>
+                <li>Launch the application</li>
+                <li>Make a 'Post' request to 'http://localhost:8006/production' endpoint. Set the Content-Type to <code>'application/json'</code> and set the request body in json format as follows,
+<pre>
+{
+  "event": {
+    "name": "Cake",
+    "amount": 20.12
+  }
+}</pre>
+                </li>
+              </ol>
+            </li>
+        </ul>
+    </li>
+    <li>Query Siddhi Store APIs to retrieve 10 records from the table.
+        <ul>
+            <li><b>Query stored events with curl command:</b><br/>
+            Publish few json to the http endpoint as follows,
+<pre style="white-space:pre-wrap;">
+curl -X POST https://localhost:9443/stores/query \
+  -H "content-type: application/json" \
+  -u "admin:admin" \
+  -d '{"appName" : "ConsumeAndStore", "query" : "from ProductionTable select * limit 10;" }' -k
+</pre>
+            </li>
+            <li><b>Query stored events with Postman:</b>
+              <ol>
+                <li>Install 'Postman' application from Chrome web store</li>
+                <li>Launch the application</li>
+                <li>Make a 'Post' request to 'https://localhost:9443/stores/query' endpoint. Set the Content-Type to <code>'application/json'</code> and set the request body in json format as follows,
+<pre>
+{
+  "appName" : "ConsumeAndStore",
+  "query" : "from ProductionTable select * limit 10;"
+}</pre>
+                </li>
+              </ol>
+            </li>
+        </ul>
+    </li>
+    <li>The results of the query will be as follows,
+<pre style="white-space:pre-wrap;">
+{
+  "records":[
+    ["Cake",20.12]
+  ]
+}</pre>
+    </li>
+</ul>
+
+<h4 id="running-with-environmentalsystem-variables_1">Running with environmental/system variables<a class="headerlink" href="#running-with-environmentalsystem-variables_1" title="Permanent link">&para;</a></h4>
+<p>Templating SiddhiApps allows users to provide environment/system variables to siddhiApps at runtime. This can help users to migrate SiddhiApps from one environment to another (E.g from dev, test and to prod).</p>
+<p>Following templated SiddhiApp collects events via HTTP, filters them based on <code>amount</code> greater than a given threshold value, and only sends the filtered events via email.</p>
+<p>Here the <code>THRESHOLD</code> value, and <code>TO_EMAIL</code> are templated in the <code>TemplatedFilterAndEmail.siddhi</code> SiddhiApp.</p>
+<script src="https://gist.github.com/suhothayan/47b6300f629463e63b2d5be78d6e45b4.js"></script>
+
+<p>The runner config is configured with a gmail account to send email messages in <code>EmailConfig.yaml</code> by templating sending <code>EMAIL_ADDRESS</code>, <code>EMAIL_USERNAME</code> and <code>EMAIL_PASSWORD</code>.   </p>
+<script src="https://gist.github.com/suhothayan/3f36f8827d379925a8cca68dd78b9a8e.js"></script>
+
+<ul>
+    <li>Copy the above SiddhiApp, & config yaml, and create corresponding the SiddhiApp file <code>TemplatedFilterAndEmail.siddhi</code> and <code>EmailConfig.yaml</code> files.</li>
+
+    <li>Set the below environment variables by passing them during the docker run command: 
+         <pre style="white-space:pre-wrap;">
+ THRESHOLD=20
+ TO_EMAIL=&lt;to email address&gt; 
+ EMAIL_ADDRESS=&lt;gmail address&gt;
+ EMAIL_USERNAME=&lt;gmail username&gt;
+ EMAIL_PASSWORD=&lt;gmail password&gt;</pre>
+        Or they can also be passed as system variables by adding them to the end of the docker run command .
+        <pre style="white-space:pre-wrap;">-DTHRESHOLD=20 -DTO_EMAIL=&gt;to email address&gt; -DEMAIL_ADDRESS=&lt;gmail address&gt; 
+ -DEMAIL_USERNAME=&lt;gmail username&gt; -DEMAIL_PASSWORD=&lt;gmail password&gt;</pre>
+
+    </li>
+        <li>Run the SiddhiApp by executing following command.
+        <ul>
+            <li>
+            <pre style="white-space:pre-wrap;">docker run -it -p 8006:8006 -v &lt;local-absolute-siddhi-file-path&gt;/TemplatedFilterAndEmail.siddhi:/apps/TemplatedFilterAndEmail.siddhi -v &lt;local-absolute-config-yaml-path&gt;/EmailConfig.yaml:/conf/EmailConfig.yaml -e THRESHOLD=20 -e TO_EMAIL=&lt;to email address&gt; -e EMAIL_ADDRESS=&lt;gmail address&gt; -e EMAIL_USERNAME=&lt;gmail username&gt; -e EMAIL_PASSWORD=&lt;gmail password&gt; siddhiio/siddhi-runner-alpine -Dapps=/apps/TemplatedFilterAndEmail.siddhi -Dconfig=/conf/EmailConfig.yaml </pre>
+
+            </li>
+        </ul>
+    </li>
+    <li>Test the SiddhiApp by calling the HTTP endpoint using curl or Postman as follows
+        <ul>
+            <li><b>Publish events with curl command:</b><br/>
+            Publish few json to the http endpoint as follows,
+<pre style="white-space:pre-wrap;">
+curl -X POST http://localhost:8006/production \
+  --header "Content-Type:application/json" \
+  -d '{"event":{"name":"Cake","amount":2000.0}}'
+</pre>
+            </li>
+            <li><b>Publish events with Postman:</b>
+              <ol>
+                <li>Install 'Postman' application from Chrome web store</li>
+                <li>Launch the application</li>
+                <li>Make a 'Post' request to 'http://localhost:8006/production' endpoint. Set the Content-Type to <code>'application/json'</code> and set the request body in json format as follows,
+<pre>
+{
+  "event": {
+    "name": "Cake",
+    "amount": 2000.0
+  }
+}</pre>
+                </li>
+              </ol>
+            </li>
+        </ul>
+    </li>
+    <li>Check the <code>to.email</code> for the published email message, which will look as follows,
+<pre style="white-space:pre-wrap;">
+Subject : High Cake production!
+
+Hi, 
+
+High production of Cake, with amount 2000.0 identified. 
+
+For more information please contact production department. 
+
+Thank you</pre>
+    </li>
+</ul>
+
 <h3 id="using-siddhi-as-kubernetes-micro-service"><strong>Using Siddhi as Kubernetes Micro Service</strong><a class="headerlink" href="#using-siddhi-as-kubernetes-micro-service" title="Permanent link">&para;</a></h3>
 <h4 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h4>
 <ol>
@@ -1395,14 +1749,129 @@ siddhi    siddhi    10.0.2.15   80, 443   30s
 </pre></div>
 
 
-<p>When you print the logs, you can see the event that you sent was logged in the pod. </p>
+<h4 id="monitoring-the-status">Monitoring the status<a class="headerlink" href="#monitoring-the-status" title="Permanent link">&para;</a></h4>
+<h5 id="listing-the-siddhi-processes">Listing the siddhi processes<a class="headerlink" href="#listing-the-siddhi-processes" title="Permanent link">&para;</a></h5>
+<p>You can use <code>sps or SiddhiProcesses</code> names to list the <code>SiddhiProcess</code> custom objects.</p>
+<div class="codehilite"><pre><span></span>$ kubectl get sps
+NAME                        AGE
+example-siddhi-deployment   2m
+
+$ kubectl get SiddhiProcesses
+NAME                        AGE
+example-siddhi-deployment   2m
+</pre></div>
+
+
+<h5 id="view-siddhi-process-configs">View siddhi process configs<a class="headerlink" href="#view-siddhi-process-configs" title="Permanent link">&para;</a></h5>
+<p>You can view the configuration details of the deployed siddhi processes using <code>kubectl describe</code> and <code>kubectl get</code> as follow using <code>sp or SiddhiProcess</code> names.</p>
+<div class="codehilite"><pre><span></span>$ kubectl describe sp example-siddhi-deployment
+
+Name:         example-siddhi-deployment
+Namespace:    default
+Labels:       &lt;none&gt;
+Annotations:  &lt;none&gt;
+API Version:  siddhi.io/v1alpha1
+Kind:         SiddhiProcess
+Metadata:
+  Creation Timestamp:  2019-04-17T10:14:19Z
+  Generation:          1
+  Resource Version:    417512
+  Self Link:           /apis/siddhi.io/v1alpha1/namespaces/default/siddhiprocesses/example-siddhi-deployment
+  UID:                 904c526f-60f9-11e9-90dc-0800279e6dba
+Spec:
+  Env:
+    Name:   RECEIVER_URL
+    Value:  http://0.0.0.0:8006/foo
+    Name:   BASIC_AUTH_ENABLED
+    Value:  false
+  Pod:
+    Image:      siddhiio/siddhi-runner-alpine
+    Image Tag:  v0.1.0
+  Query:        @App:name(&quot;Example-Siddhi&quot;)
+@App:description(&quot;Description of the plan&quot;) 
+
+@sink(type=&#39;log&#39;, prefix=&#39;LOGGER&#39;)
+@source(type=&#39;http&#39;, receiver.url=&#39;http://0.0.0.0:8280/example&#39;, basic.auth.enabled=&#39;false&#39;, @map(type=&#39;json&#39;))
+define stream DevicePowerStream (type string, deviceID string, power int);
+
+
+define stream MonitorDevicesPowerStream(deviceID string, power int);
+
+@info(name=&#39;monitored-filter&#39;)
+from DevicePowerStream[type == &#39;monitored&#39;]
+select deviceID, power
+insert into MonitorDevicesPowerStream;
+
+  Siddhi . Runner . Configs:  state.persistence:
+  enabled: true
+  intervalInMin: 5
+  revisionsToKeep: 2
+  persistenceStore: io.siddhi.distribution.core.persistence.FileSystemPersistenceStore
+  config:
+    location: siddhi-app-persistence
+
+Status:
+  Nodes:   &lt;nil&gt;
+  Status:  Running
+Events:    &lt;none&gt;
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>$ kubectl get sp example-siddhi-deployment -o yaml
+
+apiVersion: siddhi.io/v1alpha1
+kind: SiddhiProcess
+metadata:
+  creationTimestamp: 2019-04-17T10:14:19Z
+  generation: 1
+  name: example-siddhi-deployment
+  namespace: default
+  resourceVersion: &quot;417512&quot;
+  selfLink: /apis/siddhi.io/v1alpha1/namespaces/default/siddhiprocesses/example-siddhi-deployment
+  uid: 904c526f-60f9-11e9-90dc-0800279e6dba
+spec:
+  env:
+  - name: RECEIVER_URL
+    value: http://0.0.0.0:8006/foo
+  - name: BASIC_AUTH_ENABLED
+    value: &quot;false&quot;
+  pod:
+    image: siddhiio/siddhi-runner-alpine
+    imageTag: v0.1.0
+  query: &quot;@App:name(\&quot;Example-Siddhi\&quot;)\n@App:description(\&quot;Description of the plan\&quot;)
+    \n\n@sink(type=&#39;log&#39;, prefix=&#39;LOGGER&#39;)\n@source(type=&#39;http&#39;, receiver.url=&#39;http://0.0.0.0:8280/example&#39;,
+    basic.auth.enabled=&#39;false&#39;, @map(type=&#39;json&#39;))\ndefine stream DevicePowerStream
+    (type string, deviceID string, power int);\n\n\ndefine stream MonitorDevicesPowerStream(deviceID
+    string, power int);\n\n@info(name=&#39;monitored-filter&#39;)\nfrom DevicePowerStream[type
+    == &#39;monitored&#39;]\nselect deviceID, power\ninsert into MonitorDevicesPowerStream;\n&quot;
+  siddhi.runner.configs: |
+    state.persistence:
+      enabled: true
+      intervalInMin: 5
+      revisionsToKeep: 2
+      persistenceStore: io.siddhi.distribution.core.persistence.FileSystemPersistenceStore
+      config:
+        location: siddhi-app-persistence
+status:
+  nodes: null
+  status: Running
+</pre></div>
+
+
+<h5 id="view-siddhi-process-logs">View siddhi process logs<a class="headerlink" href="#view-siddhi-process-logs" title="Permanent link">&para;</a></h5>
+<p>You can list the deployed pods.</p>
 <div class="codehilite"><pre><span></span>$ kubectl get pods
+
 NAME                                         READY     STATUS    RESTARTS   AGE
 example-siddhi-deployment-668555c85f-6b5bs   1/1       Running   0          48s
 siddhi-operator-76ff98b67-z4jg2              1/1       Running   2          2m
 siddhi-parser-55f9c8764f-sk4kw               1/1       Running   1          2m
+</pre></div>
 
-$ kubectl logs example-siddhi-deployment-668555c85f-6b5bs
+
+<p>Then you can view the logs of that deployed pod. This log shows you the event that you sent using the previous POST request</p>
+<div class="codehilite"><pre><span></span>$ kubectl logs example-siddhi-deployment-668555c85f-6b5bs
+
 JAVA_HOME environment variable is set to /opt/java/openjdk
 CARBON_HOME environment variable is set to /home/siddhi_user/siddhi-runner-0.1.0
 RUNTIME_HOME environment variable is set to /home/siddhi_user/siddhi-runner-0.1.0/wso2/runner
