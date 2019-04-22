@@ -533,6 +533,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#samples" title="Samples" class="md-nav__link">
+    Samples
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-siddhi-apps-using-kubernetes-config-maps" title="Deploy siddhi apps using kubernetes config maps" class="md-nav__link">
+    Deploy siddhi apps using kubernetes config maps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable-ingress-creation" title="Disable ingress creation" class="md-nav__link">
+    Disable ingress creation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#https-support" title="HTTPS support" class="md-nav__link">
+    HTTPS support
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1112,6 +1146,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#samples" title="Samples" class="md-nav__link">
+    Samples
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deploy-siddhi-apps-using-kubernetes-config-maps" title="Deploy siddhi apps using kubernetes config maps" class="md-nav__link">
+    Deploy siddhi apps using kubernetes config maps
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#disable-ingress-creation" title="Disable ingress creation" class="md-nav__link">
+    Disable ingress creation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#https-support" title="HTTPS support" class="md-nav__link">
+    HTTPS support
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1198,7 +1266,7 @@
 <h3 id="using-siddhi-as-local-micro-service"><strong>Using Siddhi as Local Micro Service</strong><a class="headerlink" href="#using-siddhi-as-local-micro-service" title="Permanent link">&para;</a></h3>
 <p>Siddhi can also run a standalone program by passing the SiddhiApps and required configurations to it.</p>
 <ul>
-<li>Download the the latest Siddhi distribution from <a href="https://github.com/siddhi-io/distribution/releases">Github releases</a>.</li>
+<li>Download the latest Siddhi distribution from <a href="https://github.com/siddhi-io/distribution/releases">Github releases</a>.</li>
 <li>Unzip the siddhi-runner-x.x.x.zip</li>
 <li>Start SiddhiApps with the runner config by executing the following commands from the distribution directory<br/>
   Linux/Mac : <code>./bin/runner.sh -Dapps=&lt;siddhi-file&gt; -Dconfig=&lt;config-yaml-file&gt;</code><br/>
@@ -1902,6 +1970,83 @@ osgi&gt; [2019-04-20 03:59:00,208]  INFO {org.wso2.carbon.config.reader.ConfigFi
 [2019-04-20 04:04:02,216]  INFO {org.wso2.extension.siddhi.io.http.source.HttpSourceListener} - Event input has paused for http://0.0.0.0:8280/example
 [2019-04-20 04:04:02,235]  INFO {org.wso2.extension.siddhi.io.http.source.HttpSourceListener} - Event input has resume for http://0.0.0.0:8280/example
 [2019-04-20 04:05:29,741]  INFO {io.siddhi.core.stream.output.sink.LogSink} - LOGGER : Event{timestamp=1555733129736, data=[monitored, 001, 341], isExpired=false}
+</pre></div>
+
+
+<h4 id="samples">Samples<a class="headerlink" href="#samples" title="Permanent link">&para;</a></h4>
+<h5 id="deploy-siddhi-apps-using-kubernetes-config-maps">Deploy siddhi apps using kubernetes config maps<a class="headerlink" href="#deploy-siddhi-apps-using-kubernetes-config-maps" title="Permanent link">&para;</a></h5>
+<p>First, you need a sample siddhi app as follow. Here we save this siddhi file as <code>MonitorApp.siddhi</code>.</p>
+<script src="https://gist.github.com/BuddhiWathsala/8687a2b73bb003a8ae7bcf3d3f63b78e.js"></script>
+
+<p>Use the following command to create the kubernetes config map. Here the <code>monitor-app-cm</code> is the name of the config map.</p>
+<div class="codehilite"><pre><span></span>kubectl create configmap monitor-app-cm --from-file=&lt;absolute-file-path&gt;/MonitorApp.siddhi
+</pre></div>
+
+
+<p>Hereafter, use the following YAML file to deploy the siddhi app. In this YAML file under the <code>apps</code> entry, you have to specify the config map names that contain siddhi apps you want to deploy. Save this YAML file as <code>monitor-app.yaml</code>.</p>
+<script src="https://gist.github.com/BuddhiWathsala/45019cf093226e4858c931e62e04233f.js"></script>
+
+<p>Now use the following command to deploy the siddhi app.</p>
+<div class="codehilite"><pre><span></span>kubectl create -f &lt;absolute-yaml-file-path&gt;/monitor-app.yaml
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">You can deploy multiple siddhi apps by specifying multiple config maps under <code>apps</code> entry like below.</p>
+</div>
+<div class="codehilite"><pre><span></span>apps:
+  - config-map-name1
+  - config-map-name2
+</pre></div>
+
+
+<div class="admonition note">
+<p class="admonition-title">You can create a config map using a directory which contains multiple siddhi files instead of specifying a single siddhi file</p>
+<p>Use <code>kubectl create configmap siddhi-apps --from-file=&lt;DIRECTORY_PATH&gt;</code> command to create config map using a directory.</p>
+</div>
+<h5 id="disable-ingress-creation">Disable ingress creation<a class="headerlink" href="#disable-ingress-creation" title="Permanent link">&para;</a></h5>
+<p>By default, siddhi operator creates an NGINX ingress and expose your HTTP/HTTPS through that ingress. If you need to disable ingress creation you have to change the <code>AUTO_INGRESS_CREATION</code> value in the <code>operator.yaml</code> file to <code>false</code> or <code>null</code> as below.</p>
+<script src="https://gist.github.com/BuddhiWathsala/c1cadcf9828cfaf46bb909f30497e4ab.js"></script>
+
+<h5 id="https-support">HTTPS support<a class="headerlink" href="#https-support" title="Permanent link">&para;</a></h5>
+<p>First, you need to create a certificate using the following commands. For more details about the certificate, creation refers to <a href="https://superuser.com/questions/73979/how-to-easily-create-a-ssl-certificate-and-configure-it-in-apache2-in-mac-os-x">this</a>.</p>
+<div class="codehilite"><pre><span></span># Generating Private Key
+openssl genrsa -des3 -out siddhi.key 1024
+
+# Generating the CSR
+openssl req -new -key siddhi.key -out siddhi.csr
+
+# Generate Self Signed Certificate
+openssl x509 -req -days 365 -in siddhi.csr -signkey siddhi.key -out siddhi.crt
+</pre></div>
+
+
+<p>Obtain the Base64 encoded values of the key (<code>siddhi.key</code>) and certificate (<code>siddhi.crt</code>) using the following commands.</p>
+<div class="codehilite"><pre><span></span>$ cat siddhi.key | base64
+$ cat siddhi.crt | base64
+</pre></div>
+
+
+<p>After that, add those Base64 encoded values to the following YAML file like below. Save this YAML file as <code>siddhi-tls.yaml</code>.</p>
+<script src="https://gist.github.com/BuddhiWathsala/73e08ec4870e6b75e4bb3cda81f2de03.js"></script>
+
+<p>For more details about the Ingress TLS, refer <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/">this K8s doc</a>.</p>
+<p>Use the following command to create a secret.</p>
+<div class="codehilite"><pre><span></span>kubectl create -f &lt;absolute-yaml-file-path&gt;/siddhi-tls.yaml
+</pre></div>
+
+
+<p>You have to add the following YAML block to the <code>SiddhiProcess</code> custom object YAML file. Siddhi operator will enable TLS support in ingress. Now, you can access your endpoints via HTTPS.</p>
+<div class="codehilite"><pre><span></span>tls:
+  ingressSecret: siddhi-tls
+</pre></div>
+
+
+<p>Sample custom object YAML file.</p>
+<script src="https://gist.github.com/BuddhiWathsala/f029d671f4f6d7719dce59500b970815.js"></script>
+
+<p>Now you can use HTTPS URL to send events.</p>
+<div class="codehilite"><pre><span></span>https://siddhi/monitor-app/8280/example 
 </pre></div>
 
 
