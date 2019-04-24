@@ -172,7 +172,7 @@
   
 
 
-  <a href="https://github.com/wso2/siddhi/" title="Go to repository" class="md-source" data-md-source="github">
+  <a href="https://github.com/siddhi-io/siddhi/" title="Go to repository" class="md-source" data-md-source="github">
     
       <div class="md-source__icon">
         <svg viewBox="0 0 24 24" width="24" height="24">
@@ -221,7 +221,7 @@
   
 
 
-  <a href="https://github.com/wso2/siddhi/" title="Go to repository" class="md-source" data-md-source="github">
+  <a href="https://github.com/siddhi-io/siddhi/" title="Go to repository" class="md-source" data-md-source="github">
     
       <div class="md-source__icon">
         <svg viewBox="0 0 24 24" width="24" height="24">
@@ -1747,7 +1747,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/wso2/siddhi/edit/master/docs/documentation/siddhi-5.x/query-guide-5.x.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/siddhi-io/siddhi/edit/master/docs/documentation/siddhi-5.x/query-guide-5.x.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                 <h1 id="siddhi-5x-streaming-sql-guide">Siddhi 5.x Streaming SQL Guide<a class="headerlink" href="#siddhi-5x-streaming-sql-guide" title="Permanent link">&para;</a></h1>
@@ -4205,7 +4205,67 @@ When constructing the <code>condition</code>, the table attribute must be always
 <p>Named aggregation allows you to obtain aggregates in an incremental manner for a specified set of time periods.</p>
 <p>This not only allows you to calculate aggregations with varied time granularity, but also allows you to access them in an interactive
  manner for reports, dashboards, and for further processing. Its schema is defined via the <strong>aggregation definition</strong>.</p>
-<p>Named aggregation's granularity data holders are automatically purged every 15 minutes. When carrying out data purging, the retention period you have specified for each granularity in the named aggregation query is taken into account. The retention period defined for a granularity needs to be greater than or equal to its minimum retention period as specified in the table below. If no valid retention period is defined for a granularity, the default retention period (as specified in the table below) is applied.</p>
+<p><strong>Purpose</strong></p>
+<p>Named aggregation allows you to retrieve the aggregate values for different time durations.
+That is, it allows you to obtain aggregates such as <code>sum</code>, <code>count</code>, <code>avg</code>, <code>min</code>, <code>max</code>, <code>count</code> and <code>distinctCount</code>
+of stream attributes for durations such as <code>sec</code>, <code>min</code>, <code>hour</code>, etc.</p>
+<p>This is of considerable importance in many Analytics scenarios because aggregate values are often needed for several time periods.
+Furthermore, this ensures that the aggregations are not lost due to unexpected system failures because aggregates can be stored in different persistence <code>stores</code>.</p>
+<p><strong>Syntax</strong></p>
+<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">store</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="ss">&quot;&lt;store type&gt;&quot;</span><span class="p">,</span> <span class="p">...)</span>
+<span class="o">@</span><span class="n">purge</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="ss">&quot;&lt;true or false&gt;&quot;</span><span class="p">,</span><span class="nb">interval</span><span class="o">=&lt;</span><span class="n">purging</span> <span class="nb">interval</span><span class="o">&gt;</span><span class="p">,</span><span class="o">@</span><span class="n">retentionPeriod</span><span class="p">(</span><span class="o">&lt;</span><span class="n">granularity</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">retention</span> <span class="n">period</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...)</span> <span class="p">)</span>
+<span class="n">define</span> <span class="n">aggregation</span> <span class="o">&lt;</span><span class="n">aggregator</span> <span class="n">name</span><span class="o">&gt;</span>
+<span class="k">from</span> <span class="o">&lt;</span><span class="k">input</span> <span class="n">stream</span><span class="o">&gt;</span>
+<span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">aggregate</span> <span class="k">function</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">as</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
+    <span class="k">group</span> <span class="k">by</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span>
+    <span class="k">aggregate</span> <span class="k">by</span> <span class="o">&lt;</span><span class="k">timestamp</span> <span class="n">attribute</span><span class="o">&gt;</span> <span class="k">every</span> <span class="o">&lt;</span><span class="n">time</span> <span class="n">periods</span><span class="o">&gt;</span> <span class="p">;</span>
+</pre></div>
+
+
+<p>The above syntax includes the following:</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@store</code></td>
+<td>This annotation is used to refer to the data store where the calculated <br/>aggregate results are stored. This annotation is optional. When <br/>no annotation is provided, the data is stored in the <code>in-memory</code> store.</td>
+</tr>
+<tr>
+<td><code>@purge</code></td>
+<td>This annotation is used to configure purging in aggregation granularities.<br/> If this annotation is not provided, the default purging mentioned above is applied.<br/> If you want to disable automatic data purging, you can use this annotation as follows:</br>'@purge(enable=false)</br>/You should disable data purging if the aggregation query in included in the Siddhi application for read-only purposes.</td>
+</tr>
+<tr>
+<td><code>@retentionPeriod</code></td>
+<td>This annotation is used to specify the length of time the data needs to be retained when carrying out data purging.<br/> If this annotation is not provided, the default retention period is applied.</td>
+</tr>
+<tr>
+<td><code>&lt;aggregator name&gt;</code></td>
+<td>This specifies a unique name for the aggregation so that it can be referred <br/>when accessing aggregate results.</td>
+</tr>
+<tr>
+<td><code>&lt;input stream&gt;</code></td>
+<td>The stream that feeds the aggregation. <strong>Note! this stream should be <br/>already defined.</strong></td>
+</tr>
+<tr>
+<td><code>group by &lt;attribute name&gt;</code></td>
+<td>The <code>group by</code> clause is optional. If it is included in a Siddhi application, aggregate values <br/> are calculated per each <code>group by</code> attribute. If it is not used, all the<br/> events are aggregated together.</td>
+</tr>
+<tr>
+<td><code>by &lt;timestamp attribute&gt;</code></td>
+<td>This clause is optional. This defines the attribute that should be used as<br/> the timestamp. If this clause is not used, the event time is used by default.<br/> The timestamp could be given as either a <code>string</code> or a <code>long</code> value. If it is a <code>long</code> value,<br/> the unix timestamp in milliseconds is expected (e.g. <code>1496289950000</code>). If it is <br/>a <code>string</code> value, the supported formats are <code>&lt;yyyy&gt;-&lt;MM&gt;-&lt;dd&gt; &lt;HH&gt;:&lt;mm&gt;:&lt;ss&gt;</code> <br/>(if time is in GMT) and  <code>&lt;yyyy&gt;-&lt;MM&gt;-&lt;dd&gt; &lt;HH&gt;:&lt;mm&gt;:&lt;ss&gt; &lt;Z&gt;</code> (if time is <br/>not in GMT), here the ISO 8601 UTC offset must be provided for <code>&lt;Z&gt;</code> .<br/>(e.g., <code>+05:30</code>, <code>-11:00</code>).</td>
+</tr>
+<tr>
+<td><code>&lt;time periods&gt;</code></td>
+<td>Time periods can be specified as a range where the minimum and the maximum value are separated by three dots, or as comma-separated values. <br><br> e.g., A range can be specified as sec...year where aggregation is done per second, minute, hour, day, month and year. Comma-separated values can be specified as min, hour. <br><br> Skipping time durations (e.g., min, day where the hour duration is skipped) when specifying comma-separated values is supported only from v4.1.1 onwards</td>
+</tr>
+</tbody>
+</table>
+<p>Aggregation's granularity data holders are automatically purged every 15 minutes. When carrying out data purging, the retention period you have specified for each granularity in the named aggregation query is taken into account. The retention period defined for a granularity needs to be greater than or equal to its minimum retention period as specified in the table below. If no valid retention period is defined for a granularity, the default retention period (as specified in the table below) is applied.</p>
 <table>
 <thead>
 <tr>
@@ -4247,81 +4307,13 @@ When constructing the <code>condition</code>, the table attribute must be always
 </tr>
 </tbody>
 </table>
-<p><strong>Purpose</strong></p>
-<p>Named aggregation allows you to retrieve the aggregate values for different time durations.
-That is, it allows you to obtain aggregates such as <code>sum</code>, <code>count</code>, <code>avg</code>, <code>min</code>, <code>max</code>, <code>count</code> and <code>distinctCount</code>
-of stream attributes for durations such as <code>sec</code>, <code>min</code>, <code>hour</code>, etc.</p>
-<p>This is of considerable importance in many Analytics scenarios because aggregate values are often needed for several time periods.
-Furthermore, this ensures that the aggregations are not lost due to unexpected system failures because aggregates can be stored in different persistence <code>stores</code>.</p>
-<p><strong>Syntax</strong></p>
-<div class="codehilite"><pre><span></span><span class="o">@</span><span class="n">store</span><span class="p">(</span><span class="k">type</span><span class="o">=</span><span class="ss">&quot;&lt;store type&gt;&quot;</span><span class="p">,</span> <span class="p">...)</span>
-<span class="o">@</span><span class="n">purge</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="ss">&quot;&lt;true or false&gt;&quot;</span><span class="p">,</span><span class="nb">interval</span><span class="o">=&lt;</span><span class="n">purging</span> <span class="nb">interval</span><span class="o">&gt;</span><span class="p">,</span><span class="o">@</span><span class="n">retentionPeriod</span><span class="p">(</span><span class="o">&lt;</span><span class="n">granularity</span><span class="o">&gt;</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">retention</span> <span class="n">period</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...)</span> <span class="p">)</span>
-<span class="n">define</span> <span class="n">aggregation</span> <span class="o">&lt;</span><span class="n">aggregator</span> <span class="n">name</span><span class="o">&gt;</span>
-<span class="k">from</span> <span class="o">&lt;</span><span class="k">input</span> <span class="n">stream</span><span class="o">&gt;</span>
-<span class="k">select</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="k">aggregate</span> <span class="k">function</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">as</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span><span class="p">,</span> <span class="p">...</span>
-    <span class="k">group</span> <span class="k">by</span> <span class="o">&lt;</span><span class="n">attribute</span> <span class="n">name</span><span class="o">&gt;</span>
-    <span class="k">aggregate</span> <span class="k">by</span> <span class="o">&lt;</span><span class="k">timestamp</span> <span class="n">attribute</span><span class="o">&gt;</span> <span class="k">every</span> <span class="o">&lt;</span><span class="n">time</span> <span class="n">periods</span><span class="o">&gt;</span> <span class="p">;</span>
-</pre></div>
-
-
-<p>The above syntax includes the following:</p>
-<table>
-<thead>
-<tr>
-<th>Item</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>@BufferSize</code></td>
-<td><strong>DEPRECIATED FROM V4.2.0</strong>. This identifies the number of expired events to retain in a buffer in order<br/>to handle out of order event processing. This is an optional<br/>parameter that is applicable only if aggregation is based on external<br/>timestamps (because events aggregated based on event arrival<br/>time cannot be out of order). Siddhi determines whether an event is expired or not<br/>based on the timestamp of the latest event and the most granular duration for<br/>which aggregation is calculated.<br/> e.g., If the aggregation is calculated for <code>sec…year</code>, the most granular duration is seconds. Therefore, if the buffer size is <code>3</code> and events arrive during 51st, 52nd, 53rd and 54th seconds, all of the older aggregations (i.e., for 51st, 52nd and 53rd seconds) are kept in the buffer because the latest event arrived during the 54th second. <br/>The default value is <code>0</code>.</td>
-</tr>
-<tr>
-<td><code>@IgnoreEventsOlderThanBuffer</code></td>
-<td><strong>DEPRECIATED FROM V4.2.0</strong>.This annotation specifies whether or not to aggregate events older than the <br/>buffer. If this parameter is set to <code>false</code> (which is default), any event <br/>older than the buffer is aggregated with the oldest event in buffer. If <br/>this parameter is set to <code>true</code>, any event older than the buffer is dropped. This is an optional annotation.</td>
-</tr>
-<tr>
-<td><code>@store</code></td>
-<td>This annotation is used to refer to the data store where the calculated <br/>aggregate results are stored. This annotation is optional. When <br/>no annotation is provided, the data is stored in the <code>in-memory</code> store.</td>
-</tr>
-<tr>
-<td><code>@purge</code></td>
-<td>This annotation is used to configure purging in aggregation granularities.<br/> If this annotation is not provided, the default purging mentioned above is applied.<br/> If you want to disable automatic data purging, you can use this annotation as follows:</br>'@purge(enable=false)</br>/You should disable data purging if the aggregation query in included in the Siddhi application for read-only purposes.</td>
-</tr>
-<tr>
-<td><code>@retentionPeriod</code></td>
-<td>This annotation is used to specify the length of time the data needs to be retained when carrying out data purging.<br/> If this annotation is not provided, the default retention period is applied.</td>
-</tr>
-<tr>
-<td><code>&lt;aggregator name&gt;</code></td>
-<td>This specifies a unique name for the aggregation so that it can be referred <br/>when accessing aggregate results.</td>
-</tr>
-<tr>
-<td><code>&lt;input stream&gt;</code></td>
-<td>The stream that feeds the aggregation. <strong>Note! this stream should be <br/>already defined.</strong></td>
-</tr>
-<tr>
-<td><code>group by &lt;attribute name&gt;</code></td>
-<td>The <code>group by</code> clause is optional. If it is included in a Siddhi application, aggregate values <br/> are calculated per each <code>group by</code> attribute. If it is not used, all the<br/> events are aggregated together.</td>
-</tr>
-<tr>
-<td><code>by &lt;timestamp attribute&gt;</code></td>
-<td>This clause is optional. This defines the attribute that should be used as<br/> the timestamp. If this clause is not used, the event time is used by default.<br/> The timestamp could be given as either a <code>string</code> or a <code>long</code> value. If it is a <code>long</code> value,<br/> the unix timestamp in milliseconds is expected (e.g. <code>1496289950000</code>). If it is <br/>a <code>string</code> value, the supported formats are <code>&lt;yyyy&gt;-&lt;MM&gt;-&lt;dd&gt; &lt;HH&gt;:&lt;mm&gt;:&lt;ss&gt;</code> <br/>(if time is in GMT) and  <code>&lt;yyyy&gt;-&lt;MM&gt;-&lt;dd&gt; &lt;HH&gt;:&lt;mm&gt;:&lt;ss&gt; &lt;Z&gt;</code> (if time is <br/>not in GMT), here the ISO 8601 UTC offset must be provided for <code>&lt;Z&gt;</code> .<br/>(e.g., <code>+05:30</code>, <code>-11:00</code>).</td>
-</tr>
-<tr>
-<td><code>&lt;time periods&gt;</code></td>
-<td>Time periods can be specified as a range where the minimum and the maximum value are separated by three dots, or as comma-separated values. <br><br> e.g., A range can be specified as sec...year where aggregation is done per second, minute, hour, day, month and year. Comma-separated values can be specified as min, hour. <br><br> Skipping time durations (e.g., min, day where the hour duration is skipped) when specifying comma-separated values is supported only from v4.1.1 onwards</td>
-</tr>
-</tbody>
-</table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>From V4.2.0 onwards, aggregation is carried out at calendar start times for each granularity with the GMT timezone</p>
+<p>Aggregation is carried out at calendar start times for each granularity with the GMT timezone</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>From V4.2.6 onwards, the same aggregation can be defined in multiple Siddhi apps for joining, however, <em>only one siddhi app should carry out the processing</em> (i.e. the aggregation input stream should only feed events to one aggregation definition).</p>
+<p>The same aggregation can be defined in multiple Siddhi apps for joining, however, <em>only one siddhi app should carry out the processing</em> (i.e. the aggregation input stream should only feed events to one aggregation definition).</p>
 </div>
 <p><strong>Example</strong></p>
 <p>This Siddhi Application defines an aggregation named <code>TradeAggregation</code> to calculate the average and sum for the <code>price</code> attribute of events arriving at the <code>TradeStream</code> stream. These aggregates are calculated per every time granularity in the second-year range.</p>
@@ -4337,10 +4329,6 @@ Furthermore, this ensures that the aggregations are not lost due to unexpected s
 
 
 <h3 id="distributed-aggregation">Distributed Aggregation<a class="headerlink" href="#distributed-aggregation" title="Permanent link">&para;</a></h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Distributed Aggregation is only supported after v4.3.0</p>
-</div>
 <p>Distributed Aggregation allows you to partially process aggregations in different shards. This allows Siddhi
 app in one shard to be responsible only for processing a part of the aggregation.
 However for this, all aggregations must be based on a common physical database(@store).</p>
@@ -4436,17 +4424,10 @@ However for this, all aggregations must be based on a common physical database(@
 <td><code>per &lt;time granularity&gt;</code></td>
 <td>This specifies the time granularity by which the aggregate values must be grouped and returned. e.g., If you specify <code>days</code>, the retrieved aggregate values are grouped for each day within the selected time interval.</td>
 </tr>
-<tr>
-<td><code>AGG_TIMESTAMP</code></td>
-<td>This specifies the start time of the aggregations and can be used in the select clause.</td>
-</tr>
 </tbody>
 </table>
-<p><code>within</code> and <code>per</code> clauses also accept attribute values from the stream.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The timestamp of the aggregations can be accessed through the <code>AGG_TIMESTAMP</code> attribute.</p>
-</div>
+<p><code>within</code> and <code>per</code> clauses also accept attribute values from the stream.<br>
+The timestamp of the aggregations can be accessed through the <code>AGG_TIMESTAMP</code> attribute.</p>
 <p><strong>Example</strong></p>
 <p>Following aggregation definition will be used for the examples.</p>
 <div class="codehilite"><pre><span></span><span class="n">define</span> <span class="n">stream</span> <span class="n">TradeStream</span> <span class="p">(</span><span class="n">symbol</span> <span class="n">string</span><span class="p">,</span> <span class="n">price</span> <span class="n">double</span><span class="p">,</span> <span class="n">volume</span> <span class="n">long</span><span class="p">,</span> <span class="k">timestamp</span> <span class="n">long</span><span class="p">);</span>
@@ -5575,7 +5556,7 @@ The following elements are configured with this annotation.</p>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-      <a href="https://github.com/wso2/siddhi" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/siddhi-io/siddhi" class="md-footer-social__link fa fa-github"></a>
     
       <a href="https://www.linkedin.com/groups/13553064" class="md-footer-social__link fa fa-linkedin"></a>
     

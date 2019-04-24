@@ -172,7 +172,7 @@
   
 
 
-  <a href="https://github.com/wso2/siddhi/" title="Go to repository" class="md-source" data-md-source="github">
+  <a href="https://github.com/siddhi-io/siddhi/" title="Go to repository" class="md-source" data-md-source="github">
     
       <div class="md-source__icon">
         <svg viewBox="0 0 24 24" width="24" height="24">
@@ -221,7 +221,7 @@
   
 
 
-  <a href="https://github.com/wso2/siddhi/" title="Go to repository" class="md-source" data-md-source="github">
+  <a href="https://github.com/siddhi-io/siddhi/" title="Go to repository" class="md-source" data-md-source="github">
     
       <div class="md-source__icon">
         <svg viewBox="0 0 24 24" width="24" height="24">
@@ -330,6 +330,13 @@
         <li class="md-nav__item">
   <a href="#6-a-bit-of-stream-processing" title="6. A bit of Stream Processing" class="md-nav__link">
     6. A bit of Stream Processing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-running-streaming-application-as-a-micro-service" title="7. Running streaming application as a micro service" class="md-nav__link">
+    7. Running streaming application as a micro service
   </a>
   
 </li>
@@ -457,6 +464,13 @@
         <li class="md-nav__item">
   <a href="#6-a-bit-of-stream-processing" title="6. A bit of Stream Processing" class="md-nav__link">
     6. A bit of Stream Processing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-running-streaming-application-as-a-micro-service" title="7. Running streaming application as a micro service" class="md-nav__link">
+    7. Running streaming application as a micro service
   </a>
   
 </li>
@@ -904,6 +918,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#7-running-streaming-application-as-a-micro-service" title="7. Running streaming application as a micro service" class="md-nav__link">
+    7. Running streaming application as a micro service
+  </a>
+  
+</li>
+      
       
       
       
@@ -920,7 +941,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/wso2/siddhi/edit/master/docs/documentation/siddhi-5.x/quckstart-5.x.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/siddhi-io/siddhi/edit/master/docs/documentation/siddhi-5.x/quckstart-5.x.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
                 <h1 id="siddhi-5x-quick-start-guide">Siddhi 5.x Quick Start Guide<a class="headerlink" href="#siddhi-5x-quick-start-guide" title="Permanent link">&para;</a></h1>
@@ -995,31 +1016,29 @@ language which is discussed in the <a href="#4-siddhi-hello-world-your-first-sid
 <li>Sends newly generated events as the output to streams.</li>
 </ol>
 <h2 id="3-using-siddhi-for-the-first-time">3. Using Siddhi for the first time<a class="headerlink" href="#3-using-siddhi-for-the-first-time" title="Permanent link">&para;</a></h2>
-<p>In this section, we will be using the WSO2 Stream Processor(referred to as SP in the rest of this guide) — a server version of Siddhi that has a
-sophisticated editor with a GUI (referred to as <em><strong>“Stream Processor Studio”</strong></em>) where you can write your query and simulate events
-as a data stream.</p>
+<p>In this section, we will be using the Tooling distribution — a server version of Siddhi that has a sophisticated editor with a GUI(referred to as <em><strong>“Siddhi Editor”</strong></em>) where you can write your query and simulate events as a data stream.</p>
 <p><strong>Step 1</strong> — Install
 <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Oracle Java SE Development Kit (JDK)</a> version 1.8. <br>
 <strong>Step 2</strong> — <a href="https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/">Set the JAVA_HOME</a> environment
 variable. <br>
-<strong>Step 3</strong> — Download the latest <a href="http://wso2.com/analytics?utm_source=gitanalytics&amp;utm_campaign=gitanalytics_Jul17">WSO2 Stream Processor</a>. <br>
-<strong>Step 4</strong> — Extract the downloaded zip and navigate to <code>&lt;SP_HOME&gt;/bin</code>. <br> (<code>SP_HOME</code> refers to the extracted folder) <br>
+<strong>Step 3</strong> — Download the latest tooling distribution from <a href="https://github.com/siddhi-io/distribution/releases/download/v0.1.0/siddhi-tooling-0.1.0.zip">here</a>.<br>
+<strong>Step 4</strong> — Extract the downloaded zip and navigate to <code>&lt;TOOLING_HOME&gt;/bin</code>. <br> (<code>TOOLING_HOME</code> refers to the 
+extracted folder) <br>
 <strong>Step 5</strong> — Issue the following command in the command prompt (Windows) / terminal (Linux)</p>
-<div class="codehilite"><pre><span></span>For Windows: editor.bat
-For Linux: ./editor.sh
+<div class="codehilite"><pre><span></span>For Windows: tooling.bat
+For Linux: ./tooling.bat
 </pre></div>
 
 
-<p>For more details about WSO2 Stream Processor, see its <a href="https://docs.wso2.com/display/SP400/Quick+Start+Guide">Quick Start Guide</a>.</p>
-<p>After successfully starting the Stream Processor Studio, the terminal in Linux should look like as shown below:</p>
-<p><img alt="" src="../../../images/quickstart/after-starting-sp.png?raw=true" title="Terminal after starting WSO2 Stream Processor Text Editor" /></p>
-<p>After starting the WSO2 Stream Processor, access the Stream Processor Studio by visiting the following link in your browser.</p>
+<p>After successfully starting the Siddhi Editor, the terminal should look like as shown below:</p>
+<p><img alt="" src="../../../images/quickstart/after-starting-editor.png?raw=true" title="Terminal after starting Siddhi Editor" /></p>
+<p>After starting the Siddhi Editor, access the Editor GUI by visiting the following link in your browser.</p>
 <div class="codehilite"><pre><span></span>http://localhost:9390/editor
 </pre></div>
 
 
-<p>This takes you to the Stream Processor Studio landing page.</p>
-<p><img alt="" src="../../../images/quickstart/sp-studio.png?raw=true" title="Stream Processor Studio" /></p>
+<p>This takes you to the Siddhi Editor landing page.</p>
+<p><img alt="" src="../../../images/quickstart/siddhi-editor.png?raw=true" title="Siddhi Editor" /></p>
 <h2 id="4-siddhi-hello-world">4. Siddhi ‘Hello World!’<a class="headerlink" href="#4-siddhi-hello-world" title="Permanent link">&para;</a></h2>
 <p>Siddhi Streaming SQL is a rich, compact, easy-to-learn SQL-like language. <strong>Let's first learn how to find the total</strong> of values
 coming into a data stream and output the current running total value with each event. Siddhi has lot of in-built functions and extensions
@@ -1036,14 +1055,22 @@ weight of the cargo added. <strong>Measuring the weight of a cargo box when load
 
 
 <p><strong>Part 2 — Defining the input stream.</strong> The stream needs to have a name and a schema defining the data that each incoming event should contain.
-The event data attributes are expressed as name and type pairs. In this example:</p>
+The event data attributes are expressed as name and type pairs. Also we need to attach a_"source"_  to the 
+created stream so that we can send events to that stream. (<strong>Source is the Siddhi way to consume streams from 
+external systems.</strong> This particular <code>http</code> type source will spin up a HTTP endpoint and keep on listening to events 
+though that endpoint. To learn more about sources, see <a href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#source">source</a>)</p>
+<p>In this example:</p>
 <ul>
 <li>The name of the input stream — <em>“CargoStream”</em> <br>
 This contains only one data attribute:</li>
 <li>The name of the data in each event — <em>“weight”</em></li>
 <li>Type of the data <em>“weight”</em> — int</li>
+<li>Type of source - HTTP</li>
+<li>HTTP endpoint address - http://0.0.0.0:8006/cargo</li>
+<li>Accepted input data type - JSON</li>
 </ul>
-<div class="codehilite"><pre><span></span>define stream CargoStream (weight int);
+<div class="codehilite"><pre><span></span>@source(type = &#39;http&#39;, receiver.url = &quot;http://0.0.0.0:8006/cargo&quot;,@map(type = &#39;json&#39;))
+define stream CargoStream (weight int);
 </pre></div>
 
 
@@ -1072,10 +1099,15 @@ insert into OutputStream;
 </pre></div>
 
 
-<p><img alt="" src="../../../images/quickstart/hello-query.png?raw=true" title="Hello World in Stream Processor Studio" /></p>
+<p>Final Siddhi application in the editor will look like below.
+<img alt="" src="../../../images/quickstart/hello-query.png?raw=true" title="Hello World in Stream Processor Studio" /></p>
+<p>You can copy the final Siddhi app from below.
+<script src="https://gist.github.com/tishan89/dafb25a494add587b7259c077ac49914.js"></script></p>
 <h2 id="5-testing-siddhi-application">5. Testing Siddhi Application<a class="headerlink" href="#5-testing-siddhi-application" title="Permanent link">&para;</a></h2>
-<p>The Stream Processor Studio has in-built support to simulate events. You can do it via the <em>“Event Simulator”</em>
-panel at the left of the Stream Processor Studio. You should save your <em>HelloWorldApp</em> by browsing to <strong>File</strong> -&gt;
+<p>In this section we will be testing the logical accuracy of Siddhi query using in-built functions of Siddhi Editor. In
+ a later section we will invoke the HTTP endpoint and perform an end to end integration test.</p>
+<p>The Siddhi Editor has in-built support to simulate events. You can do it via the <em>“Event Simulator”</em>
+panel at the left of the Siddhi Editor. You should save your <em>HelloWorldApp</em> by browsing to <strong>File</strong> -&gt;
 <strong>Save</strong> before you run event simulation. Then click  <strong>Event Simulator</strong> and configure it as shown below.</p>
 <p><img alt="" src="../../../images/quickstart/event-simulation.png?raw=true" title="Simulating Events in Stream Processor Studio" /></p>
 <p><strong>Step 1 — Configurations:</strong></p>
@@ -1088,13 +1120,13 @@ panel at the left of the Stream Processor Studio. You should save your <em>Hello
 <p><strong>Step 2 — Click “Run” mode and then click “Start”</strong>. This starts the Siddhi Application.
 If the Siddhi application is successfully started, the following message is printed in the Stream Processor Studio console:</br>
 <em>“HelloWorldApp.siddhi Started Successfully!”</em></p>
-<p><strong>Step 3 — Click “Send” and observe the terminal</strong> where you started WSO2 Stream Processor Studio.
+<p><strong>Step 3 — Click “Send” and observe the terminal</strong>
 You can see a log that contains <em>“outputData=[2, 2]”</em>. Click <strong>Send</strong> again and observe a log with
 <em>“outputData=[2, 4]”</em>. You can change the value of the weight and send it to see how the sum of the weight is updated.</p>
 <p><img alt="" src="../../../images/quickstart/log.png?raw=true" title="Terminal after sending 2 twice" /></p>
 <p>Bravo! You have successfully completed creating Siddhi Hello World!</p>
 <h2 id="6-a-bit-of-stream-processing">6. A bit of Stream Processing<a class="headerlink" href="#6-a-bit-of-stream-processing" title="Permanent link">&para;</a></h2>
-<p>This section demonstrates how to carry out <strong>temporal window processing</strong> with Siddhi.</p>
+<p>This section will improve our Siddhi app to demonstrates how to carry out <strong>temporal window processing</strong> with Siddhi.</p>
 <p>Up to this point, we have been carrying out the processing by having only the running sum value in-memory.
 No events were stored during this process.</p>
 <p><a href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/#window">Window processing</a>
@@ -1122,13 +1154,53 @@ average value as <em>"averageWeight"</em> (Note: Now the <code>sum</code> also c
 </pre></div>
 
 
-<p>The updated Siddhi Application should look as shown below:</p>
-<p><img alt="" src="../../../images/quickstart/window-processing-app.png?raw=true" title="Window Processing with Siddhi" /></p>
+<p>The updated Siddhi Application is given below:
+<script src="https://gist.github.com/tishan89/6b57a2c226486e745451ef2f691f9750.js"></script></p>
 <p>Now you can send events using the Event Simulator and observe the log to see the sum and average of the weights of the last three
 cargo events.</p>
 <p>It is also notable that the defined <code>length window</code> only keeps 3 events in-memory. When the 4th event arrives, the
 first event in the window is removed from memory. This ensures that the memory usage does not grow beyond a specific limit. There are also other
 implementations done in Siddhi  to reduce the memory consumption. For more information, see <a href="http://siddhi.io/documentation/siddhi-5.x/architecture-5.x/">Siddhi Architecture</a>.</p>
+<h2 id="7-running-streaming-application-as-a-micro-service">7. Running streaming application as a micro service<a class="headerlink" href="#7-running-streaming-application-as-a-micro-service" title="Permanent link">&para;</a></h2>
+<p>This step we will run above developed Siddhi application as a micro service utilizing docker. For othere available options please refer <a href="https://siddhi-io.github.io/siddhi/documentation/siddhi-5.x/user-guide-5.x/#using-siddhi-in-various-environments">here</a>. Here we will use siddhi-runner docker distribution. Follow below steps.</p>
+<ul>
+<li>Install docker in your machine and start the daemon.(<a href="https://docs.docker
+.com/install/">https://docs.docker.com/install/</a>)</li>
+<li>Pull the latest siddhi-runner image by executing below command</li>
+</ul>
+<div class="codehilite"><pre><span></span>docker pull siddhiio/siddhi-runner-alpine:latest
+</pre></div>
+
+
+<ul>
+<li>Navigate to Siddhi Editor and choose <strong>File -&gt; Export File</strong> for download above Siddhi application as a file.</li>
+<li>Move downloaded Siddhi file(<em>HelloWorldModifiedApp.siddhi</em>) to a desired location(/home/me/siddhi-apps)</li>
+<li>Execute below command to start a streaming micro service which runs above developed siddhi application. <strong>(Please 
+pay attention to the siddhi app name as in the Quick Start Guide we have changed the modified Siddhi app name from 
+that of the original app.)</strong></li>
+</ul>
+<div class="codehilite"><pre><span></span>docker run -it -p 8006:8006 -v /home/me/siddhi-apps:/apps siddhiio/siddhi-runner-alpine 
+-Dapps=/apps/HelloWorldModifiedApp.siddhi
+</pre></div>
+
+
+<ul>
+<li>Once container is started use below curl command to send events into <em>"CargoStream"</em> </li>
+</ul>
+<div class="codehilite"><pre><span></span>curl -X POST http://localhost:8006/cargo \
+  --header &quot;Content-Type:application/json&quot; \
+  -d &#39;{&quot;event&quot;:{&quot;weight&quot;:2}}&#39;
+</pre></div>
+
+
+<ul>
+<li>You will observe below messages in container logs.</li>
+</ul>
+<div class="codehilite"><pre><span></span>[2019-04-24 08:54:51,755]  INFO {io.siddhi.core.stream.output.sink.LogSink} - LOGGER : Event{timestamp=1556096091751, data=[2, 2, 2.0], isExpired=false}
+[2019-04-24 08:56:25,307]  INFO {io.siddhi.core.stream.output.sink.LogSink} - LOGGER : Event{timestamp=1556096185307, data=[2, 4, 2.0], isExpired=false}
+</pre></div>
+
+
 <p>To learn more about the Siddhi functionality, see <a href="http://siddhi.io/documentation/siddhi-5.x/query-guide-5.x/">Siddhi Query Guide</a>.</p>
 <p>Feel free to try out Siddhi and event simulation to understand Siddhi better.</p>
 <p>If you have questions please post them to the <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">Stackoverflow</a> with <a target="_blank" href="http://stackoverflow.com/search?q=siddhi">"Siddhi"</a> tag.</p>
@@ -1204,7 +1276,7 @@ implementations done in Siddhi  to reduce the memory consumption. For more infor
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
-      <a href="https://github.com/wso2/siddhi" class="md-footer-social__link fa fa-github"></a>
+      <a href="https://github.com/siddhi-io/siddhi" class="md-footer-social__link fa fa-github"></a>
     
       <a href="https://www.linkedin.com/groups/13553064" class="md-footer-social__link fa fa-linkedin"></a>
     
