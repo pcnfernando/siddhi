@@ -382,6 +382,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../../siddhi-5.x/config-guide-5.x/" title="Config Guide" class="md-nav__link">
+      Config Guide
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../../siddhi-5.x/query-guide-5.x/" title="Siddhi Query Guide" class="md-nav__link">
       Siddhi Query Guide
     </a>
@@ -4654,7 +4666,7 @@ extension type.</p>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When using the generated archetype please make sure you uncomment @Extension annotation and complete the
+<p>When using the generated archetype please make sure you complete the @Extension
 annotation with proper values. This annotation will be used to identify and document the extension, hence your
 extension will not work without @Extension annotation.</p>
 </div>
@@ -4673,21 +4685,83 @@ extension will not work without @Extension annotation.</p>
 <ol>
 <li>
 <p>Issue the following command from your CLI.</p>
-<div class="codehilite"><pre><span></span>        mvn archetype:generate
-            -DarchetypeGroupId=io.siddhi.extension.archetype
-            -DarchetypeArtifactId=siddhi-archetype-execution
-            -DgroupId=io.extension.siddhi.execution
-            -Dversion=1.0.0-SNAPSHOT
+<div class="codehilite"><pre><span></span>mvn archetype:generate
+    -DarchetypeGroupId=org.wso2.siddhi.extension.archetype
+    -DarchetypeArtifactId=siddhi-archetype-execution
+    -DgroupId=org.wso2.extension.siddhi.execution
+    -Dversion=1.0.0-SNAPSHOT
 </pre></div>
 
 
 </li>
 <li>
-<p>Enter the required execution name in the message that pops up as shown in the example below.</p>
-<div class="codehilite"><pre><span></span>    Define value for property &#39;executionType&#39;: ML
-</pre></div>
-
-
+<p>Enter the mandatory properties prompted, please see the description for all properties below.</p>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+<th>Mandatory</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_nameOfFunction</td>
+<td>Name of the custom function to be created</td>
+<td>Y</td>
+<td>-</td>
+</tr>
+<tr>
+<td>_nameSpaceOfFunction</td>
+<td>Namespace of the function, used to grouped similar custom functions</td>
+<td>Y</td>
+<td>-</td>
+</tr>
+<tr>
+<td>groupIdPostfix</td>
+<td>Namespace of the function is added as postfix to the groupId as a convention</td>
+<td>N</td>
+<td _nameSpaceOfFunction="_nameSpaceOfFunction"></td>
+</tr>
+<tr>
+<td>artifactId</td>
+<td>Artifact Id of the project</td>
+<td>N</td>
+<td _nameSpaceOfFunction="_nameSpaceOfFunction">siddhi-execution-</td>
+</tr>
+<tr>
+<td>classNameOfAggregateFunction</td>
+<td>Class name of the Aggregate Function</td>
+<td>N</td>
+<td _nameOfFunction="_nameOfFunction">$</td>
+</tr>
+<tr>
+<td>classNameOfFunction</td>
+<td>Class name of the Function</td>
+<td>N</td>
+<td _nameOfFunction="_nameOfFunction">$</td>
+</tr>
+<tr>
+<td>classNameOfStreamFunction</td>
+<td>Class name of the Stream Function</td>
+<td>N</td>
+<td _nameOfFunction="_nameOfFunction">$</td>
+</tr>
+<tr>
+<td>classNameOfStreamProcessor</td>
+<td>Class name of the Stream Processor</td>
+<td>N</td>
+<td _nameOfFunction="_nameOfFunction">$</td>
+</tr>
+<tr>
+<td>classNameOfWindow</td>
+<td>Class name of the Window</td>
+<td>N</td>
+<td _nameOfFunction="_nameOfFunction">$</td>
+</tr>
+</tbody>
+</table>
 </li>
 <li>
 <p>To confirm that all property values are correct, type <code>Y</code> in the console. If not, press <code>N</code>.</p>
@@ -4707,21 +4781,59 @@ extension will not work without @Extension annotation.</p>
 <ol>
 <li>
 <p>Issue the following command from your CLI.</p>
-<div class="codehilite"><pre><span></span>       mvn archetype:generate
-           -DarchetypeGroupId=io.siddhi.extension.archetype
-           -DarchetypeArtifactId=siddhi-archetype-io
-           -DgroupId=io.extension.siddhi.io
-           -Dversion=1.0.0-SNAPSHOT
+<div class="codehilite"><pre><span></span>mvn archetype:generate
+    -DarchetypeGroupId=org.wso2.siddhi.extension.archetype
+    -DarchetypeArtifactId=siddhi-archetype-io
+    -DgroupId=org.wso2.extension.siddhi.io
+    -Dversion=1.0.0-SNAPSHOT
 </pre></div>
 
 
 </li>
 <li>
-<p>Enter the required execution name (the transport type in this scenario) in the message that pops up as shown in the example below.</p>
-<div class="codehilite"><pre><span></span> Define value for property &#39;typeOf_IO&#39;: http
-</pre></div>
-
-
+<p>Enter the mandatory properties prompted, please see the description for all properties below.</p>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+<th>Mandatory</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_IOType</td>
+<td>Type of IO for which Siddhi-io extension is written</td>
+<td>Y</td>
+<td>-</td>
+</tr>
+<tr>
+<td>groupIdPostfix</td>
+<td>Type of the IO is added as postfix to the groupId as a convention</td>
+<td>N</td>
+<td _IOType="_IOType"></td>
+</tr>
+<tr>
+<td>artifactId</td>
+<td>Artifact Id of the project</td>
+<td>N</td>
+<td _IOType="_IOType">siddhi-io-</td>
+</tr>
+<tr>
+<td>classNameOfSink</td>
+<td>Class name of the Sink</td>
+<td>N</td>
+<td _IOType="_IOType"></td>
+</tr>
+<tr>
+<td>classNameOfSource</td>
+<td>Class name of the Source</td>
+<td>N</td>
+<td _IOType="_IOType"></td>
+</tr>
+</tbody>
+</table>
 </li>
 <li>
 <p>To confirm that all property values are correct, type <code>Y</code> in the console. If not, press <code>N</code>.</p>
@@ -4743,24 +4855,65 @@ extension will not work without @Extension annotation.</p>
 <ol>
 <li>
 <p>Issue the following command from your CLI.                </p>
-<div class="codehilite"><pre><span></span>        mvn archetype:generate
-            -DarchetypeGroupId=io.siddhi.extension.archetype
-            -DarchetypeArtifactId=siddhi-archetype-map
-            -DgroupId=io.extension.siddhi.map
-            -Dversion=1.0.0-SNAPSHOT
+<div class="codehilite"><pre><span></span>mvn archetype:generate
+    -DarchetypeGroupId=org.wso2.siddhi.extension.archetype
+    -DarchetypeArtifactId=siddhi-archetype-map
+    -DgroupId=org.wso2.extension.siddhi.map
+    -Dversion=1.0.0-SNAPSHOT
 </pre></div>
 
 
 </li>
 <li>
-<p>Enter the required execution name (the map type in this scenario) in the message that pops up as shown in the example below.</p>
-<div class="codehilite"><pre><span></span>    Define value for property &#39;mapType&#39;:CSV
-</pre></div>
-
-
-</li>
-<li>
-<p>To confirm that all property values are correct, type <code>Y</code> in the console. If not, press <code>N</code>.</p>
+<p>Enter the mandatory properties prompted, please see the description for all properties below.</p>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+<th>Mandatory</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_mapType</td>
+<td>Type of Mapper for which Siddhi-map extension is written</td>
+<td>Y</td>
+<td>-</td>
+</tr>
+<tr>
+<td>groupIdPostfix</td>
+<td>Type of the Map is added as postfix to the groupId as a convention</td>
+<td>N</td>
+<td _mapType="_mapType"></td>
+</tr>
+<tr>
+<td>artifactId</td>
+<td>Artifact Id of the project</td>
+<td>N</td>
+<td _mapType="_mapType">siddhi-map-</td>
+</tr>
+<tr>
+<td>classNameOfSinkMapper</td>
+<td>Class name of the Sink Mapper</td>
+<td>N</td>
+<td _mapType="_mapType"></td>
+</tr>
+<tr>
+<td>classNameOfSourceMapper</td>
+<td>Class name of the Source Mapper</td>
+<td>N</td>
+<td _mapType="_mapType"></td>
+</tr>
+<tr>
+<td>3. To confirm that all property values are correct, type <code>Y</code> in the console. If not, press <code>N</code>.</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 </li>
 </ol>
 <p><strong>siddhi-script</strong></p>
@@ -4771,21 +4924,50 @@ extension will not work without @Extension annotation.</p>
 <ol>
 <li>
 <p>Issue the following command from your CLI.                   </p>
-<div class="codehilite"><pre><span></span>       mvn archetype:generate
-           -DarchetypeGroupId=io.siddhi.extension.archetype
-           -DarchetypeArtifactId=siddhi-archetype-script
-           -DgroupId=io.extension.siddhi.script
-           -Dversion=1.0.0-SNAPSHOT
-</pre></div>
-
-
+<p>mvn archetype:generate
+       -DarchetypeGroupId=org.wso2.siddhi.extension.archetype
+       -DarchetypeArtifactId=siddhi-archetype-script
+       -DgroupId=org.wso2.extension.siddhi.script
+       -Dversion=1.0.0-SNAPSHOT</p>
 </li>
 <li>
-<p>Enter the required execution name in the message that pops up as shown in the example below.</p>
-<div class="codehilite"><pre><span></span> Define value for property &#39;typeOfScript&#39;:
-</pre></div>
-
-
+<p>Enter the mandatory properties prompted, please see the description for all properties below.</p>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+<th>Mandatory</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_nameOfScript</td>
+<td>Name of Custom Script for which Siddhi-script extension is written</td>
+<td>Y</td>
+<td>-</td>
+</tr>
+<tr>
+<td>groupIdPostfix</td>
+<td>Name of the Script is added as postfix to the groupId as a convention</td>
+<td>N</td>
+<td _nameOfScript="_nameOfScript"></td>
+</tr>
+<tr>
+<td>artifactId</td>
+<td>Artifact Id of the project</td>
+<td>N</td>
+<td _nameOfScript="_nameOfScript">siddhi-script-</td>
+</tr>
+<tr>
+<td>classNameOfScript</td>
+<td>Class name of the Script</td>
+<td>N</td>
+<td _nameOfScript="_nameOfScript">Eval</td>
+</tr>
+</tbody>
+</table>
 </li>
 <li>
 <p>To confirm that all property values are correct, type <code>Y</code> in the console. If not, press <code>N</code>.</p>
@@ -4799,21 +4981,50 @@ extension will not work without @Extension annotation.</p>
 <ol>
 <li>
 <p>Issue the following command from your CLI.                      </p>
-<div class="codehilite"><pre><span></span>       mvn archetype:generate
-          -DarchetypeGroupId=io.siddhi.extension.archetype
-          -DarchetypeArtifactId=siddhi-archetype-store
-          -DgroupId=io.extension.siddhi.store
-          -Dversion=1.0.0-SNAPSHOT
-</pre></div>
-
-
+<p>mvn archetype:generate
+      -DarchetypeGroupId=org.wso2.siddhi.extension.archetype
+      -DarchetypeArtifactId=siddhi-archetype-store
+      -DgroupId=org.wso2.extension.siddhi.store
+      -Dversion=1.0.0-SNAPSHOT</p>
 </li>
 <li>
-<p>Enter the required execution name in the message that pops up as shown in the example below.</p>
-<div class="codehilite"><pre><span></span>  Define value for property &#39;storeType&#39;: RDBMS
-</pre></div>
-
-
+<p>Enter the mandatory properties prompted, please see the description for all properties below.</p>
+<table>
+<thead>
+<tr>
+<th>Properties</th>
+<th>Description</th>
+<th>Mandatory</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>_storeType</td>
+<td>Type of Store for which Siddhi-store extension is written</td>
+<td>Y</td>
+<td>-</td>
+</tr>
+<tr>
+<td>groupIdPostfix</td>
+<td>Type of the Store is added as postfix to the groupId as a convention</td>
+<td>N</td>
+<td _storeType="_storeType"></td>
+</tr>
+<tr>
+<td>artifactId</td>
+<td>Artifact Id of the project</td>
+<td>N</td>
+<td _storeType="_storeType">siddhi-store-</td>
+</tr>
+<tr>
+<td>className</td>
+<td>Class name of the Store</td>
+<td>N</td>
+<td _storeType="_storeType"></td>
+</tr>
+</tbody>
+</table>
 </li>
 <li>
 <p>To confirm that all property values are correct, type <code>Y</code> in the console. If not, press <code>N</code>.</p>
