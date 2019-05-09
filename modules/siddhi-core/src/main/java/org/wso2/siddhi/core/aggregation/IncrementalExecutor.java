@@ -267,7 +267,7 @@ public class IncrementalExecutor implements Executor, Snapshotable {
                 executorService.execute(() -> {
                     try {
                         table.addEvents(tableEventChunk, noOfEvents);
-                    } catch (Throwable t){
+                    } catch (Throwable t) {
                         LOG.error("Exception occurred when writing to aggregation table of duration '" +
                                 this.duration + "'. This should be investigated as this can cause accuracy loss.", t);
                     }
