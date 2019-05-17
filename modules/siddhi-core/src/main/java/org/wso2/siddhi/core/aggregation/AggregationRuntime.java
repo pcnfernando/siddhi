@@ -204,12 +204,11 @@ public class AggregationRuntime implements MemoryCalculable {
             }
             if (lastExecutorsRefreshedTime == -1 || System.currentTimeMillis() - lastExecutorsRefreshedTime > 1000) {
                 if (shardId != null) {
-                    recreateInMemoryData(isFirstEventArrived, true);
-                    lastExecutorsRefreshedTime = System.currentTimeMillis();
+                    this.recreateInMemoryData.recreateInMemoryData(isFirstEventArrived, true);
                 } else if (!isFirstEventArrived) {
-                    recreateInMemoryData(false, false);
-                    lastExecutorsRefreshedTime = System.currentTimeMillis();
+                    this.recreateInMemoryData.recreateInMemoryData(false, false);
                 }
+                lastExecutorsRefreshedTime = System.currentTimeMillis();
             }
             return ((IncrementalAggregateCompileCondition) compiledCondition).find(matchingEvent,
                     aggregationDefinition, incrementalExecutorMap, aggregationTables, incrementalDurations,
@@ -359,9 +358,10 @@ public class AggregationRuntime implements MemoryCalculable {
         incrementalDataPurging.executeIncrementalDataPurging();
     }
 
-    public void recreateInMemoryData(boolean isFirstEventArrived, boolean refreshReadingExecutors) {
-        this.isFirstEventArrived = isFirstEventArrived;
-        recreateInMemoryData.recreateInMemoryData(isFirstEventArrived, refreshReadingExecutors);
+    public void recreateInMemoryDataFirstEventArrived() {
+        // State only updated when first event arrives to IncrementalAggregationProcessor
+        this.isFirstEventArrived = true;
+        this.recreateInMemoryData.recreateInMemoryData(true, false);
     }
 
     public void processEvents(ComplexEventChunk<StreamEvent> streamEventComplexEventChunk) {
