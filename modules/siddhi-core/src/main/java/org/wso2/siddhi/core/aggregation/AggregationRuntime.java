@@ -204,7 +204,7 @@ public class AggregationRuntime implements MemoryCalculable {
             }
             if (lastExecutorsRefreshedTime == -1 || System.currentTimeMillis() - lastExecutorsRefreshedTime > 1000) {
                 if (shardId != null) {
-                    recreateInMemoryData(false, true);
+                    recreateInMemoryData(isFirstEventArrived, true);
                     lastExecutorsRefreshedTime = System.currentTimeMillis();
                 } else if (!isFirstEventArrived) {
                     recreateInMemoryData(false, false);
