@@ -86,6 +86,7 @@ public class AggregationRuntime implements MemoryCalculable {
     private IncrementalDataPurging incrementalDataPurging;
     private ExpressionExecutor shouldUpdateExpressionExecutor;
     private String shardId;
+    private List<String> groupByAttributeNameList;
 
     public AggregationRuntime(AggregationDefinition aggregationDefinition,
                               Map<TimePeriod.Duration, IncrementalExecutor> incrementalExecutorMap,
@@ -101,7 +102,8 @@ public class AggregationRuntime implements MemoryCalculable {
                               List<GroupByKeyGenerator> groupByKeyGeneratorList,
                               IncrementalDataPurging incrementalDataPurging,
                               ExpressionExecutor shouldUpdateExpressionExecutor, String shardId,
-                              Map<TimePeriod.Duration, IncrementalExecutor> incrementalExecutorMapForPartitions) {
+                              Map<TimePeriod.Duration, IncrementalExecutor> incrementalExecutorMapForPartitions,
+                              List<String> groupByAttributeNameList) {
         this.aggregationDefinition = aggregationDefinition;
         this.incrementalExecutorMap = incrementalExecutorMap;
         this.aggregationTables = aggregationTables;
@@ -123,6 +125,7 @@ public class AggregationRuntime implements MemoryCalculable {
         this.incrementalExecutorMapForPartitions = incrementalExecutorMapForPartitions;
         aggregateMetaSteamEvent = new MetaStreamEvent();
         aggregationDefinition.getAttributeList().forEach(aggregateMetaSteamEvent::addOutputData);
+        this.groupByAttributeNameList = groupByAttributeNameList;
     }
 
     private static void initMetaStreamEvent(MetaStreamEvent metaStreamEvent, AbstractDefinition inputDefinition,
@@ -310,7 +313,15 @@ public class AggregationRuntime implements MemoryCalculable {
         withinExpression = Expression.and(compareWithStartTime, compareWithEndTime);
 
         // Combine with and on condition for table query
-        Expression withinExpressionTable = Expression.and(expression, withinExpression);
+        AggregationExpressionBuilder aggregationExpressionBuilder = new AggregationExpressionBuilder(expression);
+        AggregationExpressionVisitor expressionVisitor = new AggregationExpressionVisitor(
+                newMetaStreamEventWithStartEnd.getInputReferenceId(),
+                newMetaStreamEventWithStartEnd.getLastInputDefinition().getAttributeList(),
+                this.groupByAttributeNameList
+        );
+        aggregationExpressionBuilder.build(expressionVisitor);
+
+        Expression withinExpressionTable = Expression.and(withinExpression, expressionVisitor.getReducedExpression());
 
         // Create start and end time expression
         Expression startEndTimeExpression;
