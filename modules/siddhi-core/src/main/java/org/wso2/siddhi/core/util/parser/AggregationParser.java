@@ -347,6 +347,7 @@ public class AggregationParser {
             List<ExpressionExecutor> baseExecutors = cloneExpressionExecutors(processExpressionExecutorsList.get(0));
             //Remove timestamp executor
             baseExecutors.remove(0);
+
             AggregationRuntime aggregationRuntime = new AggregationRuntime(aggregationDefinition,
                     incrementalExecutorMap, aggregationTables, ((SingleStreamRuntime) streamRuntime),
                     incrementalDurations, siddhiAppContext, baseExecutors, processedMetaStreamEvent,
