@@ -2502,26 +2502,44 @@ public class Aggregation1TestCase {
             public void run() {
                 try {
                     stockStreamInputHandler.send(new Event[]{
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 50f, 60f, 90L, 6, 1496289950000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 70f, null, 40L, 10, 1496289950000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 60f, 44f, 200L, 56, 1496289952000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 100f, null, 200L, 16, 1496289952000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"IBM", 100f, null, 200L, 96, 1496289954000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"IBM", 100f, null, 200L, 26, 1496289954000L})});
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 50f, 60f, 90L, 6, 1496289950000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 70f, null, 40L, 10, 1496289950000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 60f, 44f, 200L, 56, 1496289952000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 100f, null, 200L, 16, 1496289952000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"IBM", 100f, null, 200L, 96, 1496289954000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"IBM", 100f, null, 200L, 26, 1496289954000L})});
                     stockStreamInputHandler.send(new Event[]{
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 50f, 60f, 90L, 6, 1496289950000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 70f, null, 40L, 10, 1496289950000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 60f, 44f, 200L, 56, 1496289952000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 100f, null, 200L, 16, 1496289952000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"IBM", 100f, null, 200L, 96, 1496289954000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"IBM", 100f, null, 200L, 26, 1496289954000L})});
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 50f, 60f, 90L, 6, 1496289950000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 70f, null, 40L, 10, 1496289950000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 60f, 44f, 200L, 56, 1496289952000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 100f, null, 200L, 16, 1496289952000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"IBM", 100f, null, 200L, 96, 1496289954000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"IBM", 100f, null, 200L, 26, 1496289954000L})});
                     stockStreamInputHandler.send(new Event[]{
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 50f, 60f, 90L, 6, 1496289950000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 70f, null, 40L, 10, 1496289950000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 60f, 44f, 200L, 56, 1496289952000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"WSO2", 100f, null, 200L, 16, 1496289952000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"IBM", 100f, null, 200L, 96, 1496289954000L}),
-                            new Event(System.currentTimeMillis(), new Object[]{"IBM", 100f, null, 200L, 26, 1496289954000L})});
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 50f, 60f, 90L, 6, 1496289950000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 70f, null, 40L, 10, 1496289950000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 60f, 44f, 200L, 56, 1496289952000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"WSO2", 100f, null, 200L, 16, 1496289952000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"IBM", 100f, null, 200L, 96, 1496289954000L}),
+                            new Event(System.currentTimeMillis(),
+                                    new Object[]{"IBM", 100f, null, 200L, 26, 1496289954000L})});
                     Thread.sleep(500L);
                 } catch (InterruptedException e) {
                 }
